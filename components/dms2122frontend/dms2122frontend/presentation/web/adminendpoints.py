@@ -96,6 +96,7 @@ class AdminEndpoints():
             redirect_to = url_for('get_admin_users')
         return redirect(redirect_to)
 
+    
     @staticmethod
     def get_admin_users_edit(auth_service: AuthService) -> Union[Response, Text]:
         """ Handles the GET requests to the user editing endpoint.

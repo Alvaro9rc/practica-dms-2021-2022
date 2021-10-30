@@ -83,6 +83,10 @@ def get_admin_users_edit():
 def post_admin_users_edit():
     return AdminEndpoints.post_admin_users_edit(auth_service)
 
+@app.route("/Preguntas", methods=['GET'])
+def prueba():
+    return TeacherEndpoints.prueba(auth_service)
+
 if __name__ == '__main__':
     app.run(
         host=cfg.get_service_host(),
