@@ -32,6 +32,6 @@ class TeacherEndpoints():
 
     
     @staticmethod
-    def prueba(auth_service: AuthService) -> Union[Response, Text]:
+    def ir_preguntas_Teacher(auth_service: AuthService) -> Union[Response, Text]:
         name = session['user']
         return render_template('Preguntas.html', name=name, roles=session['roles'])

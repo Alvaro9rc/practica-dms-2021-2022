@@ -5,15 +5,66 @@
 	</head>
 
 	<body>
-		<form>
+		<div id="contenedor"></div>
+
+		<form >
 			<div>¿Cuántos planetas tiene el sistema solar? </div>
-		  	<input type="radio" id="Opcion1" name="Respuesta" value="6">
-		  	<label for="vehicle1"> 6 </label><br>
-		  	<input type="radio" id="Opcion2" name="Respuesta" value="8">
-		  	<label for="vehicle2"> 8 </label><br>
-		  	<input type="radio" id="Opcion3" name="Respuesta" value="7">
-		  	<label for="vehicle3"> 7 </label>
+		  	<input type="radio" id="P1" name="1" value="6">
+		  	<label for="P1"> 6 </label><br>
+		  	<input type="radio" id="P1" name="1" value="8">
+		  	<label for="P1"> 8 </label><br>
+		  	<input type="radio" id="P1" name="1" value="7">
+		  	<label for="P1"> 7 </label>
+
+		  	<div>¿Cuál es el radio de la tierra en kilometros? </div>
+		  	<input type="radio" id="P2" name="2" value="6700">
+		  	<label for="vehicle1"> 6700 </label><br>
+		  	<input type="radio" id="P2" name="2" value="8000">
+		  	<label for="vehicle2"> 8000 </label><br>
+		  	<input type="radio" id="P2" name="2" value="7700">
+		  	<label for="vehicle3"> 7700 </label>
+
+		  	<br>
+		  
 		</form>
+		<input type="button" value="Corregir" onclick="comprobarRespuestas(respuestaCorrecta)" /></td></tr>
+
+		<div id="solucion"></div>
+ 		</div>
+ <script>
+    var respuestaCorrecta = new Array("8", "6700");
+		
+		function comprobarRespuestas(matriz){
+		
+			var numeroRespuestasOK=0;
+			var numeroRespuestasKO=0;
+			var solucion = document.getElementById("solucion");
+			var tablaResultados ="<table border='1'>";
+			
+			for(j=0; j< matriz.length; j++){
+			var radios = document.getElementsByName(j+1);
+				for(i=0; i< radios.length;i++){
+					if (radios[i].checked){
+					var valor =  radios[i].value;
+						if(valor == matriz[j]) {
+						tablaResultados+= "<tr><td>Respuesta correcta: </td>"+ "<td>"+ valor + "</td></tr>";
+						numeroRespuestasOK++;
+						break;
+						}else {
+						tablaResultados+= "<tr><td>Respuesta incorrecta: </td><td>"+ valor + "</td></tr>";
+						numeroRespuestasKO++;
+						break;
+						}
+					}
+				}
+				
+				
+			}
+			var numeroRespuestasNulas=matriz.length - (numeroRespuestasOK + numeroRespuestasKO);
+			tablaResultados+="<tr><td>Resultado: </td><td>Respuestas correctas: "+numeroRespuestasOK+"<br/>Respuestas incorrectas: "+ numeroRespuestasKO+"<br/>Respuestas en blanco: "+ numeroRespuestasNulas+"</td></tr></table>";
+			solucion.innerHTML = tablaResultados;
+	}
+</script>
 	</body>
 
 </html>

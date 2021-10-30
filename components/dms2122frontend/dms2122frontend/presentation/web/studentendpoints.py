@@ -28,3 +28,9 @@ class StudentEndpoints():
             return redirect(url_for('get_home'))
         name = session['user']
         return render_template('student.html', name=name, roles=session['roles'])
+
+
+    @staticmethod
+    def ir_preguntas_Alu(auth_service: AuthService) -> Union[Response, Text]:
+        name = session['user']
+        return render_template('Preguntas.html', name=name, roles=session['roles'])
