@@ -1,9 +1,8 @@
 {% extends "base_logged_in.html" %}
-{% block title %}{% block subtitle %}{% endblock %}Teacher{% endblock %}
-{% block contentheading %}Teachers panel{% endblock %}
+{% block title %}{% block subtitle %}{% endblock %}Preguntas{% endblock %}
+{% block contentheading %}Gestión de preguntas{% endblock %}
 {% block maincontent %}
-    {% block teachercontent %}
-    <p class="yellowbg">Under construction </p>
-    <li><a href="/Preguntas">Preguntas</a></li>
-    {% endblock %}
+    <dl>
+        <dt><a href="/teacher/questions">Gestión de preguntas</a></dt><dd>Edición de cuestiones</dd>
+    </dl>
 {% endblock %}

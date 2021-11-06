@@ -1,0 +1,34 @@
+{% extends "teacher.html" %}
+{% from "macros/buttons.html" import button with context %}
+{% block contentsubheading %}Preguntas{% endblock %}
+{% block maincontent %}
+<tbody>
+<table class="fillwidth ">
+
+    <!-- esto será un bucle for que reciba todas las preguntas
+    en el td: 
+<td> question.name </td>
+<td> question.answerValid </td>
+<td>name = "editQuestion" id =question.id btn blablaba>/td>  -->
+        <tr>
+            <th>Preguntas</th>
+            <th>Respuesta Válida</th>
+            <th>Editar pregunta</th>
+            <!-- <th>Ver Respuestas a esta pregunta</th> -->
+        </tr>
+        <tr>
+            <td>Nombre de Pregunta1</td>
+            <td>Respuesta pregunta 1</td>
+    <td name="editarPregunta1">{{ button('bluebg', '/teacher/questions/edit', 'Editar pregunta') }}</td>
+        </tr>
+        <tr>
+            <td>Nombre de Pregunta 2</td>
+            <td>Respuesta pregunta 2</td>
+    <td name="editarPregunta1">{{ button('bluebg', '/teacher/questions/edit', 'Editar pregunta') }}</td>
+
+        </tr>
+
+    </table>
+    <p class="alignright">{{ button('bluebg', '/teacher/questions/new', 'Añadir pregunta') }}</p>
+</tbody>
+{% endblock %}
