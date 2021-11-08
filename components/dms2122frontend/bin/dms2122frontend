@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-from flask import Flask
+from flask import Flask, redirect, url_for
 import inspect
 import os
 from typing import Dict
@@ -34,6 +34,10 @@ app = Flask(
 )
 app.secret_key = bytes(cfg.get_app_secret_key(), 'ascii')
 
+
+@app.route("/", methods=['GET'])
+def get_root():
+    return redirect(url_for("get_login"))
 
 @app.route("/login", methods=['GET'])
 def get_login():
