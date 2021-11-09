@@ -112,6 +112,7 @@ table tr:last-child {
 
 table th {
     border-bottom: 1px solid #eee;
+    text-align: left;
 }
 
 #login-form {
