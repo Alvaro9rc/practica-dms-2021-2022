@@ -1,4 +1,8 @@
-{% extends "teacher.html" %} {% from "macros/buttons.html" import button with context %} {% from "macros/question.html" import question with context %} {% block contentsubheading %}Preguntas{% endblock %} {% block maincontent %}
+{% extends "teacher.html" %} 
+{% from "macros/buttons.html" import button with context %} 
+{% from "macros/question.html" import question with context %} 
+{% block contentsubheading %}Preguntas{% endblock %} 
+{% block maincontent %}
 
 <!-- Tabla que contendra las preguntas que se han establecido -->
 <table style="width:100%">
@@ -16,6 +20,6 @@
     {{ question( '4', 'texto de la pregunta', 'texto de la repuesta') }}
 
 </table>
-<p class="alignright">{{ button('bluebg', '/teacher/questions/new', 'Añadir pregunta') }}</p>
+{{ button('bluebg', '/teacher/questions/new', 'Añadir pregunta') }}
 
 {% endblock %}
