@@ -1,34 +1,21 @@
-{% extends "teacher.html" %}
-{% from "macros/buttons.html" import button with context %}
-{% block contentsubheading %}Preguntas{% endblock %}
-{% block maincontent %}
-<tbody>
-<table class="fillwidth ">
+{% extends "teacher.html" %} {% from "macros/buttons.html" import button with context %} {% from "macros/question.html" import question with context %} {% block contentsubheading %}Preguntas{% endblock %} {% block maincontent %}
 
-    <!-- esto será un bucle for que reciba todas las preguntas
-    en el td: 
-<td> question.name </td>
-<td> question.answerValid </td>
-<td>name = "editQuestion" id =question.id btn blablaba>/td>  -->
-        <tr>
-            <th>Preguntas</th>
-            <th>Respuesta Válida</th>
-            <th>Editar pregunta</th>
-            <!-- <th>Ver Respuestas a esta pregunta</th> -->
-        </tr>
-        <tr>
-            <td>Nombre de Pregunta1</td>
-            <td>Respuesta pregunta 1</td>
-    <td name="editarPregunta1">{{ button('bluebg', '/teacher/questions/edit', 'Editar pregunta') }}</td>
-        </tr>
-        <tr>
-            <td>Nombre de Pregunta 2</td>
-            <td>Respuesta pregunta 2</td>
-    <td name="editarPregunta1">{{ button('bluebg', '/teacher/questions/edit', 'Editar pregunta') }}</td>
+<!-- Tabla que contendra las preguntas que se han establecido -->
+<table style="width:100%">
+    <caption></caption>
+    <!-- Cabecera de la tabla -->
+    <tr>
+        <th scope="col">Preguntas</th>
+        <th scope="col">Respuesta Válida</th>
+        <th scope="col">Editar pregunta</th>
+    </tr>
 
-        </tr>
+    {{ question( '1', 'texto de la pregunta', 'texto de la repuesta') }}
+    {{ question( '2', 'texto de la pregunta', 'texto de la repuesta') }}
+    {{ question( '3', 'texto de la pregunta', 'texto de la repuesta') }}
+    {{ question( '4', 'texto de la pregunta', 'texto de la repuesta') }}
 
-    </table>
-    <p class="alignright">{{ button('bluebg', '/teacher/questions/new', 'Añadir pregunta') }}</p>
-</tbody>
+</table>
+<p class="alignright">{{ button('bluebg', '/teacher/questions/new', 'Añadir pregunta') }}</p>
+
 {% endblock %}

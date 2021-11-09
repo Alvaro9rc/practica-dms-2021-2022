@@ -1,0 +1,9 @@
+{% macro question(id, question, answer) %}
+<tr id="question_{{ id }}">
+    <td name="question">{{ question }}</td>
+    <td name="answer">{{ answer }}</td>
+    <td name="editarPregunta1">
+        {{ button('bluebg', '/teacher/questions/edit', 'Editar pregunta') }}
+    </td>
+</tr>
+{% endmacro %}
