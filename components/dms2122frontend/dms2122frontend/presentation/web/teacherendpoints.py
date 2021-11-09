@@ -34,7 +34,6 @@ class TeacherEndpoints():
 
     @staticmethod
     def get_teacher_questions(auth_service: AuthService) -> Union[Response, Text]:
-        name = session['user']
         return render_template('teacher/questions.html')
 
     @staticmethod
