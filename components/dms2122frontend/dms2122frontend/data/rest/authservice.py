@@ -265,3 +265,34 @@ class AuthService():
             aggregated_response.set_successful(
                 aggregated_response.is_successful() & response.is_successful())
         return aggregated_response
+
+
+    def update_teacher_question(self,
+                          token: Optional[str], id:str, questionName: str,description: str,questionAnswer: str,IncorrectAnswer: str,IncorrectAnswer2: str,puntuacion: str,porcentaje: str
+                          ) -> ResponseData:
+        aggregated_response: ResponseData = ResponseData()
+        aggregated_response.set_successful(True)
+
+# TODO PENDIENTE DE CREAR LA FUNCION PARA GUARDAR LOS DATOS DE ESTA QUESTION EN CONCRETO va a fallar mientras el guardado al editar
+        # response = self.set_question_data(token, id, questionName, description, questionAnswer, IncorrectAnswer, IncorrectAnswer2, puntuacion, porcentaje)
+
+        # aggregated_response.add_messages(response.get_messages())
+        # aggregated_response.set_successful(
+        #     aggregated_response.is_successful() & response.is_successful())
+        return aggregated_response
+
+
+# TODO pendiente de desarrollar esta funcion para crear una pregunta nueva
+    def create_teacher_question(self,
+                          token: Optional[str], questionName: str,description: str,questionAnswer: str,IncorrectAnswer: str,IncorrectAnswer2: str,puntuacion: str,porcentaje: str
+                          ) -> ResponseData:
+        aggregated_response: ResponseData = ResponseData()
+        aggregated_response.set_successful(True)
+
+# TODO PENDIENTE DE CREAR LA FUNCION PARA GUARDAR LOS DATOS DE ESTA QUESTION EN CONCRETO va a fallar mientras el guardado al editar
+        # response = self.set_question_data(token, id, questionName, description, questionAnswer, IncorrectAnswer, IncorrectAnswer2, puntuacion, porcentaje)
+
+        # aggregated_response.add_messages(response.get_messages())
+        # aggregated_response.set_successful(
+        #     aggregated_response.is_successful() & response.is_successful())
+        return aggregated_response

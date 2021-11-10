@@ -2,8 +2,10 @@
 """
 
 from typing import Dict
-from sqlalchemy import Table, MetaData, Column, String  # type: ignore
-from sqlalchemy.orm import relationship  # type: ignore
+from sqlalchemy import Table, MetaData, Column, String
+from sqlalchemy.log import instance_logger  # type: ignore
+from sqlalchemy.orm import relationship
+from sqlalchemy.sql.sqltypes import Integer  # type: ignore
 from dms2122auth.data.db.results.resultbase import ResultBase
 
 
@@ -17,10 +19,10 @@ class Question(ResultBase):
         self.questionName: str = questionName
         self.description: str =  description
         self.questionAnswer :str =  questionAnswer
-        self.IncorrectAnswer = IncorrectAnswer
-        self.IncorrectAnswer2 = IncorrectAnswer2
-        self.puntuacion = puntuacion
-        self.porcentaje = porcentaje
+        self.IncorrectAnswer :str= IncorrectAnswer
+        self.IncorrectAnswer2 :str= IncorrectAnswer2
+        self.puntuacion :int= puntuacion
+        self.porcentaje :int= porcentaje
 
     @staticmethod
     def _table_definition(metadata: MetaData) -> Table:
@@ -30,17 +32,10 @@ class Question(ResultBase):
             metadata,
             Column('questionName', String(32), primary_key=True),
             Column('description', String(256), nullable=False),
-            Column('questionAnswer', String(64), nullable=False)
-            # TODO SEGUIR METIENDO LAS COLUMNAS DE LA TABLA
+            Column('questionAnswer', String(64), nullable=False),
+            Column('IncorrectAnswer', String(64), nullable=False),
+            Column('IncorrectAnswer2', String(64), nullable=False),
+            Column('puntuacion', Integer, nullable=False),
+            Column('porcentaje', Integer, nullable=False)
+
         )
-
-    @staticmethod
-    def _mapping_properties() -> Dict:
-        """ Gets the mapping properties dictionary.
-
-        Returns:
-            - Dict: A dictionary with the mapping properties.
-        """
-        return {
-            'rights': relationship(Question, backref='question')
-        }
