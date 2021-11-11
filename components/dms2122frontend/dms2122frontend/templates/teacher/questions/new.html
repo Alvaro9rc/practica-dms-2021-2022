@@ -1,53 +1,76 @@
 {% extends "teacher.html" %}
 {% from "macros/buttons.html" import button, submit_button %}
+
+{% block scripts %}
+    <!-- Librerias para el editor de texto enriquecido -->
+    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>  
+    <script>tinymce.init({selector:'textarea'});</script>
+{% endblock %}
+
 {% block contentsubheading %}Añadir pregunta{% endblock %}
 {% block maincontent %}
+
+
 <form action="/teacher/questions/new" method="post">
     <input type="hidden" name="redirect_to" value="{{ redirect_to }}" />
-    <dl>
-        <dt>Nombre de la pregunta</dt>
-        <dd>
-            <input type="text" name="questionName" autofocus />
-        </dd>
-        <dt>Descripción del enunciado</dt>
-        <dd>
-            <input type="text" name="description" autofocus />
-        </dd>
-        <dt>Respuesta Corecta</dt>
-        <dd>
-            <input type="text" name="questionAnswer" placeholder="Answer" />
 
-        </dd>
-        <dt>Respuesta Incorrecta 1</dt>
-        <dd>
-            <input type="text" name="IncorrectAnswer" placeholder="Incorrect Answer" />
-        </dd>
-        <dt>Respuesta Incorrecta 2</dt>
-        <dd>
-            <input type="text" name="IncorrectAnswer2" placeholder="Incorrect Answer 2" />
-        </dd>
-        <dt>Puntuacion de la pregunta</dt>
-        <dd>
-            <label for="puntuacion"></label>
-            <select id="puntuacion" name="puntuacion">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-            </select>
-        </dd>
-        <dt>Porcentaje de Penalizacićon por fallo/dt>
-        <dd>
+    <ul class="nobullet space">
 
-        <label for="porcentaje"></label>
-        <select id="porcentaje" name="porcentaje">
-            <option value="10">10%</option>
-            <option value="20">20%</option>
-            <option value="30">30%</option>
-            <option value="40">40%</option>
-            <option value="50">50%</option>
-        </select>
-        </dd>
-    </dl>
-    <p class="alignright">{{ submit_button('bluebg', 'Save changes') }}{{ button('redbg', redirect_to, 'Cancel') }}</p>
+        <!-- NOMBRE PREGUNTA -->
+        <li>
+            <label for="name"><strong>Nombre de la pregunta</strong></label>
+            <br>
+            <input type="text" name="name" id="" class="w100" placeholder="Introduce el nombre de la pregunta">
+        </li>
+
+        <!-- ENUNCIADO -->
+        <li>
+            <label for="utterance"><strong>Enunciado</strong></label>
+            <br>
+            <textarea name="utterance">Introduce el enunciado de la pregunta</textarea>
+        </li>
+
+        <!-- RESPUESTAS -->
+        <li>
+            <label for="respuestas"><strong>Respuestas</strong></label>
+            <div name="respuestas">
+                <div class="space">
+                    <input type="text" name="r1" id="" class="w100" placeholder="Introduce la respuesta">
+                    <input type="checkbox" id="" name="correcta" value="">
+                    <label for="correcta">Correcta</label><br>
+                </div>            
+                <div class="space">
+                    <input type="text" name="r2" id="" class="w100" placeholder="Introduce la respuesta">
+                    <input type="checkbox" id="" name="correcta" value="">
+                    <label for="correcta">Correcta</label><br>
+                </div>
+                <div class="space">
+                    <input type="text" name="r3" id="" class="w100" placeholder="Introduce la respuesta">
+                    <input type="checkbox" id="" name="correcta" value="">
+                    <label for="correcta">Correcta</label><br>
+                </div>
+            </div>
+        </li>
+
+        <!-- PUNTUACION -->
+        <li>
+            <label for="puntuation"><strong>Puntuación</strong></label><br>
+            <input type="number" name="puntuation" step="0.05" value="0" min="0">    
+        </li>
+
+        <!-- PENALIZACION -->
+        <li>
+            <label for="penalty"><strong>Penalización respuesta incorrecta</strong></label><br>
+            <input type="number" name="penalty" step="0.05" value="0" min="0">    
+        </li>
+    </ul>
+    
+    <!-- BOTONES -->
+    <div class="ml35">
+        {{ submit_button('bluebg', 'Save changes') }}
+        {{ button('redbg', redirect_to, 'Cancel') }}
+    <div>
+
+
 </form>
 {% endblock %}
