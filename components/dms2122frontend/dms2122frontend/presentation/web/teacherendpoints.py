@@ -45,24 +45,42 @@ class TeacherEndpoints():
                                redirect_to=redirect_to
                                )
 
+
+
     @staticmethod
     def post_teacher_questions_new(auth_service: AuthService) -> Union[Response, Text]:
 
+        '''Endpoint para el creado de preguntas '''
+
+        #Controlamos que el usuario se haya logeado
         if not WebAuth.test_token(auth_service):
             return redirect(url_for('get_login'))
         if Role.Teacher.name not in session['roles']:
             return redirect(url_for('get_home'))
 
-        created_question = WebQuestion.create_question(auth_service,
-                                                       request.form['questionName'], request.form['description'], request.form[
-                                                           'questionAnswer'], request.form["IncorrectAnswer"], request.form["IncorrectAnswer2"], request.form["puntuacion"], request.form["porcentaje"]
-                                                       )
-    # si no se ha creado una pregunta, se cargará de nuevo el formulario de crear pregunta. ahora mismo será todo el tiempo porque no se guarda una pregunta
+        # Inicializamos el objeto que contiene la informacion de la pregunta
+        created_question = WebQuestion.create_question(
+            auth_service,
+            request.form["questionName"], 
+            request.form["description"], 
+            request.form["questionAnswer"],
+            request.form["IncorrectAnswer"],
+            request.form["IncorrectAnswer2"],
+            request.form["puntuacion"],
+            request.form["porcentaje"]
+        )
+
+        # si no se ha creado una pregunta, se cargará de nuevo el formulario de crear pregunta. 
+        # ahora mismo será todo el tiempo porque no se guarda una pregunta
         if not created_question:
             return redirect(url_for('get_teacher_questions_new')) 
+
+        #Obtenemos la ruta de redireccion
         redirect_to = request.form['redirect_to']
         if not redirect_to:
             redirect_to = url_for('get_teacher_questions')
+        
+        # Redireccionamos a la ruta
         return redirect(redirect_to)
 
 # editar preguntas
