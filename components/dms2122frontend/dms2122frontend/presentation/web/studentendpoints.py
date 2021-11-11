@@ -29,8 +29,8 @@ class StudentEndpoints():
         name = session['user']
         return render_template('student.html', name=name, roles=session['roles'])
 
-
     @staticmethod
-    def ir_preguntas_Alu(auth_service: AuthService) -> Union[Response, Text]:
-        name = session['user']
-        return render_template('Preguntas.html', name=name, roles=session['roles'])
+    def get_student_questions(auth_service: AuthService) -> Union[Response, Text]:
+        return render_template('/student/questions.html')
+
+
