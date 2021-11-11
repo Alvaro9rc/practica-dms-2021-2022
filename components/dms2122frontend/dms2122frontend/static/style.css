@@ -163,6 +163,15 @@ table th {
     box-shadow: 0 0.3em 0.1em inset rgb(0 0 0 / 20%);
 }
 
+.greenbg {
+    background-color: #52a80b;
+    color: #fff;
+}
+
+.greenbg a {
+    color: #fff;
+}
+
 .bluebg {
     background-color: #253aa7;
     color: #fff;
@@ -204,4 +213,38 @@ table th {
 .questionscore {
     font-size: smaller;
     color: #777;
+}
+
+
+/* Para las listas */
+.nobullet {
+    list-style-type: none;
+}
+
+.space li, .space div{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+
+/* Para los inputs */
+
+.w100{
+    /* 100% de ancho  */
+    width: 100%;
+}
+
+.w50{
+    /* 50% de ancho  */
+    width: 50%;
+}
+
+/* Margenes */
+
+.m35{
+    margin: 35px;
+}
+
+.ml35{
+    margin: 35px;
 }
