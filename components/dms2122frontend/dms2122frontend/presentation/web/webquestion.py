@@ -30,7 +30,7 @@ class WebQuestion():
     
 
     @staticmethod
-    def update_teacher_question(auth_service: AuthService,  id:int, questionName:str, description:str, questionAnswer:str, IncorrectAnswer:str, IncorrectAnswer2:str, puntuacion:str, porcentaje:str) -> bool:
+    def update_teacher_question(auth_service: AuthService,  id:str, questionName:str, description:str, questionAnswer:str, IncorrectAnswer:str, IncorrectAnswer2:str, puntuacion:str, porcentaje:str) -> bool:
 
         response: ResponseData = auth_service.update_teacher_question(
             session.get('token'), id, questionName, description, questionAnswer, IncorrectAnswer, IncorrectAnswer2, puntuacion, porcentaje)
