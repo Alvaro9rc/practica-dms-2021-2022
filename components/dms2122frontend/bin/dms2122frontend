@@ -89,15 +89,12 @@ def get_teacher():
     return TeacherEndpoints.get_teacher(auth_service)
 
 @app.route("/teacher/questions", methods=['GET'])
-def get_teacher_queestions():
+def get_teacher_questions():
     return TeacherEndpoints.get_teacher_questions(auth_service)
-
 
 @app.route("/teacher/questions/new", methods=['GET'])
 def get_teacher_questions_new():
     return TeacherEndpoints.get_teacher_questions_new(auth_service)
-
-
 
 @app.route("/teacher/questions/new", methods=['POST'])
 def post_teacher_questions_new():

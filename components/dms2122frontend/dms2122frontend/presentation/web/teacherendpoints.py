@@ -64,10 +64,10 @@ class TeacherEndpoints():
             request.form["questionName"], 
             request.form["description"], 
             request.form["questionAnswer"],
-            request.form["IncorrectAnswer"],
-            request.form["IncorrectAnswer2"],
-            request.form["puntuacion"],
-            request.form["porcentaje"]
+            request.form["questionAnswer2"],
+            request.form["questionAnswer3"],
+            request.form["puntuation"],
+            request.form["penalty"]
         )
 
         # si no se ha creado una pregunta, se cargará de nuevo el formulario de crear pregunta. 
@@ -96,23 +96,23 @@ class TeacherEndpoints():
         # questionName: str = str(request.args.get('questionName'))
         # description: str = str(request.args.get('description'))
         # questionAnswer: str = str(request.args.get('questionAnswer'))
-        # IncorrectAnswer: str = str(request.args.get('IncorrectAnswer'))
-        # IncorrectAnswer2: str = str(request.args.get('IncorrectAnswer2'))
-        # puntuacion: str = str(request.args.get('puntuacion'))
-        # porcentaje: str = str(request.args.get('porcentaje'))
+        # questionAnswer2: str = str(request.args.get('questionAnswer2'))
+        # questionAnswer3: str = str(request.args.get('questionAnswer3'))
+        # puntuation: str = str(request.args.get('puntuation'))
+        # penalty: str = str(request.args.get('penalty'))
         
         # le llega un objeto a pelo, esto habrá que cambiar
         id: str =1
         questionName: str = "Texto de la pregunta"
         description: str = "Descripción"
         questionAnswer: str ="Texto de la respuesta"
-        IncorrectAnswer: str = "Respuesta Incorrecta 1"
-        IncorrectAnswer2: str = "Respoesta Incorrecta 2"
-        puntuacion: str  = "1"
-        porcentaje: str = "20%"
+        questionAnswer2: str = "Respuesta Incorrecta 1"
+        questionAnswer3: str = "Respoesta Incorrecta 2"
+        puntuation: str  = "1"
+        penalty: str = "20%"
         redirect_to: str = str(request.args.get(
             'redirect_to', default='/teacher/questions'))
-        return render_template('teacher/questions/edit.html',id=id, questionName=questionName, description=description, questionAnswer=questionAnswer, IncorrectAnswer=IncorrectAnswer, IncorrectAnswer2=IncorrectAnswer2, puntuacion=puntuacion,porcentaje=porcentaje,
+        return render_template('teacher/questions/edit.html',id=id, questionName=questionName, description=description, questionAnswer=questionAnswer, questionAnswer2=questionAnswer2, questionAnswer3=questionAnswer3, puntuation=puntuation,penalty=penalty,
                                redirect_to=redirect_to
                                )
 
@@ -130,10 +130,10 @@ class TeacherEndpoints():
                                                 request.form['questionName'],
                                                 request.form['description'],
                                                 request.form['questionAnswer'],
-                                                request.form['IncorrectAnswer'],
-                                                request.form['IncorrectAnswer2'],
-                                                request.form['puntuacion'],
-                                                request.form['porcentaje']
+                                                request.form['questionAnswer2'],
+                                                request.form['questionAnswer3'],
+                                                request.form['puntuation'],
+                                                request.form['penalty']
                                                 )
         redirect_to = request.form['redirect_to']
         if not redirect_to:

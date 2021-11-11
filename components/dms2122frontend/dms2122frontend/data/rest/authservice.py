@@ -268,13 +268,13 @@ class AuthService():
 
 
     def update_teacher_question(self,
-                          token: Optional[str], id:str, questionName: str,description: str,questionAnswer: str,IncorrectAnswer: str,IncorrectAnswer2: str,puntuacion: str,porcentaje: str
+                          token: Optional[str], id:str, questionName: str,description: str,questionAnswer: str,questionAnswer2: str,questionAnswer3: str,puntuation: str,penalty: str
                           ) -> ResponseData:
         aggregated_response: ResponseData = ResponseData()
         aggregated_response.set_successful(True)
 
 # TODO PENDIENTE DE CREAR LA FUNCION PARA GUARDAR LOS DATOS DE ESTA QUESTION EN CONCRETO va a fallar mientras el guardado al editar
-        # response = self.set_question_data(token, id, questionName, description, questionAnswer, IncorrectAnswer, IncorrectAnswer2, puntuacion, porcentaje)
+        # response = self.set_question_data(token, id, questionName, description, questionAnswer, questionAnswer2, questionAnswer3, puntuacion, penalty)
 
         # aggregated_response.add_messages(response.get_messages())
         # aggregated_response.set_successful(
@@ -284,15 +284,33 @@ class AuthService():
 
 # TODO pendiente de desarrollar esta funcion para crear una pregunta nueva
     def create_teacher_question(self,
-                          token: Optional[str], questionName: str,description: str,questionAnswer: str,IncorrectAnswer: str,IncorrectAnswer2: str,puntuacion: str,porcentaje: str
+                          token: Optional[str], questionName: str,description: str,questionAnswer: str,questionAnswer2: str,questionAnswer3: str,puntuation: str,penalty: str
                           ) -> ResponseData:
         aggregated_response: ResponseData = ResponseData()
+        # Para esta entregan le damos el valor True para que no de errores en ejecucion
         aggregated_response.set_successful(True)
-
-# TODO PENDIENTE DE CREAR LA FUNCION PARA GUARDAR LOS DATOS DE ESTA QUESTION EN CONCRETO va a fallar mientras el guardado al editar
-        # response = self.set_question_data(token, id, questionName, description, questionAnswer, IncorrectAnswer, IncorrectAnswer2, puntuacion, porcentaje)
-
-        # aggregated_response.add_messages(response.get_messages())
-        # aggregated_response.set_successful(
-        #     aggregated_response.is_successful() & response.is_successful())
+        # IMPORTANTE PARA LA PARTE DEL BACK, SE ENVIAN LAS OPCIONES DEL FORMULARIO EN UN JSON PARA GUARDARLAS POSTERIORMENTE 
+        # TODO para cuando se envie al back yhay que definir la ruta /question/new en/  en (spec.yml)
+        # response: requests.Response = requests.post(
+        #     self.__base_url() + 'question/new',
+        #     json={
+        #         'questionName': questionName,
+        #         'description': description,
+        #         'questionAnswer': questionAnswer,
+        #         'questionAnswer2': questionAnswer2,
+        #         'questionAnswer3': questionAnswer3,
+        #         'puntuation': puntuation,
+        #         'penalty': penalty
+        #     },
+        #     headers={
+        #         'Authorization': f'Bearer {token}',
+        #         self.__apikey_header: self.__apikey_secret
+        #     }
+        # )
+        # aggregated_response.set_successful(response.ok)
+        # if aggregated_response.is_successful():
+        #     aggregated_response.set_content(response.json())
+        # else:
+        #     aggregated_response.add_message(response.content.decode('ascii'))
         return aggregated_response
+

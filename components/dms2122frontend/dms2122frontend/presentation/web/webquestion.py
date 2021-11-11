@@ -14,7 +14,7 @@ class WebQuestion():
     @staticmethod
     def list_question(auth_service: AuthService) -> List:
 
-        response: ResponseData = auth_service.list_users(session.get('token'))
+        response: ResponseData = auth_service.list_questions(session.get('token'))
         WebUtils.flash_response_messages(response)
         if response.get_content() is not None and isinstance(response.get_content(), list):
             return list(response.get_content())
@@ -22,17 +22,17 @@ class WebQuestion():
 
 # TODO pendiente por hacer en AUTSERVICES
     @staticmethod
-    def create_question(auth_service: AuthService, questionName: str, description:str, questionAnswer:str, IncorrectAnswer:str, IncorrectAnswer2:str, puntuacion, porcentaje) -> Optional[Dict]:
+    def create_question(auth_service: AuthService, questionName: str, description:str, questionAnswer:str, questionAnswer2:str, questionAnswer3:str, puntuation:str, penalty:str) -> Optional[Dict]:
         response: ResponseData = auth_service.create_teacher_question(
-            session.get('token'), questionName, description, questionAnswer, IncorrectAnswer, IncorrectAnswer2, puntuacion, porcentaje)
+            session.get('token'), questionName, description, questionAnswer, questionAnswer2, questionAnswer3, puntuation, penalty)
         WebUtils.flash_response_messages(response)
         return response.get_content()
     
 
     @staticmethod
-    def update_teacher_question(auth_service: AuthService,  id:str, questionName:str, description:str, questionAnswer:str, IncorrectAnswer:str, IncorrectAnswer2:str, puntuacion:str, porcentaje:str) -> bool:
+    def update_teacher_question(auth_service: AuthService,  id:str, questionName:str, description:str, questionAnswer:str, questionAnswer2:str, questionAnswer3:str, puntuation:str, penalty:str) -> bool:
 
         response: ResponseData = auth_service.update_teacher_question(
-            session.get('token'), id, questionName, description, questionAnswer, IncorrectAnswer, IncorrectAnswer2, puntuacion, porcentaje)
+            session.get('token'), id, questionName, description, questionAnswer, questionAnswer2, questionAnswer3, puntuation, penalty)
         WebUtils.flash_response_messages(response)
         return response.is_successful()
