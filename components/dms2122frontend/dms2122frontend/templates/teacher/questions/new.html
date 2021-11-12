@@ -3,8 +3,8 @@
 
 {% block scripts %}
     <!-- Librerias para el editor de texto enriquecido -->
-    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>  
-    <script>tinymce.init({selector:'textarea'});</script>
+    <!-- <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>  
+    <script>tinymce.init({selector:'textarea'});</script> -->
 {% endblock %}
 
 {% block contentsubheading %}Añadir pregunta{% endblock %}
@@ -25,7 +25,7 @@
 
         <!-- ENUNCIADO -->
         <li>
-            <label for="utterance"><strong>Enunciado</strong></label>
+            <label for="description"><strong>Enunciado</strong></label>
             <br>
             <textarea name="description">Introduce el enunciado de la pregunta</textarea>
         </li>
@@ -35,19 +35,16 @@
             <label for="respuestas"><strong>Respuestas</strong></label>
             <div name="respuestas">
                 <div class="space">
+                    <label for="questionAnswer">Respuesta correcta</label>
                     <input type="text" name="questionAnswer" id="" class="w100" placeholder="Introduce la respuesta">
-                    <input type="checkbox" id="" name="correcta" value="">
-                    <label for="correcta">Correcta</label><br>
                 </div>            
                 <div class="space">
+                    <label for="questionAnswer2">Respuesta incorrecta 1</label>
                     <input type="text" name="questionAnswer2" id="" class="w100" placeholder="Introduce la respuesta">
-                    <input type="checkbox" id="" name="correcta" value="">
-                    <label for="correcta">Correcta</label><br>
                 </div>
                 <div class="space">
+                    <label for="questionAnswer3">Respuesta incorrecta 2</label>
                     <input type="text" name="questionAnswer3" id="" class="w100" placeholder="Introduce la respuesta">
-                    <input type="checkbox" id="" name="correcta" value="">
-                    <label for="correcta">Correcta</label><br>
                 </div>
             </div>
         </li>

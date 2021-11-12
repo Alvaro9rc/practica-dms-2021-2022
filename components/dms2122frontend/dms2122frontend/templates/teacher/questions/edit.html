@@ -3,51 +3,64 @@
 {% block contentsubheading %}Edit pregunta{{ questionName }}{% endblock %}
 {% block maincontent %}
 <form action="/teacher/questions/edit" method="post">
+
     <input type="hidden" name="questionName" value="{{ questionName }}" />
     <input type="hidden" name="id" value="{{ id }}" />
     <input type="hidden" name="redirect_to" value="{{ redirect_to }}" />
-    <dl>
-        <dt>Nombre de la pregunta</dt>
-        <dd>
-            <input type="text" name="questionName"  placeholder= "{{questionName}}"/>
-        </dd>
-        <dt>Descripción del enunciado</dt>
-        <dd>
-            <input type="text" name="description" placeholder="{{description}}" />
-        </dd>
-        <dt>Respuesta Corecta</dt>
-        <dd>
-            <input type="text" name="questionAnswer"  placeholder="{{questionAnswer}}" />
-        </dd>
-        <dt>Respuesta Incorrecta 1</dt>
-        <dd>
-            <input type="text" name="questionAnswer2" placeholder="{{questionAnswer3}}" />
-        </dd>
-        <dt>Respuesta Incorrecta 2</dt>
-        <dd>
-            <input type="text" name="questionAnswer3" placeholder="{{questionAnswer3}}" />
-        </dd>
-        <dt>Puntuacion de la pregunta</dt>
-        <dd>
-            <label for="puntuation"></label>
-            <select id="puntuation" name="puntuation" placeholder="{{puntuation}}">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-            </select>
-        </dd>
-        <dt>Porcentaje de Penalizacićon por fallo</dl>
-        <dd>
-        <label for="penalty"></label>
-        <select id="penalty" name="penalty">
-            <option value="10">10%</option>
-            <option value="20">20%</option>
-            <option value="30">30%</option>
-            <option value="40">40%</option>
-            <option value="50">50%</option>
-        </select>
-        </dd>
-    </dl>
-    <p class="alignright">{{ submit_button('bluebg', 'Save changes') }}{{ button('redbg', redirect_to, 'Cancel') }}</p>
+    
+    <!-- Formulario de edicion de prreguntas -->
+    <ul class="nobullet space">
+        <!-- NOMBRE PREGUNTA -->
+        <li>
+            <label for="questionName"><strong>Nombre de la pregunta</strong></label>
+            <br>
+            <input type="text" name="questionName" id="" class="w100" placeholder="{{questionName}}">
+        </li>
+
+        <!-- ENUNCIADO -->
+        <li>
+            <label for="description"><strong>Enunciado</strong></label>
+            <br>
+            <textarea name="description" placeholder="{{description}}"></textarea>
+        </li>
+
+        <!-- RESPUESTAS -->
+        <li>
+            <label for="respuestas"><strong>Respuestas</strong></label>
+            <div name="respuestas">
+                <div class="space">
+                    <label for="questionAnswer">Respuesta correcta</label>
+                    <input type="text" name="questionAnswer" id="" class="w100" placeholder="{{questionAnswer}}">
+                </div>            
+                <div class="space">
+                    <label for="questionAnswer2">Respuesta incorrecta 1</label>
+                    <input type="text" name="questionAnswer2" id="" class="w100" placeholder="{{questionAnswer2}}">
+                </div>
+                <div class="space">
+                    <label for="questionAnswer3">Respuesta incorrecta 2</label>
+                    <input type="text" name="questionAnswer3" id="" class="w100" placeholder="{{questionAnswer3}}">
+                </div>
+            </div>
+        </li>
+
+        <!-- PUNTUACION -->
+        <li>
+            <label for="puntuation"><strong>Puntuación</strong></label><br>
+            <input type="number" name="puntuation" step="0.05" value="0" min="0" placeholder="{{puntuation}}">    
+        </li>
+
+        <!-- PENALIZACION -->
+        <li>
+            <label for="penalty"><strong>Penalización respuesta incorrecta</strong></label><br>
+            <input type="number" name="penalty" step="0.05" value="0" min="0" placeholder="{{penalty}}" >    
+        </li>
+    </ul>
+    
+    <!-- BOTONES -->
+    <div class="ml35">
+        {{ submit_button('bluebg', 'Save changes') }}
+        {{ button('redbg', redirect_to, 'Cancel') }}
+    <div>
+
 </form>
 {% endblock %}
