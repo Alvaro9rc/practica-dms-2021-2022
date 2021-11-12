@@ -43,7 +43,5 @@ class StudentEndpoints():
         if Role.Student.name not in session['roles']:
             return redirect(url_for('get_home'))
         name = session['user']
-        return render_template('student/questions/view.html',  questions=WebQuestion.list_question(auth_service)
+        return render_template('/student/questions/view.html',  questions=WebQuestion.list_question(auth_service)
                                )
-
-
