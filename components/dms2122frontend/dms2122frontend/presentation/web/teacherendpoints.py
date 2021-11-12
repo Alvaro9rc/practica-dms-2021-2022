@@ -100,7 +100,8 @@ class TeacherEndpoints():
         # questionAnswer3: str = str(request.args.get('questionAnswer3'))
         # puntuation: str = str(request.args.get('puntuation'))
         # penalty: str = str(request.args.get('penalty'))
-        
+        # redirect_to: str = str(request.args.get(
+        #     'redirect_to', default='/teacher/questions'))
         # le llega un objeto a pelo, esto habrá que cambiar
         id: str =1
         questionName: str = "Texto de la pregunta"

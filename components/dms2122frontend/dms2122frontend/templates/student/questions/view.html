@@ -1,0 +1,17 @@
+{% extends "student.html" %}
+{% from "macros/buttons.html" import button with context %}
+{% block contentsubheading %}Cuestiones{% endblock %}
+{% block maincontent %}
+<table class="fillwidth highlightrows">
+    <tbody>
+        <tr>
+            <th class="alignleft">Cuestiones</th><th></th>
+        </tr>
+        {% for question in questions %}
+            <!-- <tr class="highlightable">
+            </tr> -->
+        {% endfor %}
+    </tbody>
+</table>
+<p class="alignright">{{ button('bluebg', '/student', 'volver') }}</p>
+{% endblock %}

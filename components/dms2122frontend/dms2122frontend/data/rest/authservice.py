@@ -314,3 +314,22 @@ class AuthService():
         #     aggregated_response.add_message(response.content.decode('ascii'))
         return aggregated_response
 
+    def list_questions(self, token: Optional[str]) -> ResponseData:
+        
+        response_data: ResponseData = ResponseData()
+        response_data.set_successful(True)
+
+        # response: requests.Response = requests.get(
+        #     self.__base_url() + '/questions',
+        #     headers={
+        #         'Authorization': f'Bearer {token}',
+        #         self.__apikey_header: self.__apikey_secret
+        #     }
+        # )
+        # response_data.set_successful(response.ok)
+        # if response_data.is_successful():
+        #     response_data.set_content(response.json())
+        # else:
+        #     response_data.add_message(response.content.decode('ascii'))
+        #     response_data.set_content([])
+        return response_data
