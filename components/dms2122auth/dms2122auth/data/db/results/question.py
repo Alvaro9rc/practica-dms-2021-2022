@@ -13,7 +13,7 @@ class Question(ResultBase):
     """ Definition and storage of user ORM records.
     """
 
-    def __init__(self, id:int,  questionName: str, description:str, questionAnswer:str, questionAnswer2:str, questionAnswer3:str, puntuation, penalty):
+    def __init__(self, id:str,  questionName: str, description:str, questionAnswer:str, questionAnswer2:str, questionAnswer3:str, puntuation, penalty):
         """ Constructor method.
         """
         self.id: int = id
@@ -22,8 +22,8 @@ class Question(ResultBase):
         self.questionAnswer :str =  questionAnswer
         self.questionAnswer2 :str= questionAnswer2
         self.questionAnswer3 :str= questionAnswer3
-        self.puntuation :int= puntuation
-        self.penalty :int= penalty
+        self.puntuation :str= puntuation
+        self.penalty :str= penalty
 
     @staticmethod
     def _table_definition(metadata: MetaData) -> Table:
@@ -31,13 +31,13 @@ class Question(ResultBase):
         return Table(
             'question',
             metadata,
-            Column('id', Integer, primary_key=True),
+            Column('id', String(64),primary_key=True),
             Column('questionName', String(32), nullable= False),
             Column('description', String(256), nullable=False),
             Column('questionAnswer', String(64), nullable=False),
             Column('questionAnswer2', String(64), nullable=False),
             Column('questionAnswer3', String(64), nullable=False),
-            Column('puntuation', Integer, nullable=False),
-            Column('penalty', Integer, nullable=False)
+            Column('puntuation', String(64), nullable=False),
+            Column('penalty', String(64), nullable=False)
 
         )
