@@ -103,7 +103,7 @@ class TeacherEndpoints():
         # redirect_to: str = str(request.args.get(
         #     'redirect_to', default='/teacher/questions'))
         # le llega un objeto a pelo, esto habrá que cambiar
-        id: str =1
+        id: str ="1"
         questionName: str = "Texto de la pregunta"
         description: str = "Descripción"
         questionAnswer: str ="Texto de la respuesta"
