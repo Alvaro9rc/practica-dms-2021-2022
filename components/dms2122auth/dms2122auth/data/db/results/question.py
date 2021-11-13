@@ -16,7 +16,7 @@ class Question(ResultBase):
     def __init__(self, id:str,  questionName: str, description:str, questionAnswer:str, questionAnswer2:str, questionAnswer3:str, puntuation, penalty):
         """ Constructor method.
         """
-        self.id: int = id
+        self.id: str = id
         self.questionName: str = questionName
         self.description: str =  description
         self.questionAnswer :str =  questionAnswer
