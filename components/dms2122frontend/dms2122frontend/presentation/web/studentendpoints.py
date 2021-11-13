@@ -6,8 +6,9 @@ from flask import redirect, url_for, session, render_template
 from werkzeug.wrappers import Response
 from dms2122common.data import Role
 from dms2122frontend.data.rest.authservice import AuthService
+from dms2122frontend.data.rest.backendservice import BackendService
 from dms2122frontend.presentation.web.webquestion import WebQuestion
-
+from typing import  Dict, List
 from .webauth import WebAuth
 
 
@@ -33,15 +34,18 @@ class StudentEndpoints():
 
     @staticmethod
     def get_student_questions(auth_service: AuthService) -> Union[Response, Text]:
-        return render_template('/student/questions.html')
-
-
-    @staticmethod
-    def get_student_list_questions(auth_service: AuthService) -> Union[Response, Text]:
         if not WebAuth.test_token(auth_service):
             return redirect(url_for('get_login'))
         if Role.Student.name not in session['roles']:
             return redirect(url_for('get_home'))
-        name = session['user']
+        return render_template('/student/questions.html',  questions=WebQuestion.list_question(auth_service))
+
+
+    @staticmethod
+    def get_student_list_questions(auth_service: AuthService, backend_service: BackendService) -> Union[Response, Text]:
+        if not WebAuth.test_token(auth_service):
+            return redirect(url_for('get_login'))
+        if Role.Student.name not in session['roles']:
+            return redirect(url_for('get_home'))
         return render_template('/student/questions/view.html',  questions=WebQuestion.list_question(auth_service)
                                )

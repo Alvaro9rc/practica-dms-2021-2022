@@ -65,7 +65,7 @@ def get_student_questions():
 
 @app.route("/student/questions/viewAllQuestions", methods=['GET'])
 def get_student_list_questions():
-    return StudentEndpoints.get_student_list_questions(auth_service)
+    return StudentEndpoints.get_student_list_questions(auth_service, backend_service)
 
 @app.route("/admin", methods=['GET'])
 def get_admin():

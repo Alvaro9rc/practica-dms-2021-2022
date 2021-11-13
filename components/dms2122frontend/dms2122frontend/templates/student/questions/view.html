@@ -8,10 +8,12 @@
             <th class="alignleft">Cuestiones</th><th></th>
         </tr>
         {% for question in questions %}
-            <!-- <tr class="highlightable">
-            </tr> -->
+            <tr class="highlightable">
+                <td>{{ question.questionName }}</td>
+            </tr>
+
         {% endfor %}
     </tbody>
 </table>
-<p class="alignright">{{ button('bluebg', '/student', 'volver') }}</p>
+<p class="alignright">{{ button('bluebg', '/student', 'Volver') }}</p>
 {% endblock %}

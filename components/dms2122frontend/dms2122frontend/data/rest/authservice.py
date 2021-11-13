@@ -1,7 +1,7 @@
 """ AuthService class module.
 """
 
-from typing import List, Optional, Union
+from typing import List, Optional, Dict,  Union
 import requests
 from dms2122common.data import Role
 from dms2122common.data.rest import ResponseData
@@ -318,7 +318,40 @@ class AuthService():
         
         response_data: ResponseData = ResponseData()
         response_data.set_successful(True)
+        out: List[Dict] = []
+        out.append(
+            {
+                'id': '1',
+                'questionName': "¿Quién Inventó la luz?",
+                'description': "Esto es una pregunta",
+                'questionAnswer': "La luz ya existía",
+                'questionAnswer2': "Alberto Porres",
+                'questionAnswer3': "Guttemberg",
+                'puntuation': "10",
+                'penalty':"20"
 
+            })
+        out.append({
+                'id': '2',
+                'questionName': "¿Cuántas Patas tiene un caballo?",
+                'description': "Pregunta fácil para aprobar",
+                'questionAnswer': "Tiene cola",
+                'questionAnswer2': "Tiene 4 patas",
+                'questionAnswer3': "No existen los caballos",
+                'puntuation': "10",
+                'penalty':"20"
+            })
+        out.append({
+                'id': '3',
+                'questionName': "Cuál es el radio de la tierra? en km",
+                'description': "Pregunta fácil para aprobar",
+                'questionAnswer': "6700 km",
+                'questionAnswer2': "8000 km",
+                'questionAnswer3': "7700 km",
+                'puntuation': "10",
+                'penalty':"20"
+            })
+        response_data.set_content(out)
         # response: requests.Response = requests.get(
         #     self.__base_url() + '/questions',
         #     headers={

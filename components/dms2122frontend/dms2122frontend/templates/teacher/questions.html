@@ -13,11 +13,15 @@
         <th scope="col">Respuesta Válida</th>
         <th scope="col">Editar pregunta</th>
     </tr>
+    {% for question in questions %}
+    <tr>
+    <td>{{ question.questionName }} </td>
+      <td>{{ question.questionAnswer }}</td>
+      <td name="editarPregunta{{question}}">{{ button('bluebg', '/teacher/questions/edit', 'Editar pregunta') }}</td>
 
-    {{ question( '1', 'texto de la pregunta', 'texto de la repuesta') }}
-    {{ question( '2', 'texto de la pregunta', 'texto de la repuesta') }}
-    {{ question( '3', 'texto de la pregunta', 'texto de la repuesta') }}
-    {{ question( '4', 'texto de la pregunta', 'texto de la repuesta') }}
+</tr>
+    {% endfor %}
+
 
 </table>
 {{ button('bluebg', '/teacher/questions/new', 'Añadir pregunta') }}

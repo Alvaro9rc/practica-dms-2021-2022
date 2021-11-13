@@ -18,6 +18,7 @@ class QuestionServices():
         questions: List[Question] = Questions.list_all(session)
         for question in questions:
             out.append({
+                'id': question.id,
                 'questionName': question.questionName,
                 'description': question.description,
                 'questionAnswer': question.questionAnswer,

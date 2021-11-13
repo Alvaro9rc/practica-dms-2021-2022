@@ -34,7 +34,7 @@ class TeacherEndpoints():
 
     @staticmethod
     def get_teacher_questions(auth_service: AuthService) -> Union[Response, Text]:
-        return render_template('teacher/questions.html')
+        return render_template('teacher/questions.html',  questions=WebQuestion.list_question(auth_service))
 
     @staticmethod
     def get_teacher_questions_new(auth_service: AuthService) -> Union[Response, Text]:

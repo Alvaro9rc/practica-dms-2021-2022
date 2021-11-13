@@ -11,3 +11,5 @@ def list_questions() -> Tuple[List[Dict], Optional[int]]:
     with current_app.app_context():
         questions: List[Dict] = QuestionServices.list_questions(current_app.db)
     return (questions, HTTPStatus.OK.value)
+
+ 

@@ -8,7 +8,7 @@
     <script>tinymce.init({selector:'textarea'});</script>
 {% endblock %}
 
-{% block contentsubheading %}Añadir pregunta{% endblock %}
+{% block contentsubheading %}Contestar preguntas{% endblock %}
 {% block maincontent %}
 
 <!-- TODO Pewndiente de poenr ruta en el form -->
@@ -16,26 +16,28 @@
     <!-- <input type="hidden" name="redirect_to" value="{{ redirect_to }}" /> -->
 
 	<form >
-		<div>¿Cuántos planetas tiene el sistema solar? </div>
+		{% for question in questions %}
+		<div>{{ question.questionName }} </div>
+		  <input type="radio" id="P1" name="1" value="6">
+		  <label for="P1"> {{question.questionAnswer }} </label><br>
+		  <input type="radio" id="P1" name="1" value="8">
+		  <label for="P1"> {{ question.questionAnswer2 }} </label><br>
+		  <input type="radio" id="P1" name="1" value="7">
+		  <label for="P1"> {{ question.questionAnswer3 }} </label>
+		  <br>
+		  <!-- <input type="button" value="Corregir" onclick="comprobarRespuestas(respuestaCorrecta)" /></td></tr> -->
+
+		  <div id="solucion"></div>
+
+        {% endfor %}
+		<!-- <div>¿Cuántos planetas tiene el sistema solar? </div>
 		  <input type="radio" id="P1" name="1" value="6">
 		  <label for="P1"> 6 </label><br>
 		  <input type="radio" id="P1" name="1" value="8">
 		  <label for="P1"> 8 </label><br>
 		  <input type="radio" id="P1" name="1" value="7">
 		  <label for="P1"> 7 </label>
-
-		  <div>¿Cuál es el radio de la tierra en kilometros? </div>
-		  <input type="radio" id="P2" name="2" value="6700">
-		  <label for="vehicle1"> 6700 </label><br>
-		  <input type="radio" id="P2" name="2" value="8000">
-		  <label for="vehicle2"> 8000 </label><br>
-		  <input type="radio" id="P2" name="2" value="7700">
-		  <label for="vehicle3"> 7700 </label>
-
-		  <br>
-		  <input type="button" value="Corregir" onclick="comprobarRespuestas(respuestaCorrecta)" /></td></tr>
-
-		  <div id="solucion"></div>
+-->
 	</form>
     
     <!-- BOTONES -->
@@ -46,38 +48,5 @@
 
 
 </form>
-<script>
-    var respuestaCorrecta = new Array("8", "6700");
-		
-		function comprobarRespuestas(matriz){
-		
-			var numeroRespuestasOK=0;
-			var numeroRespuestasKO=0;
-			var solucion = document.getElementById("solucion");
-			var tablaResultados ="<table border='1'>";
-			
-			for(j=0; j< matriz.length; j++){
-			var radios = document.getElementsByName(j+1);
-				for(i=0; i< radios.length;i++){
-					if (radios[i].checked){
-					var valor =  radios[i].value;
-						if(valor == matriz[j]) {
-						tablaResultados+= "<tr><td>Respuesta correcta: </td>"+ "<td>"+ valor + "</td></tr>";
-						numeroRespuestasOK++;
-						break;
-						}else {
-						tablaResultados+= "<tr><td>Respuesta incorrecta: </td><td>"+ valor + "</td></tr>";
-						numeroRespuestasKO++;
-						break;
-						}
-					}
-				}
-				
-				
-			}
-			var numeroRespuestasNulas=matriz.length - (numeroRespuestasOK + numeroRespuestasKO);
-			tablaResultados+="<tr><td>Resultado: </td><td>Respuestas correctas: "+numeroRespuestasOK+"<br/>Respuestas incorrectas: "+ numeroRespuestasKO+"<br/>Respuestas en blanco: "+ numeroRespuestasNulas+"</td></tr></table>";
-			solucion.innerHTML = tablaResultados;
-	}
-</script>
+
 {% endblock %}

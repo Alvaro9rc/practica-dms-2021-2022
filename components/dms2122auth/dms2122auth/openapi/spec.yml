@@ -19,6 +19,8 @@ tags:
     description: Role-related operations (e.g., grant, revoke)
   - name: server
     description: Operations about the server itself (e.g., server status querying)
+  # - name: questions
+  #   description: Question-related operations (e.g., list, create, search)
 servers:
   - url: /api/v1
 paths:
@@ -56,8 +58,8 @@ paths:
   
   # /questions:
   #   get:
-  #     summary: Gets a listing of users.
-  #     operationId: dms2122auth.presentation.rest.question.list_questions
+  #     summary: Gets a listing of questions.
+  #      operationId: dms2122auth.presentation.rest.question.list_questions
   #     responses:
   #       '200':
   #         description: A list of questions.
@@ -66,7 +68,7 @@ paths:
   #             schema:
   #               $ref: '#/components/schemas/QuestionsFullListModel'
   #     tags:
-  #       - quesetions
+  #       - questions
   #     security:
   #       - user_token: []
   #         api_key: []  
@@ -308,6 +310,18 @@ components:
     #   type: object
     #   properties:
     #     questionName:
+    #       type: string
+    #     descriptone:
+    #       type: string
+    #     questionAnswer:
+    #       type: string
+    #     questionAnswer2:
+    #       type: string
+    #     questionAnwer3:
+    #       type: string
+    #     puntuation:
+    #       type: string
+    #     penality:
     #       type: string
     UsersFullListModel:
       type: array

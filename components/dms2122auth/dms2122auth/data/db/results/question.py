@@ -13,9 +13,10 @@ class Question(ResultBase):
     """ Definition and storage of user ORM records.
     """
 
-    def __init__(self, questionName: str, description:str, questionAnswer:str, questionAnswer2:str, questionAnswer3:str, puntuation, penalty):
+    def __init__(self, id:int,  questionName: str, description:str, questionAnswer:str, questionAnswer2:str, questionAnswer3:str, puntuation, penalty):
         """ Constructor method.
         """
+        self.id: int = id
         self.questionName: str = questionName
         self.description: str =  description
         self.questionAnswer :str =  questionAnswer
@@ -30,7 +31,8 @@ class Question(ResultBase):
         return Table(
             'question',
             metadata,
-            Column('questionName', String(32), primary_key=True),
+            Column('id', Integer, primary_key=True),
+            Column('questionName', String(32), nullable= False),
             Column('description', String(256), nullable=False),
             Column('questionAnswer', String(64), nullable=False),
             Column('questionAnswer2', String(64), nullable=False),
