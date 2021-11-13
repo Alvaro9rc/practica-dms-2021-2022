@@ -11,13 +11,24 @@
     <tr>
         <th scope="col">Preguntas</th>
         <th scope="col">Respuesta Válida</th>
+        <th scope="col">Respuesta Incorrecta</th>
+        <th scope="col">Respuesta Incorrecta 2</th>
+        <th scope="col">Porcentaje</th>
+        <th scope="col">Penalización</th>
         <th scope="col">Editar pregunta</th>
     </tr>
     {% for question in questions %}
     <tr>
     <td>{{ question.questionName }} </td>
       <td>{{ question.questionAnswer }}</td>
+      <td>{{ question.questionAnswer2 }}</td>
+      <td>{{ question.questionAnswer3 }}</td>
+      <td>{{ question.puntuation }}</td>
+      <td>{{ question.penalty }}</td>
       <td name="editarPregunta{{question}}">{{ button('bluebg', '/teacher/questions/edit', 'Editar pregunta') }}</td>
+
+      <!-- <td name="editarPregunta"><a href="/teacher/questions/edit?questionId={{ question.id }}&redirect_to=/teacher/questions">Editar pregunta</td> -->
+
 
 </tr>
     {% endfor %}

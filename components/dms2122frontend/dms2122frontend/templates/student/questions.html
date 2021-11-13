@@ -18,11 +18,11 @@
 	<form >
 		{% for question in questions %}
 		<div>{{ question.questionName }} </div>
-		  <input type="radio" id="P1" name="1" value="6">
+		  <input type="radio" id=" {{ question.id }}" name=" {{ question.id }}"value="6">
 		  <label for="P1"> {{question.questionAnswer }} </label><br>
-		  <input type="radio" id="P1" name="1" value="8">
+		  <input type="radio" id=" {{ question.id }}" name=" {{ question.id }}" value="8">
 		  <label for="P1"> {{ question.questionAnswer2 }} </label><br>
-		  <input type="radio" id="P1" name="1" value="7">
+		  <input type="radio" id=" {{ question.id }}" name=" {{ question.id }}" value="7">
 		  <label for="P1"> {{ question.questionAnswer3 }} </label>
 		  <br>
 		  <!-- <input type="button" value="Corregir" onclick="comprobarRespuestas(respuestaCorrecta)" /></td></tr> -->
