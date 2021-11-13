@@ -366,3 +366,25 @@ class AuthService():
         #     response_data.add_message(response.content.decode('ascii'))
         #     response_data.set_content([])
         return response_data
+
+    def list_questions_answer(self, token: Optional[str]) -> ResponseData:
+        
+        response_data: ResponseData = ResponseData()
+        response_data.set_successful(True)
+        out: List[Dict] = []
+        out.append(
+            {
+                'id': '1',
+                'questionId': "1",
+                'answer': "La luz ya existía",
+                'puntuation': "-20"
+
+            })
+        out.append({
+                'id': '2',
+                'questionId': "3",
+                'answer': "7700 km",
+                'puntuation': "10"
+            })
+        response_data.set_content(out)
+        return response_data

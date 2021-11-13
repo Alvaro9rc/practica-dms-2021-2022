@@ -31,3 +31,4 @@ class Answer(ResultBase):
             Column('valoration', String(64), nullable=False),
 
         )
+

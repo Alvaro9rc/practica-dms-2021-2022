@@ -19,6 +19,14 @@ class WebQuestion():
         if response.get_content() is not None and isinstance(response.get_content(), list):
             return list(response.get_content())
         return []
+    @staticmethod
+    def list_question_answer(auth_service: AuthService) -> List:
+
+        response: ResponseData = auth_service.list_questions_answer(session.get('token'))
+        WebUtils.flash_response_messages(response)
+        if response.get_content() is not None and isinstance(response.get_content(), list):
+            return list(response.get_content())
+        return []
 
 # TODO pendiente por hacer en AUTSERVICES
     @staticmethod

@@ -49,3 +49,13 @@ class StudentEndpoints():
             return redirect(url_for('get_home'))
         return render_template('/student/questions/view.html',  questions=WebQuestion.list_question(auth_service)
                                )
+    @staticmethod
+    def get_student_list_answer(auth_service: AuthService) -> Union[Response, Text]:
+        if not WebAuth.test_token(auth_service):
+            return redirect(url_for('get_login'))
+        if Role.Student.name not in session['roles']:
+            return redirect(url_for('get_home'))
+        return render_template('/student/questions/answers.html',  questions=WebQuestion.list_question(auth_service), answers=WebQuestion.list_question_answer(auth_service)
+        # return render_template('/student/questions/answers.html',  questions=WebQuestion.list_question(auth_service)
+                               )
+
