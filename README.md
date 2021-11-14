@@ -5,6 +5,22 @@
 
 The goal of this project is to implement a basic online evaluation appliance deployed across several interconnected services.
 
+## Informacion acerca de la primera entrega:
+A 14 de noviembre de 2021
+Se ha implementado un front end "de pega" que permita:
+  - Crear preguntas por parte del profesor
+  - Editar preguntas por parte del profesor
+  - Contestar preguntas por parte del alumno
+  - Visualizar la lista de preguntas por parte del alumno
+  - Ver las respuestas de las preguntas contestadas anteriormente por parte del alumno
+
+Se ha editado la estructura de los 'templates' añadiendo las carpetas 'teacher' y 'student' en el que se incluyen los siguientes .html:
+  - templates/student/questions.html: muestra todas las preguntas en modo de cuestionario permitiendo dar respuesta a estas
+  - templates/student/questions/answers.html: permite ver las respuestas a las preguntas contestadas
+  - templates/student/questions/view.html: permite simplemente visualizar la lista de preguntas 
+  - templates/teacher/questions.html: permite al profesor visualizar las preguntas y acceder a la que quiera editar o añadir una nueva
+  - templates/teacher/questions/edit.html: ventana de edicion de la pregunta seleccionada
+  - templates/teacher/questions/new.html: ventana de adicion de una nueva pregunta 
 ## Components
 
 The source code of the components is available under the `components` direcotry.
