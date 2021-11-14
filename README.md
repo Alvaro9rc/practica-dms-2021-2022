@@ -117,3 +117,10 @@ The directory `scripts` contain several helper scripts.
 ## GitHub workflows and badges
 
 This project includes some workflows configured in `.github/workflows`. They will generate the badges seen at the top of this document, so do not forget to update the URLs in this README file if the project is forked!
+
+
+## Autores 
+
+-Alberto Porres Fernández
+-Álvaro Rodríguez Carpintero
+-Daniel Alonso Báscones
