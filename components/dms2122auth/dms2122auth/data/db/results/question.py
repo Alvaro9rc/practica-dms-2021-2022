@@ -10,11 +10,23 @@ from dms2122auth.data.db.results.resultbase import ResultBase
 
 
 class Question(ResultBase):
-    """ Definition and storage of user ORM records.
+    """ Class Question.
     """
 
-    def __init__(self, id:str,  questionName: str, description:str, questionAnswer:str, questionAnswer2:str, questionAnswer3:str, puntuation, penalty):
+    def __init__(self, id:str,  questionName: str, description:str, questionAnswer:str, questionAnswer2:str, questionAnswer3:str, puntuation:str, penalty:str):
         """ Constructor method.
+
+        Initializes a user record.
+
+        Args:
+            - id (str): A string with the question ID.
+            - questionName (str): A string with the name.
+            - description (str): A string with the description.
+            - questionAnswer (str): A string with the first answer.
+            - questionAnswer2 (str): A string with the second answer.
+            - questionAnswer3 (str): A string with the third answer.
+            - puntuation (str): A string with the puntuation.
+            - penalty (str): A string with the penalty.
         """
         self.id: str = id
         self.questionName: str = questionName
@@ -27,7 +39,15 @@ class Question(ResultBase):
 
     @staticmethod
     def _table_definition(metadata: MetaData) -> Table:
+        """ Gets the table definition.
 
+        Args:
+            - metadata (MetaData): The database schema metadata
+                        (used to gather the entities' definitions and mapping)
+
+        Returns:
+            - Table: A `Table` object with the table definition.
+        """
         return Table(
             'question',
             metadata,

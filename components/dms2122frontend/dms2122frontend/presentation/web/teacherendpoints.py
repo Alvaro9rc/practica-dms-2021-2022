@@ -34,10 +34,26 @@ class TeacherEndpoints():
 
     @staticmethod
     def get_teacher_questions(auth_service: AuthService) -> Union[Response, Text]:
+        """ Handles the GET requests for the teacher questions.
+
+        Args:
+            - auth_service (AuthService): The authentication service.
+
+        Returns:
+            - Union[Response,Text]: The generated response to the request.
+        """
         return render_template('teacher/questions.html',  questions=WebQuestion.list_question(auth_service))
 
     @staticmethod
     def get_teacher_questions_new(auth_service: AuthService) -> Union[Response, Text]:
+        """ Handles the GET requests for a new question created by the teacher.
+
+        Args:
+            - auth_service (AuthService): The authentication service.
+
+        Returns:
+            - Union[Response,Text]: The generated response to the request.
+        """
         name = session['user']
         redirect_to = request.args.get(
             'redirect_to', default='/teacher/questions')
@@ -49,7 +65,14 @@ class TeacherEndpoints():
 
     @staticmethod
     def post_teacher_questions_new(auth_service: AuthService) -> Union[Response, Text]:
+        """ Handles the POST for a new question created by the teacher.
 
+        Args:
+            - auth_service (AuthService): The authentication service.
+
+        Returns:
+            - Union[Response,Text]: The generated response to the request.
+        """
         '''Endpoint para el creado de preguntas '''
 
         #Controlamos que el usuario se haya logeado
@@ -86,7 +109,14 @@ class TeacherEndpoints():
 # editar preguntas
     @staticmethod
     def get_teacher_questions_edit(auth_service: AuthService) -> Union[Response, Text]:
+        """ Handles the GET request for a question edited by the teacher.
 
+        Args:
+            - auth_service (AuthService): The authentication service.
+
+        Returns:
+            - Union[Response,Text]: The generated response to the request.
+        """
         if not WebAuth.test_token(auth_service):
             return redirect(url_for('get_login'))
         if Role.Teacher.name not in session['roles']:
@@ -119,6 +149,15 @@ class TeacherEndpoints():
 
     @staticmethod
     def post_teacher_questions_edit(auth_service: AuthService) -> Union[Response, Text]:
+        """ Handles the POST request for a question edited by the teacher.
+
+        Args:
+            - auth_service (AuthService): The authentication service.
+
+        Returns:
+            - Union[Response,Text]: The generated response to the request.
+        """
+
 
         if not WebAuth.test_token(auth_service):
             return redirect(url_for('get_login'))

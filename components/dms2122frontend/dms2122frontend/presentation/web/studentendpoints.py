@@ -34,6 +34,14 @@ class StudentEndpoints():
 
     @staticmethod
     def get_student_questions(auth_service: AuthService) -> Union[Response, Text]:
+        """ Handles the GET requests to the questions for the student.
+
+        Args:
+            - auth_service (AuthService): The authentication service.
+
+        Returns:
+            - Union[Response,Text]: The generated response to the request.
+        """
         if not WebAuth.test_token(auth_service):
             return redirect(url_for('get_login'))
         if Role.Student.name not in session['roles']:
@@ -43,6 +51,14 @@ class StudentEndpoints():
 
     @staticmethod
     def get_student_list_questions(auth_service: AuthService, backend_service: BackendService) -> Union[Response, Text]:
+        """ Handles the GET requests to the list of questions names for the student.
+
+        Args:
+            - auth_service (AuthService): The authentication service.
+
+        Returns:
+            - Union[Response,Text]: The generated response to the request.
+        """
         if not WebAuth.test_token(auth_service):
             return redirect(url_for('get_login'))
         if Role.Student.name not in session['roles']:
@@ -51,6 +67,14 @@ class StudentEndpoints():
                                )
     @staticmethod
     def get_student_list_answer(auth_service: AuthService) -> Union[Response, Text]:
+        """ Handles the GET requests to the list of questions answers for the student.
+
+        Args:
+            - auth_service (AuthService): The authentication service.
+
+        Returns:
+            - Union[Response,Text]: The generated response to the request.
+        """
         if not WebAuth.test_token(auth_service):
             return redirect(url_for('get_login'))
         if Role.Student.name not in session['roles']:

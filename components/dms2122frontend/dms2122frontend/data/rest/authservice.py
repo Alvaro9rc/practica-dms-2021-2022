@@ -272,8 +272,28 @@ class AuthService():
                           ) -> ResponseData:
         aggregated_response: ResponseData = ResponseData()
         aggregated_response.set_successful(True)
+        """ Requests to update several questions for the teacher.
 
-# TODO PENDIENTE DE CREAR LA FUNCION PARA GUARDAR LOS DATOS DE ESTA QUESTION EN CONCRETO va a fallar mientras el guardado al editar
+        This utility method is not completely developed because the questions capability of been 
+        updated isn't supose to be working yet.
+
+        Args:
+            - token (Optional[str]): The user session token.
+            - id (str): Id of the question to be updated.
+            - questionName (str): New posible name.
+            - description (str): New posible description.
+            - questionAnswer (str): New posible first answer.
+            - questionAnswer2 (str): New posible second answer.
+            - questionAnswer3 (str): New posible  third answer.
+            - puntuation (str): New posible puntuation.
+            - penalty (str): New posible penalty.
+
+        Returns:
+            - ResponseData: Useful to know whether the operation succeeded and its messages.
+        """
+
+# TODO PENDIENTE DE CREAR LA FUNCION PARA GUARDAR LOS DATOS DE ESTA QUESTION EN CONCRETO va a fallar mientras el guardado en el back no funcione
+    # Esta función llamará al set_question_data para asignar las nuevas opciones a la cuestion
         # response = self.set_question_data(token, id, questionName, description, questionAnswer, questionAnswer2, questionAnswer3, puntuacion, penalty)
 
         # aggregated_response.add_messages(response.get_messages())
@@ -286,9 +306,29 @@ class AuthService():
     def create_teacher_question(self,
                           token: Optional[str], questionName: str,description: str,questionAnswer: str,questionAnswer2: str,questionAnswer3: str,puntuation: str,penalty: str
                           ) -> ResponseData:
+        """ Requests to create a question for the teacher.
+
+        This utility method is not completely developed because the questions capability of having 
+        new questions added isn't supose to be working yet.
+
+        Args:
+            - token (Optional[str]): The user session token.
+            - questionName (str): Question name.
+            - description (str): Question description.
+            - questionAnswer (str): Question first answer.
+            - questionAnswer2 (str): Question second answer.
+            - questionAnswer3 (str): Question  third answer.
+            - puntuation (str): Question puntuation.
+            - penalty (str): Question penalty.
+
+        Returns:
+            - ResponseData: Useful to know whether the operation succeeded and its messages.
+        """
+
         aggregated_response: ResponseData = ResponseData()
         # Para esta entregan le damos el valor True para que no de errores en ejecucion
         aggregated_response.set_successful(True)
+        
         # IMPORTANTE PARA LA PARTE DEL BACK, SE ENVIAN LAS OPCIONES DEL FORMULARIO EN UN JSON PARA GUARDARLAS POSTERIORMENTE 
         # TODO para cuando se envie al back yhay que definir la ruta /question/new en/  en (spec.yml)
         # response: requests.Response = requests.post(
@@ -315,7 +355,21 @@ class AuthService():
         return aggregated_response
 
     def list_questions(self, token: Optional[str]) -> ResponseData:
-        
+        """ Requests the question list from the database.
+
+        ** No hemos conseguido obtener las cuestiones mediante una ruta para realizar una 
+        consulta a la base de datos, la ruta se debería desarrollar en el fichero .yml 
+        (esta comentada). Puesto que nos daba un error en el login hemos insertado manualmente
+        las cuestiones aquí. Puesto que está la funcionalidad para obtener las cuestiones desde la
+        'base de datos' una vez corregido el error de la ruta se reemplazará este fragmento de código
+        por el del comentario situado debajo.
+
+        Args:
+            - token (Optional[str]): The user session token.
+        Returns:
+            - ResponseData: Useful to know whether the operation succeeded and its messages.
+        """
+
         response_data: ResponseData = ResponseData()
         response_data.set_successful(True)
         out: List[Dict] = []
@@ -368,7 +422,14 @@ class AuthService():
         return response_data
 
     def list_questions_answer(self, token: Optional[str]) -> ResponseData:
-        
+        """ Requests the list of answers of the answered questions  from the database.
+
+        Args:
+            - token (Optional[str]): The user session token.
+        Returns:
+            - ResponseData: Useful to know whether the operation succeeded and its messages.
+        """
+
         response_data: ResponseData = ResponseData()
         response_data.set_successful(True)
         out: List[Dict] = []
