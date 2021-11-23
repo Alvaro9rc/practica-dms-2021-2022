@@ -2,7 +2,7 @@ from sqlalchemy import create_engine  # type: ignore
 from sqlalchemy.ext.declarative import declarative_base  # type: ignore
 from sqlalchemy.orm import sessionmaker  # type: ignore
 from sqlalchemy.orm.session import Session  # type: ignore
-from results import User, UserSession
+from results import User, UserSession, Answer, Question
 
 
 class Schema():
@@ -13,6 +13,8 @@ class Schema():
 
         User.map(self.__declarative_base.metadata)
         UserSession.map(self.__declarative_base.metadata)
+        Question.map(self.__declarative_base.metadata)
+        Answer.map(self.__declarative_base.metadata)
         self.__declarative_base.metadata.create_all(self.__create_engine)
 
     def new_session(self) -> Session:
