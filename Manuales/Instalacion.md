@@ -16,7 +16,7 @@ Link: https://ubuntu.com/download/desktop.
 Una vez tengamos instalado el sistema operativo vamos a preparar el entorno para poder usar docker y python sin ningún problema. 
 Para ello vamos a ejecutar este script:
 https://gist.github.com/Kencho/b3829dd99c2c41c9f7a0c854b41dcaf4
-Usamos el comando `chmod 777` para dar permisos de ejecución al script. 
+Usamos el comando `chmod +x bootstrap.sh` para dar permisos de ejecución al script y lo ejecutamos `sudo bash bootstrap.sh`. 
 
 ## Paso 3: Descarga del proyecto: 
 
