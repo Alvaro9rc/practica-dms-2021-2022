@@ -3,15 +3,14 @@
 
 from sqlalchemy.log import instance_logger  # type: ignore
 from sqlalchemy.sql.sqltypes import Integer  # type: ignore
-from .resultbase import ResultBase
-from sqlalchemy import Table, MetaData, Column, String  # type: ignore
+from sqlalchemy import Table, MetaData, Column, String, ForeignKey # type: ignore
 from sqlalchemy.orm import mapper, relationship  # type: ignore
-from .answer import Answer
-class Question(ResultBase):
+# from .answer import Answer
+class Question():
     """ Class Question.
     """
 
-    def __init__(self, id:str,  questionName: str, description:str, questionAnswer:str, questionAnswer2:str, questionAnswer3:str, puntuation:str, penalty:str):
+    def __init__(self, id:str,  questionName: str, description:str, questionAnswer:str, questionAnswer2:str, questionAnswer3:str, puntuation:str, penalty:str, userCreated:str):
         """ Constructor method.
 
         Initializes a user record.
@@ -25,6 +24,7 @@ class Question(ResultBase):
             - questionAnswer3 (str): A string with the third answer.
             - puntuation (str): A string with the puntuation.
             - penalty (str): A string with the penalty.
+            - userCreated (str): A user who created the question.
         """
         self.id: str = id
         self.questionName: str = questionName
@@ -34,6 +34,7 @@ class Question(ResultBase):
         self.questionAnswer3: str = questionAnswer3
         self.puntuation: str = puntuation
         self.penalty: str = penalty
+        self.userCreated: str = userCreated
 
     @classmethod
     def map(cls: type, metadata: MetaData) -> None:
@@ -49,9 +50,11 @@ class Question(ResultBase):
                 Column('questionAnswer2', String(64), nullable=False),
                 Column('questionAnswer3', String(64), nullable=False),
                 Column('puntuation', String(64), nullable=False),
-                Column('penalty', String(64), nullable=False)
+                Column('penalty', String(64), nullable=False),
+                Column('userCreated', String(64), ForeignKey('users.username'), nullable=False) ,
+
             ),
-            properties={
-                'sessions': relationship(Answer, backref='question')
-            }
+            # properties={
+            #     'answer': relationship(Answer, backref='question')
+            # }
         )

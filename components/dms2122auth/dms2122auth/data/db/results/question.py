@@ -13,7 +13,7 @@ class Question(ResultBase):
     """ Class Question.
     """
 
-    def __init__(self, id:str,  questionName: str, description:str, questionAnswer:str, questionAnswer2:str, questionAnswer3:str, puntuation:str, penalty:str):
+    def __init__(self, id:int,  questionName: str, description:str, questionAnswer:str, questionAnswer2:str, questionAnswer3:str, puntuation:str, penalty:str):
         """ Constructor method.
 
         Initializes a user record.
@@ -28,7 +28,7 @@ class Question(ResultBase):
             - puntuation (str): A string with the puntuation.
             - penalty (str): A string with the penalty.
         """
-        self.id: str = id
+        self.id: int = id
         self.questionName: str = questionName
         self.description: str =  description
         self.questionAnswer :str =  questionAnswer
@@ -51,7 +51,7 @@ class Question(ResultBase):
         return Table(
             'question',
             metadata,
-            Column('id', String(64),primary_key=True),
+            Column('id', Integer,primary_key=True),
             Column('questionName', String(32), nullable= False),
             Column('description', String(256), nullable=False),
             Column('questionAnswer', String(64), nullable=False),

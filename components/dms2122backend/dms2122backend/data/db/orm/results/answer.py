@@ -1,14 +1,11 @@
-from typing import Dict
-from sqlalchemy.log import instance_logger  # type: ignore
 from sqlalchemy.orm import mapper, relationship  # type: ignore
-from sqlalchemy.sql.sqltypes import Integer  # type: ignore
+from sqlalchemy.sql.sqltypes import Integer, Float
+
+from .question import Question  # type: ignore
 from .resultbase import ResultBase
 from sqlalchemy import Table, MetaData, Column, String, ForeignKey  # type: ignore
-class Answer(ResultBase):
-    """ Class Answer
-    """
-
-    def __init__(self, id:str, questionId: str, answer:str, valoration:str):
+class Answer():
+    def __init__(self, id:int, question: int, answer:int, valoration:float, username:str):
         """ Constructor method.
 
         Initializes a user record.
@@ -18,22 +15,28 @@ class Answer(ResultBase):
             - answer (str): A string with the answer.
             - valoration (str): A string with the valoration.
         """
-        self.id: str = id
-        self.questionId: str = questionId
-        self.answer: str =  answer
-        self.valoration :str =  valoration
+        self.id: int = id
+        self.question: int = question
+        self.answer: int =  answer
+        self.valoration :float =  valoration
+        self.username :str =  username
 
-        @classmethod
-        def map(cls: type, metadata: MetaData) -> None:
-            mapper(
+    @classmethod
+    def map(cls: type, metadata: MetaData) -> None:
+        mapper(
             cls,
             Table(
                 'answer',
                 metadata,
-                Column('id', String(64), primary_key=True),
-                Column('questionId', String(32), ForeignKey('question.id'), nullable=False) ,
-                Column('answer', String(64), nullable=False),
-                Column('valoration', String(64), nullable=False),
+                Column('id', Integer, primary_key=True),
+                Column('question', Integer, ForeignKey('question.id'), nullable=False) ,
+                Column('answer', Integer, nullable=False),
+                Column('valoration', Integer, nullable=False),
+                Column('username', String(64), ForeignKey('users.username'), nullable=False) ,
 
             )
+            # ,
+            # properties={
+            #     'questions': relationship(Question, backref='answer')
+            # }
         )
