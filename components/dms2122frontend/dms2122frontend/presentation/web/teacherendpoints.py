@@ -7,6 +7,7 @@ from werkzeug.wrappers import Response
 from dms2122common.data import Role
 from dms2122frontend.data.rest.authservice import AuthService
 from flask import redirect, url_for, session, render_template, request, flash
+from dms2122frontend.data.rest.backendservice import BackendService
 
 from dms2122frontend.presentation.web.webquestion import WebQuestion
 from .webauth import WebAuth
@@ -33,7 +34,7 @@ class TeacherEndpoints():
         return render_template('teacher.html', name=name, roles=session['roles'])
 
     @staticmethod
-    def get_teacher_questions(auth_service: AuthService) -> Union[Response, Text]:
+    def get_teacher_questions(auth_service: AuthService, backend_service: BackendService) -> Union[Response, Text]:
         """ Handles the GET requests for the teacher questions.
 
         Args:
@@ -42,10 +43,10 @@ class TeacherEndpoints():
         Returns:
             - Union[Response,Text]: The generated response to the request.
         """
-        return render_template('teacher/questions.html',  questions=WebQuestion.list_question(auth_service))
+        return render_template('teacher/questions.html',  questions=WebQuestion.list_question(backend_service))
 
     @staticmethod
-    def get_teacher_questions_new(auth_service: AuthService) -> Union[Response, Text]:
+    def get_teacher_questions_new(auth_service: AuthService, backend_service: BackendService) -> Union[Response, Text]:
         """ Handles the GET requests for a new question created by the teacher.
 
         Args:
@@ -64,7 +65,7 @@ class TeacherEndpoints():
 
 
     @staticmethod
-    def post_teacher_questions_new(auth_service: AuthService) -> Union[Response, Text]:
+    def post_teacher_questions_new(auth_service: AuthService, backend_service: BackendService) -> Union[Response, Text]:
         """ Handles the POST for a new question created by the teacher.
 
         Args:
@@ -83,7 +84,7 @@ class TeacherEndpoints():
 
         # Inicializamos el objeto que contiene la informacion de la pregunta
         created_question = WebQuestion.create_question(
-            auth_service,
+            backend_service,
             request.form["questionName"], 
             request.form["description"], 
             request.form["questionAnswer"],
@@ -108,7 +109,7 @@ class TeacherEndpoints():
 
 # editar preguntas
     @staticmethod
-    def get_teacher_questions_edit(auth_service: AuthService) -> Union[Response, Text]:
+    def get_teacher_questions_edit(auth_service: AuthService, backend_service: BackendService) -> Union[Response, Text]:
         """ Handles the GET request for a question edited by the teacher.
 
         Args:
@@ -148,7 +149,7 @@ class TeacherEndpoints():
                                )
 
     @staticmethod
-    def post_teacher_questions_edit(auth_service: AuthService) -> Union[Response, Text]:
+    def post_teacher_questions_edit(auth_service: AuthService, backend_service: BackendService) -> Union[Response, Text]:
         """ Handles the POST request for a question edited by the teacher.
 
         Args:
@@ -165,7 +166,7 @@ class TeacherEndpoints():
             return redirect(url_for('get_home'))
         successful: bool = True
         #  en lugar de pasar la lista de preguntas para sustituir, pasaremos la pregunta junto con su id. Porque si no, con el teimpo y al añadir x preguntas, no será eficiente
-        successful &= WebQuestion.update_teacher_question(auth_service,
+        successful &= WebQuestion.update_teacher_question(backend_service,
                                                 request.form['id'],
                                                 request.form['questionName'],
                                                 request.form['description'],

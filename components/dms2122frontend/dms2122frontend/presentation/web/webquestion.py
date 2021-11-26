@@ -5,6 +5,7 @@ from typing import Dict, List, Optional
 from flask import session
 from dms2122common.data.rest import ResponseData
 from dms2122frontend.data.rest.authservice import AuthService
+from dms2122frontend.data.rest.backendservice import BackendService
 from .webutils import WebUtils
 
 
@@ -12,7 +13,7 @@ class WebQuestion():
     """ Monostate class responsible of the queston operation utilities.
     """
     @staticmethod
-    def list_question(auth_service: AuthService) -> List:
+    def list_question(backend_service: BackendService) -> List:
         """ Gets the list of questions-
 
         Args:
@@ -21,14 +22,14 @@ class WebQuestion():
         Returns:
             - List: The list of questions.
         """
-        response: ResponseData = auth_service.list_questions(session.get('token'))
+        response: ResponseData =backend_service.list_questions(session.get('token'))
         WebUtils.flash_response_messages(response)
         if response.get_content() is not None and isinstance(response.get_content(), list):
             return list(response.get_content())
         return []
 
     @staticmethod
-    def list_question_answer(auth_service: AuthService) -> List:
+    def list_question_answer( backend_service:BackendService) -> List:
         """ Gets the list of question answers.
 
         Args:
@@ -37,7 +38,7 @@ class WebQuestion():
         Returns:
             - List: The list of answers.
         """
-        response: ResponseData = auth_service.list_questions_answer(session.get('token'))
+        response: ResponseData = backend_service.list_questions_answer(session.get('token'))
         WebUtils.flash_response_messages(response)
         if response.get_content() is not None and isinstance(response.get_content(), list):
             return list(response.get_content())
@@ -45,7 +46,7 @@ class WebQuestion():
 
     # TODO pendiente por hacer en AUTSERVICES
     @staticmethod
-    def create_question(auth_service: AuthService, questionName: str, description:str, questionAnswer:str, questionAnswer2:str, questionAnswer3:str, puntuation:str, penalty:str) -> Optional[Dict]:
+    def create_question( backend_service: BackendService, questionName: str, description:str, questionAnswer:str, questionAnswer2:str, questionAnswer3:str, puntuation:str, penalty:str) -> Optional[Dict]:
         """ Creates the new question requested by the teacher.
 
         Args:
@@ -61,7 +62,7 @@ class WebQuestion():
         Returns:
             - Optional: true if the request is successful.
         """
-        response: ResponseData = auth_service.create_teacher_question(
+        response: ResponseData = backend_service.create_teacher_question(
             session.get('token'), questionName, description, questionAnswer, questionAnswer2, questionAnswer3, puntuation, penalty)
         
         WebUtils.flash_response_messages(response)
@@ -69,7 +70,7 @@ class WebQuestion():
     
 
     @staticmethod
-    def update_teacher_question(auth_service: AuthService,  id:str, questionName:str, description:str, questionAnswer:str, questionAnswer2:str, questionAnswer3:str, puntuation:str, penalty:str) -> bool:
+    def update_teacher_question(backend_service: BackendService,  id:str, questionName:str, description:str, questionAnswer:str, questionAnswer2:str, questionAnswer3:str, puntuation:str, penalty:str) -> bool:
         """ Updates a question requested by the teacher.
 
         Args:
@@ -86,7 +87,7 @@ class WebQuestion():
         Returns:
             - Bool: true if the request is successful.
         """
-        response: ResponseData = auth_service.update_teacher_question(
+        response: ResponseData = backend_service.update_teacher_question(
             session.get('token'), id, questionName, description, questionAnswer, questionAnswer2, questionAnswer3, puntuation, penalty)
         WebUtils.flash_response_messages(response)
         return response.is_successful()
