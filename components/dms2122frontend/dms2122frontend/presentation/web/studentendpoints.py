@@ -2,7 +2,7 @@
 """
 
 from typing import Text, Union
-from flask import redirect, url_for, session, render_template
+from flask import redirect, url_for, session, render_template, request
 from werkzeug.wrappers import Response
 from dms2122common.data import Role
 from dms2122frontend.data.rest import BackendService
