@@ -214,17 +214,19 @@ class BackendService():
         out: List[Dict] = []
         out.append(
             {
-                'id': '1',
-                'questionId': "1",
-                'answer': "La luz ya existía",
-                'puntuation': "-20"
+                'id': 1,
+                'questionId': 1,
+                'answer': 2,
+                'puntuation': "-20",
+                'username': 'Usuario1'
 
             })
         out.append({
-                'id': '2',
-                'questionId': "3",
-                'answer': "7700 km",
-                'puntuation': "10"
+                'id': 2,
+                'questionId': 2,
+                'answer': 2,
+                'puntuation': "-20",
+                'username': 'Usuario1'
             })
         response_data.set_content(out)
         return response_data

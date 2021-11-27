@@ -9,17 +9,25 @@
             <th>Respuesta</th>
             <th>Valoración</th>
         </tr>
-        {% for answer in answers %} 
-            {% for question in questions %}
-            {% if answer.questionId == question.id %}
-            <tr class="highlightable">
-                <td>{{ question.questionName }}</td>
-                <td>{{ answer.answer }}</td>
-                <td>{{ answer.puntuation }}</td>
-            </tr>
+        {% for answer in answers %}
+        {% for question in questions %}
+        {% if answer.questionId == question.id %}
+        <tr class="highlightable">
+            <td>{{ question.questionName }}</td>
+            {% if answer.answer == 1 %}
+            <td>{{ question.questionAnswer }}</td>
+            {% else %} 
+            {% if answer.answer == 2 %}
+            <td>{{ question.questionAnswer2}} </td>
+            {% else %}
+            <td>{{question.questionAnswer3 }} </td>
             {% endif %}
-            {% endfor %}
-        {% endfor %} 
+            {% endif %}
+            <td>{{ answer.puntuation }}</td>
+        </tr>
+        {% endif %}
+        {% endfor %}
+        {% endfor %}
     </tbody>
 </table>
 <p class="alignright">{{ button('bluebg', '/student', 'Volver') }}</p>
