@@ -41,7 +41,7 @@ class BackendService():
 
 
     def update_teacher_question(self,
-                          token: Optional[str], id:str, questionName: str,description: str,questionAnswer: str,questionAnswer2: str,questionAnswer3: str,puntuation: str,penalty: str
+                          token: Optional[str], id:int, questionName: str,description: str,questionAnswer: str,questionAnswer2: str,questionAnswer3: str,puntuation: int,penalty: int, userCreated:str
                           ) -> ResponseData:
         aggregated_response: ResponseData = ResponseData()
         aggregated_response.set_successful(True)
@@ -52,14 +52,14 @@ class BackendService():
 
         Args:
             - token (Optional[str]): The user session token.
-            - id (str): Id of the question to be updated.
+            - id (int): Id of the question to be updated.
             - questionName (str): New posible name.
             - description (str): New posible description.
             - questionAnswer (str): New posible first answer.
             - questionAnswer2 (str): New posible second answer.
             - questionAnswer3 (str): New posible  third answer.
-            - puntuation (str): New posible puntuation.
-            - penalty (str): New posible penalty.
+            - puntuation (int): New posible puntuation.
+            - penalty (int): New posible penalty.
 
         Returns:
             - ResponseData: Useful to know whether the operation succeeded and its messages.
@@ -77,7 +77,7 @@ class BackendService():
 
 # TODO pendiente de desarrollar esta funcion para crear una pregunta nueva
     def create_teacher_question(self,
-                          token: Optional[str], questionName: str,description: str,questionAnswer: str,questionAnswer2: str,questionAnswer3: str,puntuation: str,penalty: str
+                          token: Optional[str], questionName: str,description: str,questionAnswer: str,questionAnswer2: str,questionAnswer3: str,puntuation: int, penalty: int, userCreated: str
                           ) -> ResponseData:
         """ Requests to create a question for the teacher.
 
@@ -148,35 +148,41 @@ class BackendService():
         out: List[Dict] = []
         out.append(
             {
-                'id': '1',
+                'id': 1,
                 'questionName': "¿Quién Inventó la luz?",
                 'description': "Esto es una pregunta",
                 'questionAnswer': "La luz ya existía",
                 'questionAnswer2': "Alberto Porres",
                 'questionAnswer3': "Guttemberg",
-                'puntuation': "10",
-                'penalty':"20"
+                'puntuation': 20,
+                'penalty':10,
+                'userCreated': 1
+
 
             })
         out.append({
-                'id': '2',
+                'id': 2,
                 'questionName': "¿Cuántas Patas tiene un caballo?",
                 'description': "Pregunta fácil para aprobar",
                 'questionAnswer': "Tiene cola",
                 'questionAnswer2': "Tiene 4 patas",
                 'questionAnswer3': "No existen los caballos",
-                'puntuation': "10",
-                'penalty':"20"
+                'puntuation': 10,
+                'penalty': 5,
+                'userCreated': 1
+
             })
         out.append({
-                'id': '3',
+                'id': 3,
                 'questionName': "Cuál es el radio de la tierra? en km",
                 'description': "Pregunta fácil para aprobar",
                 'questionAnswer': "6700 km",
                 'questionAnswer2': "8000 km",
                 'questionAnswer3': "7700 km",
-                'puntuation': "10",
-                'penalty':"20"
+                'puntuation': 10,
+                'penalty': 20,
+                'userCreated': 1
+
             })
         response_data.set_content(out)
         # response: requests.Response = requests.get(

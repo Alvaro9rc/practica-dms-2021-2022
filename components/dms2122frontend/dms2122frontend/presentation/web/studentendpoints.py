@@ -5,9 +5,9 @@ from typing import Text, Union
 from flask import redirect, url_for, session, render_template
 from werkzeug.wrappers import Response
 from dms2122common.data import Role
-from dms2122frontend.data.rest import backendservice
+from dms2122frontend.data.rest import BackendService
 from dms2122frontend.data.rest.authservice import AuthService
-from dms2122frontend.data.rest.backendservice import BackendService
+# from dms2122frontend.data.rest.backendservice import BackendService
 from dms2122frontend.presentation.web.webquestion import WebQuestion
 from typing import  Dict, List
 from .webauth import WebAuth

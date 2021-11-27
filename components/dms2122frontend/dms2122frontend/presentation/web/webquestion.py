@@ -46,7 +46,7 @@ class WebQuestion():
 
     # TODO pendiente por hacer en AUTSERVICES
     @staticmethod
-    def create_question( backend_service: BackendService, questionName: str, description:str, questionAnswer:str, questionAnswer2:str, questionAnswer3:str, puntuation:str, penalty:str) -> Optional[Dict]:
+    def create_question( backend_service: BackendService, questionName: str, description:str, questionAnswer:str, questionAnswer2:str, questionAnswer3:str, puntuation:int, penalty:int, userCreated:str) -> Optional[Dict]:
         """ Creates the new question requested by the teacher.
 
         Args:
@@ -63,14 +63,14 @@ class WebQuestion():
             - Optional: true if the request is successful.
         """
         response: ResponseData = backend_service.create_teacher_question(
-            session.get('token'), questionName, description, questionAnswer, questionAnswer2, questionAnswer3, puntuation, penalty)
+            session.get('token'), questionName, description, questionAnswer, questionAnswer2, questionAnswer3, puntuation, penalty, userCreated)
         
         WebUtils.flash_response_messages(response)
         return response.get_content()
     
 
     @staticmethod
-    def update_teacher_question(backend_service: BackendService,  id:str, questionName:str, description:str, questionAnswer:str, questionAnswer2:str, questionAnswer3:str, puntuation:str, penalty:str) -> bool:
+    def update_teacher_question(backend_service: BackendService,  id:int, questionName:str, description:str, questionAnswer:str, questionAnswer2:str, questionAnswer3:str, puntuation:int, penalty:int, userCreated:str) -> bool:
         """ Updates a question requested by the teacher.
 
         Args:

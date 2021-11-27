@@ -92,6 +92,7 @@ class TeacherEndpoints():
             request.form["questionAnswer3"],
             request.form["puntuation"],
             request.form["penalty"]
+
         )
 
         # si no se ha creado una pregunta, se cargará de nuevo el formulario de crear pregunta. 
@@ -134,14 +135,14 @@ class TeacherEndpoints():
         # redirect_to: str = str(request.args.get(
         #     'redirect_to', default='/teacher/questions'))
         # le llega un objeto a pelo, esto habrá que cambiar
-        id: str ="1"
+        id: int = 1
         questionName: str = "Texto de la pregunta"
         description: str = "Descripción"
         questionAnswer: str ="Texto de la respuesta"
         questionAnswer2: str = "Respuesta Incorrecta 1"
         questionAnswer3: str = "Respoesta Incorrecta 2"
-        puntuation: str  = "1"
-        penalty: str = "20%"
+        puntuation: int = 10
+        penalty: int = 5
         redirect_to: str = str(request.args.get(
             'redirect_to', default='/teacher/questions'))
         return render_template('teacher/questions/edit.html',id=id, questionName=questionName, description=description, questionAnswer=questionAnswer, questionAnswer2=questionAnswer2, questionAnswer3=questionAnswer3, puntuation=puntuation,penalty=penalty,

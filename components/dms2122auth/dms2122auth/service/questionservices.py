@@ -5,6 +5,7 @@ from typing import List, Dict
 from sqlalchemy.orm.session import Session  # type: ignore
 from dms2122auth.data.config import AuthConfiguration
 from dms2122auth.data.db import Schema
+# from dms2122backend.data.db.orm.results import Question
 from dms2122auth.data.db.results import Question
 from dms2122auth.data.db.resultsets import Questions
 
@@ -35,7 +36,8 @@ class QuestionServices():
                 'questionAnswer2': question.questionAnswer2,
                 'questionAnswer3': question.questionAnswer3,
                 'puntuation': question.puntuation,
-                'penalty': question.penalty
+                'penalty': question.penalty, 
+                'userCreated': question.userCreated
 
             })
         schema.remove_session()
