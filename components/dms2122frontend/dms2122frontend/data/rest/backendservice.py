@@ -144,60 +144,60 @@ class BackendService():
         """
 
         response_data: ResponseData = ResponseData()
-        response_data.set_successful(True)
-        out: List[Dict] = []
-        out.append(
-            {
-                'id': 1,
-                'questionName': "¿Quién Inventó la luz?",
-                'description': "Esto es una pregunta",
-                'questionAnswer': "La luz ya existía",
-                'questionAnswer2': "Alberto Porres",
-                'questionAnswer3': "Guttemberg",
-                'puntuation': 20,
-                'penalty':10,
-                'userCreated': 1
+        # response_data.set_successful(True)
+        # out: List[Dict] = []
+        # out.append(
+        #     {
+        #         'id': 1,
+        #         'questionName': "¿Quién Inventó la luz?",
+        #         'description': "Esto es una pregunta",
+        #         'questionAnswer': "La luz ya existía",
+        #         'questionAnswer2': "Alberto Porres",
+        #         'questionAnswer3': "Guttemberg",
+        #         'puntuation': 20,
+        #         'penalty':10,
+        #         'userCreated': 1
 
 
-            })
-        out.append({
-                'id': 2,
-                'questionName': "¿Cuántas Patas tiene un caballo?",
-                'description': "Pregunta fácil para aprobar",
-                'questionAnswer': "Tiene cola",
-                'questionAnswer2': "Tiene 4 patas",
-                'questionAnswer3': "No existen los caballos",
-                'puntuation': 10,
-                'penalty': 5,
-                'userCreated': 1
+        #     })
+        # out.append({
+        #         'id': 2,
+        #         'questionName': "¿Cuántas Patas tiene un caballo?",
+        #         'description': "Pregunta fácil para aprobar",
+        #         'questionAnswer': "Tiene cola",
+        #         'questionAnswer2': "Tiene 4 patas",
+        #         'questionAnswer3': "No existen los caballos",
+        #         'puntuation': 10,
+        #         'penalty': 5,
+        #         'userCreated': 1
 
-            })
-        out.append({
-                'id': 3,
-                'questionName': "Cuál es el radio de la tierra? en km",
-                'description': "Pregunta fácil para aprobar",
-                'questionAnswer': "6700 km",
-                'questionAnswer2': "8000 km",
-                'questionAnswer3': "7700 km",
-                'puntuation': 10,
-                'penalty': 20,
-                'userCreated': 1
+        #     })
+        # out.append({
+        #         'id': 3,
+        #         'questionName': "Cuál es el radio de la tierra? en km",
+        #         'description': "Pregunta fácil para aprobar",
+        #         'questionAnswer': "6700 km",
+        #         'questionAnswer2': "8000 km",
+        #         'questionAnswer3': "7700 km",
+        #         'puntuation': 10,
+        #         'penalty': 20,
+        #         'userCreated': 1
 
-            })
-        response_data.set_content(out)
-        # response: requests.Response = requests.get(
-        #     self.__base_url() + '/questions',
-        #     headers={
-        #         'Authorization': f'Bearer {token}',
-        #         self.__apikey_header: self.__apikey_secret
-        #     }
-        # )
-        # response_data.set_successful(response.ok)
-        # if response_data.is_successful():
-        #     response_data.set_content(response.json())
-        # else:
-        #     response_data.add_message(response.content.decode('ascii'))
-        #     response_data.set_content([])
+        #     })
+        # response_data.set_content(out)
+        response: requests.Response = requests.get(
+            self.__base_url() + '/questions',
+            headers={
+                'Authorization': f'Bearer {token}',
+                self.__apikey_header: self.__apikey_secret
+            }
+        )
+        response_data.set_successful(response.ok)
+        if response_data.is_successful():
+            response_data.set_content(response.json())
+        else:
+            response_data.add_message(response.content.decode('ascii'))
+            response_data.set_content([])
         return response_data
 
     def list_questions_answer(self, token: Optional[str]) -> ResponseData:
