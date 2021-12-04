@@ -56,22 +56,22 @@ paths:
         - user_credentials: []
           api_key: []
   
-  /questions:
-    get:
-      summary: Gets a listing of questions.
-      operationId: dms2122auth.presentation.rest.question.list_questions
-      responses:
-        '200':
-          description: A list of questions.
-          content:
-            'application/json':
-              schema:
-                $ref: '#/components/schemas/QuestionsFullListModel'
-      tags:
-        - questions
-      security:
-        - user_token: []
-          api_key: []  
+  # /questions:
+  #   get:
+  #     summary: Gets a listing of questions.
+  #     operationId: dms2122auth.presentation.rest.question.list_questions
+  #     responses:
+  #       '200':
+  #         description: A list of questions.
+  #         content:
+  #           'application/json':
+  #             schema:
+  #               $ref: '#/components/schemas/QuestionsFullListModel'
+  #     tags:
+  #       - questions
+  #     security:
+  #       - user_token: []
+  #         api_key: []  
   
   /users:
     get:
@@ -302,31 +302,31 @@ components:
               type: string
           required:
             - password
-    QuestionsFullListModel:
-      type: array
-      items:
-        $ref: '#/components/schemas/QuestionsFullModel' 
-    QuestionsFullModel:
-      type: object
-      properties:
-        id:
-          type: integer
-        questionName:
-          type: string
-        descriptone:
-          type: string
-        questionAnswer:
-          type: string
-        questionAnswer2:
-          type: string
-        questionAnwer3:
-          type: string
-        puntuation:
-          type: integer
-        penality:
-          type: integer
-        userCreated:
-          type: string
+    # QuestionsFullListModel:
+    #   type: array
+    #   items:
+    #     $ref: '#/components/schemas/QuestionsFullModel' 
+    # QuestionsFullModel:
+    #   type: object
+    #   properties:
+    #     id:
+    #       type: integer
+    #     questionName:
+    #       type: string
+    #     descriptone:
+    #       type: string
+    #     questionAnswer:
+    #       type: string
+    #     questionAnswer2:
+    #       type: string
+    #     questionAnwer3:
+    #       type: string
+    #     puntuation:
+    #       type: integer
+    #     penality:
+    #       type: integer
+    #     userCreated:
+    #       type: string
     UsersFullListModel:
       type: array
       items:

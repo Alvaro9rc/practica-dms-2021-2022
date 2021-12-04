@@ -3,14 +3,14 @@ from sqlalchemy import Table, MetaData, Column, String
 from sqlalchemy.log import instance_logger  # type: ignore
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql.sqltypes import Integer  # type: ignore
-from dms2122auth.data.db.results.resultbase import ResultBase
+from dms2122backend.data.db.results.resultbase import ResultBase
 
 
 class Answer(ResultBase):
     """ Class Answer
     """
 
-    def __init__(self, id:int, question: int, answer:int, valoration:float, username:str):
+    def __init__(self, id:int, questionId: int, answer:str, valoration:float, username:str):
         """ Constructor method.
 
         Initializes a user record.
@@ -21,8 +21,8 @@ class Answer(ResultBase):
             - valoration (str): A string with the valoration.
         """
         self.id: int = id
-        self.question: int = question
-        self.answer: int =  answer
+        self.questionId: int = questionId
+        self.answer: str =  answer
         self.valoration :float =  valoration
         self.username :str =  username
 
@@ -42,8 +42,8 @@ class Answer(ResultBase):
             'answer',
             metadata,
                 Column('id', Integer, primary_key=True),
-                Column('question', Integer,  nullable=False) ,
-                Column('answer', Integer, nullable=False),
+                Column('questionId', Integer,  nullable=False) ,
+                Column('answer', String(64), nullable=False),
                 Column('valoration', Integer, nullable=False),
                 Column('username', String(64), nullable=False) ,
 
