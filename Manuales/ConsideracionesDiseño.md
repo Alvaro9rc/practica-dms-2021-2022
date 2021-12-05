@@ -69,9 +69,6 @@ El principio de single responsibility está o debería de estar presente en todo
 
 El principio Open/Closed se ve aplicado a la hora de definir las clases, ya que hay que ir pensando en dejarlas más o menos cerradas a su modificación, pero poder abrirlas a su extensión en un futuro si fuese necesario.
 
-El principio de Liskov’s substitution, no lo he visto aplicado en ninguna parte, pero pensandolo bien tiene que haber sido aplicado en alguna de las partes originales del código, ya que es fundamental para el tema de la herencia, ya que un hijo no debería poder modificar el comportamiento del padre
-
-El principio de interface segregation por desgracia, ha sido violado multitud de veces, ya que no tenemos claro la estructura que tiene que tener una aplicación web de este tipo, ni cómo se organizan las carpetas/componentes, por lo que mucho código podría reubicarse en otros lugares de la aplicación, quedando todo más limpio.
 
 
 ## Patrones estructurales
