@@ -21,11 +21,9 @@ def create_question(body: Dict, token_info: Dict) -> Tuple[Union[Dict, str], Opt
                 HTTPStatus.FORBIDDEN.value
             )
         try:
-            question: Dict = QuestionServices.create_question(body['id'], body['questionName'],
+            question: Dict = QuestionServices.create_question( body['questionName'],
              body['description'], body['questionAnswer'], body['questionAnswer2'], body['questionAnswer3'], 
-             body['correctAnswer'], body['puntuation'], body['penalty'], body['puntuation'], current_app.db)
-                
-
+             body['correctAnswer'], body['puntuation'], body['penalty'], current_app.db)
             
         except ValueError:
             return ('A mandatory argument is missing', HTTPStatus.BAD_REQUEST.value)
@@ -33,6 +31,11 @@ def create_question(body: Dict, token_info: Dict) -> Tuple[Union[Dict, str], Opt
             return ('A question like this already exists', HTTPStatus.CONFLICT.value)
     return (question, HTTPStatus.OK.value)
 
+
+def edit_question(body: Dict, token_info: Dict) -> Tuple[Union[Dict, str], Optional[int]]:
+    """ edit a question if the user has the teacher role.
+    """
+    
 
 def get_question(id: int) -> Tuple[Union[Optional[Question], str], Optional[int]]:
     """get question.
@@ -45,17 +48,6 @@ def get_question(id: int) -> Tuple[Union[Optional[Question], str], Optional[int]
             return ('A mandatory argument is missing', HTTPStatus.BAD_REQUEST.value)        
     return (question, HTTPStatus.OK.value)
 
-
-def get_question_by_name(questionName: str) -> Tuple[Union[Optional[Question], str], Optional[int]]:
-    """get question.
-    """
-    try:
-        question = QuestionServices.get_question(
-            questionName, current_app.db
-        )
-    except ValueError:
-            return ('A mandatory argument is missing', HTTPStatus.BAD_REQUEST.value)        
-    return (question, HTTPStatus.OK.value)
 
 
 def list_questions() -> Tuple[List[Dict], Optional[int]]:

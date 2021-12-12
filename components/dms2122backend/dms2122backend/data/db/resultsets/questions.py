@@ -8,6 +8,7 @@ from sqlalchemy.orm.session import Session  # type: ignore
 from sqlalchemy.orm.exc import NoResultFound  # type: ignore
 from dms2122backend.data.db.results import Question
 from dms2122backend.data.db.exc.questionexisterror import QuestionExistsError
+from dms2122backend.data.db.exc.questionnotfounderror import QuestionNotFoundError
 
 class Questions():
     """ Class Question. (no utilizada en esta entrega)
@@ -67,7 +68,7 @@ class Questions():
     #     return out
 
     @staticmethod
-    def create_question(session: Session, id: int,  questionName: str, description: str, questionAnswer: str, questionAnswer2: str, questionAnswer3: str, correctAnswer: str, puntuation: int, penalty: int) -> Question:
+    def create_question(session: Session,  questionName: str, description: str, questionAnswer: str, questionAnswer2: str, questionAnswer3: str, correctAnswer: int, puntuation: float, penalty: float) -> Question:
         """ Creates a new question.
         Note:
             Any existing transaction will be committed.
@@ -80,10 +81,10 @@ class Questions():
         Returns:
             - Question: The created Question.
         """
-        if not id or not questionName or not description or not questionAnswer or not questionAnswer2 or not questionAnswer3 or not correctAnswer or not puntuation or not penalty:
+        if not questionName or not description or not questionAnswer or not questionAnswer2 or not questionAnswer3 or not correctAnswer or not puntuation or not penalty:
             raise ValueError('All fields are required.')
         try:
-            new_question = Question(id, questionName, description, questionAnswer, questionAnswer2, questionAnswer3, correctAnswer, puntuation, penalty)
+            new_question = Question(questionName, description, questionAnswer, questionAnswer2, questionAnswer3, correctAnswer, puntuation, penalty)
             session.add(new_question)
             session.commit()
             return new_question
@@ -93,15 +94,35 @@ class Questions():
                 ) from ex
         
     @staticmethod
-    def list_all(session: Session) -> List[Question]:
-        """Lists all the question.
+    def edit_question(session: Session, id: int,questionName: str, description: str, questionAnswer: str, questionAnswer2: str, questionAnswer3: str, correctAnswer: int, puntuation: float, penalty: float) -> Question:
+        """ edits a question question.
+        Note:
+            Any existing transaction will be committed.
         Args:
             - session (Session): The session object.
+            - 
+        Raises:
+            - ValueError: If any field is empty.
+            - QuestionExistsError: If a question with the same title already exists.
         Returns:
-            - List[Question]: A list of all the questions.
+            - Question: The created Question.
         """
-        query = session.query(Question)
-        return query.all()
+        question = Questions.get_question(session, id)
+        if question is None:
+            raise QuestionNotFoundError
+        else:
+            question.questionName = questionName
+            question.description = description
+            question.questionAnswer = questionAnswer
+            question.questionAnswer2 = questionAnswer2
+            question.questionAnswer3 = questionAnswer3
+            question.correctAnswer = correctAnswer
+            question.puntuation = puntuation
+            question.penalty = penalty
+
+            session.commit()
+            return question
+
 
     @staticmethod
     def get_question(session: Session, id: int) -> Optional[Question]:
@@ -117,18 +138,32 @@ class Questions():
         except NoResultFound:
             return None
         return question
+    
 
     @staticmethod
-    def get_question_by_name(session: Session, name: str) -> Optional[Question]:
-        """ Gets a question by its name.
+    def list_questions(session: Session) -> List[Question]:
+        """Lists all the question.
         Args:
-            - name: (str): Question name.
+            - session (Session): The session object.
         Returns:
-            - bool: True if the question exist and false if not.
+            - List[Question]: A list of all the questions.
         """
-        try:
-            query = session.query(Question).filter_by(name = name)
-            question: Question = query.one()
-        except NoResultFound:
-            return None
-        return question
+        query = session.query(Question)
+        return query.all()
+
+    
+
+    # @staticmethod
+    # def get_question_by_name(session: Session, name: str) -> Optional[Question]:
+    #     """ Gets a question by its name.
+    #     Args:
+    #         - name: (str): Question name.
+    #     Returns:
+    #         - bool: True if the question exist and false if not.
+    #     """
+    #     try:
+    #         query = session.query(Question).filter_by(name = name)
+    #         question: Question = query.one()
+    #     except NoResultFound:
+    #         return None
+    #     return question

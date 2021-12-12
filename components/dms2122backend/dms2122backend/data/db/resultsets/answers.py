@@ -15,7 +15,7 @@ class Answers():
     """ Class responsible of table-level answers operations.
     """
     @staticmethod
-    def create_answer(session: Session, id: int, questionId: int, answer: str, valoration: float, username: str) -> Answer:
+    def create_question_answer(session: Session, questionId: int, answer: str, valoration: float, username: str) -> Answer:
         """ creates an answer given to a question.
         Note:
             Any existing transaction will be committed.
@@ -33,10 +33,10 @@ class Answers():
         Returns:
             - Answer: The answer to the question
         """
-        if not id or not questionId or not answer or not valoration or not username:
+        if not questionId or not answer or not valoration or not username:
             raise ValueError('All fields are required.')
         try:
-            new_answer = Answer(id, questionId, answer, valoration, username)
+            new_answer = Answer(questionId, answer, valoration, username)
             session.add(new_answer)
             session.commit()
             return new_answer
@@ -48,18 +48,21 @@ class Answers():
             raise
 
     @staticmethod
-    def list_all(session: Session) -> List[Answer]:
+    def get_question_answers(session: Session, id: int) -> List[Answer]:
         """Lists every answer.
         Args:
             - session (Session): The session object.
         Returns:
             - List[Answer]: A list of answers registers.
         """
-        query = session.query(Answer)
+
+        if not id:
+            raise ValueError('Question id required')
+        query = session.query(Answer).filter_by(id = id)
         return query.all()
 
     @staticmethod
-    def list_all_by_user(session: Session, user: str) -> List[Answer]:
+    def get_student_answers(session: Session, username: str) -> List[Answer]:
         """Lists all the answers given by a user.
         Args:
             - session (Session): The session object.
@@ -69,23 +72,8 @@ class Answers():
         Returns:
             - List[Answer]: All the answers given by that user.
         """
-        if not user:
+        if not username:
             raise ValueError('A username is required.')
-        query = session.query(Answer).filter_by(user=user)
+        query = session.query(Answer).filter_by(username=username)
         return query.all()
 
-    @staticmethod
-    def list_all_by_question(session: Session, questionId: int) -> List[Answer]:
-        """Lists all the answers given to a question.
-        Args:
-            - session (Session): The session object.
-            - questionId (int): The question id.
-        Raises:
-            - ValueError: If the question id is missing.
-        Returns:
-            - List[Answer]: A list of answers to the question.
-        """
-        if not id:
-            raise ValueError('A question id is required.')
-        query = session.query(Answer).filter_by(questionId=questionId )
-        return query.all()

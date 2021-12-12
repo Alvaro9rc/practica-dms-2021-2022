@@ -17,11 +17,11 @@ class Answer(ResultBase):
         Initializes a user record.
 
         Args:
-            - questionId (str): A string with the question ID.
+            - questionId (int): The question answered ID.
             - answer (str): A string with the answer.
             - valoration (str): A string with the valoration.
         """
-        self.questionId: int = questionId
+        self.id: int = questionId
         self.answer: str =  answer
         self.valoration :float =  valoration
         self.username :str =  username
@@ -41,10 +41,9 @@ class Answer(ResultBase):
         return Table(
             'answers',
             metadata,
-                Column('questionId', Integer, ForeignKey('questions.id') , primary_key=True) ,
+                Column('id', Integer, ForeignKey('questions.id') , primary_key=True) ,
                 Column('answer', String(64), nullable=False),
                 Column('valoration', Integer, nullable=False),
-                Column('username', String(64), nullable=False) ,
-
+                Column('username', String(64),  ForeignKey('user.username'), primary_key=True) 
         )
 

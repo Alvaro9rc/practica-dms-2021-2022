@@ -13,8 +13,7 @@ class Question(ResultBase):
     """ Class Question.
     """
 
-    # fallo grabe al no tener autoincrement y tener que meter los ids manualmente, será implementado en el siguiente commit y cambiado en todos los sitios que se use question
-    def __init__(self, id:int,  questionName: str, description:str, questionAnswer:str, questionAnswer2:str, questionAnswer3:str, correctAnswer:int, puntuation:float, penalty:float):
+    def __init__(self, questionName: str, description:str, questionAnswer:str, questionAnswer2:str, questionAnswer3:str, correctAnswer:int, puntuation:float, penalty:float):
         """ Constructor method.
 
         Initializes a user record.
@@ -29,7 +28,6 @@ class Question(ResultBase):
             - puntuation (str): A string with the puntuation.
             - penalty (str): A string with the penalty.
         """
-        self.id: int = id
         self.questionName: str = questionName
         self.description: str = description
         self.questionAnswer: str = questionAnswer
@@ -54,7 +52,7 @@ class Question(ResultBase):
         return Table(
             'questions',
             metadata,
-                Column('id', Integer, primary_key=True),
+                Column('id', Integer, autoincrement= 'auto', primary_key=True),
                 Column('questionName', String(64), nullable=False),
                 Column('description', String(64), nullable=False),
                 Column('questionAnswer', String(64), nullable=False),
