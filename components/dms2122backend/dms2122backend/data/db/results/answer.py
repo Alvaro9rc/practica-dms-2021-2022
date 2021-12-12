@@ -2,6 +2,7 @@ from typing import Dict
 from sqlalchemy import Table, MetaData, Column, String
 from sqlalchemy.log import instance_logger  # type: ignore
 from sqlalchemy.orm import relationship
+from sqlalchemy.sql.schema import ForeignKey
 from sqlalchemy.sql.sqltypes import Integer  # type: ignore
 from dms2122backend.data.db.results.resultbase import ResultBase
 
@@ -10,7 +11,7 @@ class Answer(ResultBase):
     """ Class Answer
     """
 
-    def __init__(self, id:int, questionId: int, answer:str, valoration:float, username:str):
+    def __init__(self, questionId: int, answer:str, valoration:float, username:str):
         """ Constructor method.
 
         Initializes a user record.
@@ -20,7 +21,6 @@ class Answer(ResultBase):
             - answer (str): A string with the answer.
             - valoration (str): A string with the valoration.
         """
-        self.id: int = id
         self.questionId: int = questionId
         self.answer: str =  answer
         self.valoration :float =  valoration
@@ -39,10 +39,9 @@ class Answer(ResultBase):
             - Table: A `Table` object with the table definition.
         """
         return Table(
-            'answer',
+            'answers',
             metadata,
-                Column('id', Integer, primary_key=True),
-                Column('questionId', Integer,  nullable=False) ,
+                Column('questionId', Integer, ForeignKey('questions.id') , primary_key=True) ,
                 Column('answer', String(64), nullable=False),
                 Column('valoration', Integer, nullable=False),
                 Column('username', String(64), nullable=False) ,

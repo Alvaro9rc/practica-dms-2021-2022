@@ -2,18 +2,19 @@
 """
 
 from typing import Dict
-from sqlalchemy import Table, MetaData, Column, String, ForeignKey # type: ignore
+from sqlalchemy import Table, MetaData, Column, String, Float, ForeignKey # type: ignore
 from sqlalchemy.log import instance_logger  # type: ignore
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql.sqltypes import Integer  # type: ignore
 from dms2122backend.data.db.results.resultbase import ResultBase
-
+from dms2122backend.data.db.results import Answer
 
 class Question(ResultBase):
     """ Class Question.
     """
 
-    def __init__(self, id:int,  questionName: str, description:str, questionAnswer:str, questionAnswer2:str, questionAnswer3:str, correctAnswer:str, puntuation:int, penalty:int):
+    # fallo grabe al no tener autoincrement y tener que meter los ids manualmente, será implementado en el siguiente commit y cambiado en todos los sitios que se use question
+    def __init__(self, id:int,  questionName: str, description:str, questionAnswer:str, questionAnswer2:str, questionAnswer3:str, correctAnswer:int, puntuation:float, penalty:float):
         """ Constructor method.
 
         Initializes a user record.
@@ -34,9 +35,9 @@ class Question(ResultBase):
         self.questionAnswer: str = questionAnswer
         self.questionAnswer2: str = questionAnswer2
         self.questionAnswer3: str = questionAnswer3
-        self.correctAnswer: str = correctAnswer
-        self.puntuation: int = puntuation
-        self.penalty: int = penalty
+        self.correctAnswer: int = correctAnswer
+        self.puntuation: float = puntuation
+        self.penalty: float = penalty
   
 
     @staticmethod
@@ -51,7 +52,7 @@ class Question(ResultBase):
             - Table: A `Table` object with the table definition.
         """
         return Table(
-            'question',
+            'questions',
             metadata,
                 Column('id', Integer, primary_key=True),
                 Column('questionName', String(64), nullable=False),
@@ -59,7 +60,22 @@ class Question(ResultBase):
                 Column('questionAnswer', String(64), nullable=False),
                 Column('questionAnswer2', String(64), nullable=False),
                 Column('questionAnswer3', String(64), nullable=False),
-                Column('correctAnswer', String(64), nullable=False),
-                Column('puntuation', Integer, nullable=False),
-                Column('penalty', Integer, nullable=False))
+                Column('correctAnswer', Integer, nullable=False),
+                Column('puntuation', Float(2,2), nullable=False),
+                Column('penalty', Float(2,2), nullable=False))
         
+    @staticmethod
+    def _mapping_properties() -> Dict:
+        """ Gets the mapping properties.
+
+        Args:
+            - metadata (MetaData): The database schema metadata
+                        (used to gather the entities' definitions and mapping)
+
+        Returns:
+            - Table: A `Table` object with the table definition.
+        """
+
+        return {
+            'questions': relationship(Answer, backref='question')
+        }

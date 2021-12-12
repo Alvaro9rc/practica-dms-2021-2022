@@ -53,6 +53,11 @@ class BackendConfiguration(ServiceConfiguration):
             self.set_password_salt(values["salt"])
         if "auth_service" in values:
             self.set_auth_service(values["auth_service"])
+        if 'jws_secret' in values:
+            self.set_jws_secret(values['jws_secret'])
+        if 'jws_ttl' in values:
+            self.set_jws_ttl(values['jws_ttl'])
+
 
     def set_db_connection_string(self, db_connection_string: str) -> None:
         """ Sets the db_connection_string configuration value.
@@ -104,3 +109,34 @@ class BackendConfiguration(ServiceConfiguration):
         """
 
         return self._values["auth_service"]
+
+    def set_jws_ttl(self, ttl: int) -> None:
+        """ Sets the jws_ttl configuration value.
+
+        Args:
+            - ttl: An integer with the configuration value.
+
+        Raises:
+            - ValueError: If validation is not passed.
+        """
+        self._values['jws_ttl'] = int(ttl)
+
+    def get_jws_ttl(self) -> int:
+        """ Gets the jws_ttl configuration value.
+
+        Returns:
+            - int: An integer with the value of jws_ttl.
+        """
+
+        return int(self._values['jws_ttl'])
+
+    def set_jws_secret(self, secret: str) -> None:
+        """ Sets the JWS secret key configuration value.
+
+        Args:
+            - secret: A string with the configuration value.
+
+        Raises:
+            - ValueError: If validation is not passed.
+        """
+        self._values['jws_secret'] = str(secret)

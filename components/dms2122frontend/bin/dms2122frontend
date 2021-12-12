@@ -79,30 +79,46 @@ def get_admin_users_edit():
 def post_admin_users_edit():
     return AdminEndpoints.post_admin_users_edit(auth_service)
 
+# pagina del alumno, vera un boton de acceso a las preguntas, otro para ver las respuestas ya dadas y otro para ver su progreso
 @app.route("/student", methods=['GET'])
 def get_student():
     return StudentEndpoints.get_student(auth_service)
 
+# lista de preguntos por contestar del alumno con la opcion de acceso a una pregunta para contestar
 @app.route("/student/questions", methods=['GET'])
 def get_student_questions():
     return StudentEndpoints.get_student_questions(auth_service, backend_service)
 
-@app.route("/student/questions/viewAllQuestions", methods=['GET'])
+# pregunta seleccionada para contestar 
+@app.route("/student/questions/question", methods=['GET'])
 def get_student_list_questions():
-    return StudentEndpoints.get_student_list_questions(auth_service, backend_service)
+    return StudentEndpoints.get_student_questions_question(auth_service, backend_service)
 
-@app.route("/student/questions/viewAllAnswers", methods=['GET'])
+@app.route("/student/questions/question", methods=['POST'])
 def get_student_list_answer():
-    return StudentEndpoints.get_student_list_answer(auth_service, backend_service)
+    return StudentEndpoints.post_student_questions_question(auth_service, backend_service)
 
+# pagina de las respuestas ya dadas por el alummno
+@app.route("/student/answers", methods=['GET'])
+def get_student_questions():
+    return StudentEndpoints.get_student_answers(auth_service, backend_service)
+
+# pagina del progreso del alumno
+@app.route("/student/progress", methods=['GET'])
+def get_student_questions():
+    return StudentEndpoints.get_student_progress(auth_service, backend_service)
+
+# pagina del profesor, vera un voton de gestion de preguntas y otro de gestion de alumnos
 @app.route("/teacher", methods=['GET'])
 def get_teacher():
     return TeacherEndpoints.get_teacher(auth_service)
 
+# listado de preguntas con botones de edicion, ver estadisticas o añadir una nueva pregunta
 @app.route("/teacher/questions", methods=['GET'])
 def get_teacher_questions():
     return TeacherEndpoints.get_teacher_questions(auth_service, backend_service)
 
+# adicion de una nueva pregunta
 @app.route("/teacher/questions/new", methods=['GET'])
 def get_teacher_questions_new():
     return TeacherEndpoints.get_teacher_questions_new(auth_service, backend_service)
@@ -111,17 +127,24 @@ def get_teacher_questions_new():
 def post_teacher_questions_new():
     return TeacherEndpoints.post_teacher_questions_new(auth_service, backend_service)
 
-
+# edicion de una pregunta existente
 @app.route("/teacher/questions/edit", methods=['GET'])
 def get_teacher_questions_edit():
     return TeacherEndpoints.get_teacher_questions_edit(auth_service, backend_service)
-
 
 @app.route("/teacher/questions/edit", methods=['POST'])
 def post_teacher_questions_edit():
     return TeacherEndpoints.post_teacher_questions_edit(auth_service, backend_service)
 
+# estadisticas de esa pregunta 
+@app.route("/teacher/questions/stats", methods=['GET'])
+def post_teacher_questions_edit():
+    return TeacherEndpoints.get_teacher_questions_stats(auth_service, backend_service)
 
+# estadisticas de los alumnos
+@app.route("/teacher/studentsStats", methods=['GET'])
+def get_teacher_questions_edit():
+    return TeacherEndpoints.get_teacher_studentsStats(auth_service, backend_service)
 
 
 
