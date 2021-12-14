@@ -31,28 +31,44 @@ class AnswersServices():
 
 
     @staticmethod
-    def get_student_answers( username: str, schema: Schema) -> List[Answer]:
+    def get_student_answers( username: str, schema: Schema) -> List[Dict]:
         """Lists all the answers given by a user.
         Args:
             - schema (Schema): A database handler where the questions are mapped into.
         Returns:
             
         """
+        out: List[Dict] = []
         session: Session = schema.new_session()
-        answer = Answers.get_student_answers(session, username)
+        answers: List[Answer] = Answers.get_student_answers(session, username)
+        for answer in answers:
+            out.append({
+                'id': answer.id,
+                'answer': answer.answer,
+                'valoration': answer.valoration,
+                'username': answer.username
+            })
         schema.remove_session()
-        return answer
+        return out
 
 
     @staticmethod
-    def get_question_answers(id: int, schema: Schema) -> List[Answer]:
+    def get_question_answers(id: int, schema: Schema) -> List[Dict]:
         """Lists all the answers given to a question.
         Args:
             - schema (Schema): A database handler where the questions are mapped into.
         Returns:
             - 
         """
+        out: List[Dict] = []
         session: Session = schema.new_session()
-        answer = Answers.get_question_answers(session, id)
+        answers: List[Answer] = Answers.get_question_answers(session, id)
+        for answer in answers:
+            out.append({
+                'id': answer.id,
+                'answer': answer.answer,
+                'valoration': answer.valoration,
+                'username': answer.username
+            })
         schema.remove_session()
-        return answer
+        return out

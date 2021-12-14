@@ -11,7 +11,7 @@ from dms2122common.data.role import Role
 from dms2122backend.data.db.exc.questionnotfounderror import QuestionNotFoundError
 
 
-def create_answer(body: Dict, token_info: Dict) -> Tuple[Optional[str], Optional[int]]:
+def create_question_answer(body: Dict, token_info: Dict) -> Tuple[Optional[str], Optional[int]]:
     """ creates a question if the user has the teacher role.
     """
     with current_app.app_context():
@@ -21,38 +21,59 @@ def create_answer(body: Dict, token_info: Dict) -> Tuple[Optional[str], Optional
                 HTTPStatus.FORBIDDEN.value
             )
         try:
-            answer: Dict = AnswersServices.create_answer(body['id'], body['questionId'],
+             AnswersServices.create_answer(body['questionId'],
              body['answer'], body['valoration'], body['username'], current_app.db)
                 
 
-            
         except ValueError:
             return ('A mandatory argument is missing', HTTPStatus.BAD_REQUEST.value)
         except QuestionNotFoundError:
             return ('The question does not exist', HTTPStatus.CONFLICT.value)
-    return (answer, HTTPStatus.OK.value)
+    return (None, HTTPStatus.OK.value)
 
 
-
-def list_all() -> Tuple[List[Dict], Optional[int]]:
+def get_student_answers(username: str, token_info: Dict) -> Tuple[Union[List[Dict], str], Optional[int]]:
     """ 
     """
     with current_app.app_context():
-        Answer: List[Dict] = AnswersServices.list_all(current_app.db)
-    return (Answer, HTTPStatus.OK.value)
+        if (not RoleServices.has_role(token_info['user_token']['user'], Role.Student, current_app.db):
+            return (
+                'Current user has not enough privileges to view his answers',
+                HTTPStatus.FORBIDDEN.value
+            )
+        try:
+            answers: List[Dict] = AnswersServices.get_student_answers(
+                username, current_app.db
+            )
+        except ValueError:
+            return ("A mandatory argument is missing", HTTPStatus.BAD_REQUEST.value)
+        return (answers, HTTPStatus.OK.value)
 
 
 
-def list_all_by_user(user: str) -> Tuple[List[Dict], Optional[int]]:
+
+def get_question_answers(id: int, token_info: Dict) -> Tuple[Union[List[Dict], str], Optional[int]]:
     """ 
     """
     with current_app.app_context():
-        Answer: List[Dict] = AnswersServices.list_all_by_user(user, current_app.db)
-    return (Answer, HTTPStatus.OK.value)
+        if (not RoleServices.has_role(token_info['user_token']['user'], Role.Teacher, current_app.db):
+            return (
+                'Current user has not enough privileges to view question answers',
+                HTTPStatus.FORBIDDEN.value
+            )
+        try:
+            answers: List[Dict] = AnswersServices.get_question_answers(
+                id, current_app.db
+            )
+        except ValueError:
+            return ("A mandatory argument is missing", HTTPStatus.BAD_REQUEST.value)
+        return (answers, HTTPStatus.OK.value)
 
-def list_all_by_question(questionId: int) -> Tuple[List[Dict], Optional[int]]:
-    """ 
-    """
-    with current_app.app_context():
-        Answer: List[Dict] = AnswersServices.list_all_by_question(questionId ,current_app.db)
-    return (Answer, HTTPStatus.OK.value)
+
+
+
+
+
+    
+    
+    
