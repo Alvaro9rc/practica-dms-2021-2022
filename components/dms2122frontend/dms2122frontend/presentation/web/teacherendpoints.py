@@ -19,10 +19,8 @@ class TeacherEndpoints():
     @staticmethod
     def get_teacher(auth_service: AuthService) -> Union[Response, Text]:
         """ Handles the GET requests to the teacher root endpoint.
-
         Args:
             - auth_service (AuthService): The authentication service.
-
         Returns:
             - Union[Response,Text]: The generated response to the request.
         """
@@ -36,10 +34,8 @@ class TeacherEndpoints():
     @staticmethod
     def get_teacher_questions(auth_service: AuthService, backend_service: BackendService) -> Union[Response, Text]:
         """ Handles the GET requests for the teacher questions.
-
         Args:
             - auth_service (AuthService): The authentication service.
-
         Returns:
             - Union[Response,Text]: The generated response to the request.
         """
@@ -54,10 +50,8 @@ class TeacherEndpoints():
     @staticmethod
     def get_teacher_questions_new(auth_service: AuthService, backend_service: BackendService) -> Union[Response, Text]:
         """ Handles the GET requests for a new question created by the teacher.
-
         Args:
             - auth_service (AuthService): The authentication service.
-
         Returns:
             - Union[Response,Text]: The generated response to the request.
         """
@@ -77,10 +71,8 @@ class TeacherEndpoints():
     @staticmethod
     def post_teacher_questions_new(auth_service: AuthService, backend_service: BackendService) -> Union[Response, Text]:
         """ Handles the POST for a new question created by the teacher.
-
         Args:
             - auth_service (AuthService): The authentication service.
-
         Returns:
             - Union[Response,Text]: The generated response to the request.
         """
@@ -95,7 +87,6 @@ class TeacherEndpoints():
         # Inicializamos el objeto que contiene la informacion de la pregunta
         created_question = WebQuestion.create_question(
             backend_service,
-            request.form["id"],
             request.form["questionName"], 
             request.form["description"], 
             request.form["questionAnswer"],
@@ -121,10 +112,8 @@ class TeacherEndpoints():
     @staticmethod
     def get_teacher_questions_edit(auth_service: AuthService, backend_service: BackendService) -> Union[Response, Text]:
         """ Handles the GET request for a question edited by the teacher.
-
         Args:
             - auth_service (AuthService): The authentication service.
-
         Returns:
             - Union[Response,Text]: The generated response to the request.
         """
@@ -141,10 +130,8 @@ class TeacherEndpoints():
     @staticmethod
     def post_teacher_questions_edit(auth_service: AuthService, backend_service: BackendService) -> Union[Response, Text]:
         """ Handles the POST request for a question edited by the teacher.
-
         Args:
             - auth_service (AuthService): The authentication service.
-
         Returns:
             - Union[Response,Text]: The generated response to the request.
         """
@@ -182,4 +169,3 @@ class TeacherEndpoints():
     def get_teacher_studentsStats(auth_service: AuthService, backend_service: BackendService) -> Union[Response, Text]:
         """ TODO STATS DE LOS ALUMNOS
         """
-

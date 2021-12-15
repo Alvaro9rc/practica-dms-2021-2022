@@ -18,9 +18,7 @@ class BackendService():
         apikey_secret: str = ''
         ):
         """ Constructor method.
-
         Initializes the client.
-
         Args:
             - host (str): The backend service host string.
             - port (int): The backend service port number.
@@ -43,7 +41,7 @@ class BackendService():
 
 
 
-    def create_question(self, token: Optional[str], id: int, questionName: str,
+    def create_question(self, token: Optional[str], questionName: str,
                         description: str, questionAnswer: str, questionAnswer2: str,
                         questionAnswer3: str, correctAnswer: int, puntuation: float, penalty: float) -> ResponseData:
             """ Creates a question.
@@ -56,7 +54,6 @@ class BackendService():
             response: requests.Response = requests.post(
                 self.__base_url() + '/question/new',
                 json={
-                    'id': id,
                     'questionName': questionName,
                     'description': description,
                     'questionAnswer': questionAnswer,
@@ -149,7 +146,7 @@ class BackendService():
             """
             response_data: ResponseData = ResponseData()
             response: requests.Response = requests.get(
-                self.__base_url() + '/question',
+                self.__base_url() + '/questions',
                 headers={
                     'Authorization': f'Bearer {token}',
                     self.__apikey_header: self.__apikey_secret
