@@ -1,57 +1,62 @@
 {% extends "teacher.html" %}
 {% from "macros/buttons.html" import button, submit_button %}
-{% block contentsubheading %}Editar pregunta {% endblock %}
+{% block contentsubheading %}Editing question {{ question['questionName'] }}{% endblock %}
 {% block maincontent %}
 <form action="/teacher/questions/edit" method="post">
 
-    <input type="hidden" name="questionName" value="{{ questionName }}" />
     <input type="hidden" name="id" value="{{ id }}" />
     <input type="hidden" name="redirect_to" value="{{ redirect_to }}" />
     <!-- Formulario de edicion de prreguntas -->
     <ul class="nobullet space">
         <!-- NOMBRE PREGUNTA -->
         <li>
-            <label for="questionName"><strong>Nombre de la pregunta</strong></label>
+            <label for="questionName"><strong>New question name</strong></label>
             <br>
-            <input type="text" name="questionName" id="" class="w100" placeholder="{{questionName}}">
+            <input type="text" name="questionName" id="" class="w100" placeholder="{{ question['questionName'] }}">
         </li>
 
         <!-- ENUNCIADO -->
         <li>
-            <label for="description"><strong>Enunciado</strong></label>
+            <label for="description"><strong>New sentence</strong></label>
             <br>
-            <textarea name="description" placeholder="{{description}}"></textarea>
+            <textarea name="description">Introduce the new question sentence</textarea>
         </li>
 
         <!-- RESPUESTAS -->
         <li>
-            <label for="respuestas"><strong>Respuestas</strong></label>
+            <label for="respuestas"><strong>New answer options</strong></label>
             <div name="respuestas">
                 <div class="space">
-                    <label for="questionAnswer">Respuesta correcta</label>
-                    <input type="text" name="questionAnswer" id="" class="w100" placeholder="{{questionAnswer}}">
+                    <label for="questionAnswer">Option number 1</label>
+                    <input type="text" name="questionAnswer" id="" class="w100" placeholder="{{ question['questionAnswer'] }}">
                 </div>            
                 <div class="space">
-                    <label for="questionAnswer2">Respuesta incorrecta 1</label>
-                    <input type="text" name="questionAnswer2" id="" class="w100" placeholder="{{questionAnswer2}}">
+                    <label for="questionAnswer2">Option number 2</label>
+                    <input type="text" name="questionAnswer2" id="" class="w100" placeholder="{{ question['questionAnswer2'] }}">
                 </div>
                 <div class="space">
-                    <label for="questionAnswer3">Respuesta incorrecta 2</label>
-                    <input type="text" name="questionAnswer3" id="" class="w100" placeholder="{{questionAnswer3}}">
+                    <label for="questionAnswer3">Option number 3</label>
+                    <input type="text" name="questionAnswer3" id="" class="w100" placeholder="{{ question['questionAnswer3'] }}">
                 </div>
             </div>
         </li>
-
-        <!-- PUNTUACION -->
+		
+		<!-- OPCION CORRECTA -->
+		<li>
+            <label for="correctAnswer"><strong>Number of the correct option</strong></label><br>
+            <input type="number" name="correctAnswer" value="1" min="1" max="3" step="1">    
+        </li>
+		
+        <!-- PUNTUACION (valores disponibles de 0.5 a 2 puntos con saltos de 0.25 ptos) -->
         <li>
-            <label for="puntuation"><strong>Puntuación</strong></label><br>
-            <input type="number" name="puntuation" step="0.05" value="0" min="0" placeholder="{{puntuation}}">    
+            <label for="puntuation"><strong>Question value</strong></label><br>
+            <input type="number" name="puntuation" value="0" min="0.5" max="2" step="0.25">    
         </li>
 
-        <!-- PENALIZACION -->
+        <!-- PENALIZACION (valores disponibles de 0.1 a 0.5 (10% y 50%) con saltos de 0.05 ptos) -->
         <li>
-            <label for="penalty"><strong>Penalización respuesta incorrecta</strong></label><br>
-            <input type="number" name="penalty" step="0.05" value="0" min="0" placeholder="{{penalty}}" >    
+            <label for="penalty"><strong>Penalty percentage in decimal form</strong></label><br>
+            <input type="number" name="penalty" value="0" min="0.1" max="0.5" step="0.05">    
         </li>
     </ul>
     
@@ -60,6 +65,7 @@
         {{ submit_button('bluebg', 'Save changes') }}
         {{ button('redbg', redirect_to, 'Cancel') }}
     <div>
+
 
 </form>
 {% endblock %}

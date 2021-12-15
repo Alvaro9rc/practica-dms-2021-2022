@@ -1,6 +1,5 @@
 {% extends "teacher.html" %} 
 {% from "macros/buttons.html" import button with context %} 
-{% from "macros/question.html" import question with context %} 
 {% block contentsubheading %}Preguntas{% endblock %} 
 {% block maincontent %}
 
@@ -9,33 +8,36 @@
     <caption></caption>
     <!-- Cabecera de la tabla -->
     <tr>
-        <th scope="col">Preguntas</th>
-        <th scope="col">Respuesta Válida</th>
-        <th scope="col">Respuesta Incorrecta</th>
-        <th scope="col">Respuesta Incorrecta 2</th>
-        <th scope="col">Porcentaje</th>
-        <th scope="col">Penalización</th>
-        <th scope="col">Editar pregunta</th>
+        <th scope="col">Question name</th>
+        <th scope="col">Description</th>
+        <th scope="col">Option 1</th>
+        <th scope="col">Option 2</th>
+        <th scope="col">Option 3</th>
+        <th scope="col">Correct option number</th>
+		<th scope="col">Puntuation</th>
+		<th scope="col">Penalty value</th>
+        <th scope="col">Edit</th>
+		<th scope="col">Statistics</th>
     </tr>
     {% for question in questions %}
     <tr>
-    <td>{{ question.questionName }} </td>
-      <td>{{ question.questionAnswer }}</td>
-      <td>{{ question.questionAnswer2 }}</td>
-      <td>{{ question.questionAnswer3 }}</td>
-      <td>{{ question.puntuation }}</td>
-      <td>{{ question.penalty }}</td>
-      <td name="editarPregunta{{question}}">{{ button('bluebg', '/teacher/questions/edit', 'Editar pregunta') }}</td>
-
-      <!-- <td name="editarPregunta"><a href="/teacher/questions/edit?questionId={{ question.id }}&redirect_to=/teacher/questions">Editar pregunta</td> -->
-
+	  <td>{{ question['questionName'] }} </td>
+      <td>{{ question['description'] }}</td>
+      <td>{{ question['questionAnswer'] }}</td>
+	  <td>{{ question['questionAnswer2'] }}</td>
+	  <td>{{ question['questionAnswer3'] }}</td>
+	  <td>{{ question['correctAnswer'] }}</td>
+	  <td>{{ question['puntuation'] }}</td>
+	  <td>{{ question['penalty'] }}</td>
+      <td name="editQuestion"><a href="/teacher/questions/edit?id={{ question['id'] }}&redirect_to=/teacher/questions">Edit Question</td>
+	  <td name="questionStats"><a href="/teacher/questions/stats?id={{ question['id'] }}&redirect_to=/teacher/questions">Question stats</td>
 
 </tr>
     {% endfor %}
 
 
 </table>
-{{ button('bluebg', '/teacher/questions/new', 'Añadir pregunta') }}
+{{ button('bluebg', '/teacher/questions/new', 'Create new question') }}
 {{ button('bluebg', '/teacher', 'Volver') }}
 
 {% endblock %}
