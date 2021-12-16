@@ -8,7 +8,7 @@ from dms2122common.data import Role
 from dms2122frontend.data.rest.authservice import AuthService
 from flask import redirect, url_for, session, render_template, request, flash
 from dms2122frontend.data.rest.backendservice import BackendService
-
+from dms2122frontend.presentation.web.webanswer import WebAnswer
 from dms2122frontend.presentation.web.webquestion import WebQuestion
 from .webauth import WebAuth
 
@@ -44,8 +44,19 @@ class TeacherEndpoints():
         if Role.Teacher.name not in session['roles']:
             return redirect(url_for('get_home'))
         name = session['user']
-
-        return render_template('teacher/questions.html', name=name, roles=session['roles'], questions=WebQuestion.list_question(backend_service))
+        
+        questions=WebQuestion.list_question(backend_service)
+        answered = []
+        unanswered = []
+        
+        for question in questions:
+            #si la pregunta tiene una o mas respuestas ha sido contestada
+            if (len(WebAnswer.get_question_answers(backend_service, int(question['id']))) > 0):
+                answered.append(question)
+            else:
+                unanswered.append(question)
+            
+        return render_template('teacher/questions.html', name=name, roles=session['roles'], answered = answered, unanswered = unanswered)
 
     @staticmethod
     def get_teacher_questions_new(auth_service: AuthService, backend_service: BackendService) -> Union[Response, Text]:

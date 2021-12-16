@@ -20,10 +20,8 @@ class StudentEndpoints():
     @staticmethod
     def get_student(auth_service: AuthService) -> Union[Response, Text]:
         """ Handles the GET requests to the student root endpoint.
-
         Args:
             - auth_service (AuthService): The authentication service.
-
         Returns:
             - Union[Response,Text]: The generated response to the request.
         """
@@ -37,10 +35,8 @@ class StudentEndpoints():
     @staticmethod
     def get_student_questions(auth_service: AuthService, backend_service: BackendService) -> Union[Response, Text]:
         """ Handles the GET requests to the questions for the student.
-
         Args:
             - auth_service (AuthService): The authentication service.
-
         Returns:
             - Union[Response,Text]: The generated response to the request.
         """
@@ -49,19 +45,29 @@ class StudentEndpoints():
         if Role.Student.name not in session['roles']:
             return redirect(url_for('get_home'))
         name = session['user']
+        
+        #mediante este procedimiento sacamos unicamente las preguntas que no han sido contestadas
+        allquestions=WebQuestion.list_question(backend_service)
+        student_answers=WebAnswer.get_student_answers(backend_service, name)
+        questions = []
+        for question in allquestions:
+            flag = True
+            for answer in student_answers:
+                if question['id'] == answer['id']:
+                    flag = False
+            if flag = True:
+                questions.append(question)
+            else:
+                continue
 
-
-        # TODO coger solo las preguntas que no tienen respuesta 
-        return render_template('/student/questions.html', name=name, roles=session['roles'],  questions=WebQuestion.list_question(backend_service))
+        return render_template('/student/questions.html', name=name, roles=session['roles'],  questions=questions)
 
 
     @staticmethod
     def get_student_questions_question(auth_service: AuthService, backend_service: BackendService) -> Union[Response, Text]:
         """ Handles the GET requests to a specific question.
-
         Args:
             - auth_service (AuthService): The authentication service.
-
         Returns:
             - Union[Response,Text]: The generated response to the request.
         """
@@ -77,17 +83,15 @@ class StudentEndpoints():
         name = session['user']
 
         # en el .html se tiene que hacer el formulario
-        return render_template('/student/questions/question.html', name=name, roles=session['roles'], questions=WebQuestion.get_question(backend_service, id), redirect_to = redirect_to)
+        return render_template('/student/questions/question.html', name=name, roles=session['roles'], question=WebQuestion.get_question(backend_service, id), redirect_to = redirect_to)
 
 
 
     @staticmethod
     def post_student_questions_question(auth_service: AuthService, backend_service: BackendService) -> Union[Response, Text]:
         """ Handles the POST requests to answer a question.
-
         Args:
             - auth_service (AuthService): The authentication service.
-
         Returns:
             - Union[Response,Text]: The generated response to the request.
         """
@@ -96,16 +100,31 @@ class StudentEndpoints():
         if Role.Student.name not in session['roles']:
             return redirect(url_for('get_home'))
         
-        #HAY QUE CAMBIAR LA CLASE ANSWER YA QUE LA GESTION DE LAS IDS ES MUY COMPLEJA
-
-        #TODO GESTION DE LA PUNTUACION OPTENIDA.
+        #Crear la respuesta
         value = 0
         name = session['user']
         successful: bool = True
+        id = int(request.form['id'])
+        option = int(request.form['Option'])
+        
+        question=WebQuestion.get_question(backend_service, id)
+        if option == int(question['correctAnswer']):
+            value = float(question['puntuation'])
+        else 
+            value = (- float(question['puntuation']))*( float(question['penalty']))
+           
+           
+        answer = ""
+        if(option==1):
+            answer = question['questionAnswer']
+        elif(option ==2):
+            answer = question['questionAnswer2']
+        else:
+            answer = question['questionAnswer3']
  
         successful &= WebAnswer.create_question_answer(backend_service,
-                                                request.form['id'],
-                                                request.form['answer'],
+                                                id,
+                                                answer,
                                                 value,
                                                 name                                               
                                                 )
@@ -118,10 +137,8 @@ class StudentEndpoints():
     @staticmethod
     def get_student_answers(auth_service: AuthService, backend_service: BackendService) -> Union[Response, Text]:
         """ Handles the GET requests to the answers the student has made.
-
         Args:
             - auth_service (AuthService): The authentication service.
-
         Returns:
             - Union[Response,Text]: The generated response to the request.
         """
@@ -138,10 +155,8 @@ class StudentEndpoints():
     @staticmethod
     def get_student_progress(auth_service: AuthService, backend_service: BackendService) -> Union[Response, Text]:
         """ Handles the GET requests to the answers the student has made.
-
         Args:
             - auth_service (AuthService): The authentication service.
-
         Returns:
             - Union[Response,Text]: The generated response to the request.
         """
