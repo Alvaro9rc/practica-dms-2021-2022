@@ -87,9 +87,228 @@ paths:
       security:
         - user_token: []
           api_key: []
-          
-          
-          
+  /question/{id}/answer/{username}:
+    post:
+      summary: Answer created by answering a question.
+      operationId: dms2122backend.presentation.rest.answer.create_question_answer
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: username
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Answer's data.
+        content:
+          'application/json':
+            schema:
+              $ref: '#/components/schemas/AnswerFullModel'
+      responses:
+        '200':
+          description: Answer created.
+          content:
+            'text/plain':
+              schema:
+                type: string
+        '400':
+          description: Errors in the request.
+          content:
+            'text/plain':
+              schema:
+                type: string
+        '403':
+          description: The requesting user has no permission to do this operation.
+          content:
+            'text/plain':
+              schema:
+                type: string
+        '404':
+          description: The question does not exist.
+          content:
+            'text/plain':
+              schema:
+                type: string
+      tags:
+        - questions
+        - answers
+      security:
+        - user_token: []
+          api_key: []
+  /answers/{id}:
+    get:
+      summary: Gets all answers to a question.
+      operationId: dms2122backend.presentation.rest.answer.list_all_for_question
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: The list of answers for that question.
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/AnswersFullListModel'
+        '400':
+          description: A mandatory parameter was not given.
+          content:
+            'text/plain':
+              schema:
+                type: string
+        '403':
+          description: The requesting user has no permission to do this operation.
+          content:
+            'text/plain':
+              schema:
+                type: string
+      tags:
+        - questions
+        - answers
+      security:
+        - user_token: []
+          api_key: []
+  /answers/{username}:
+    get:
+      summary: Gets all the answers to a question.
+      operationId: dms2122backend.presentation.rest.answer.list_all_for_user
+      parameters:
+        - name: username
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The list of answers for that user.
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/AnswersFullListModel'
+        '400':
+          description: A mandatory parameter was not given.
+          content:
+            'text/plain':
+              schema:
+                type: string
+        '403':
+          description: The requesting user has no permission to do this operation.
+          content:
+            'text/plain':
+              schema:
+                type: string
+      tags:
+        - questions
+        - answers
+      security:
+        - user_token: []
+          api_key: []
+
+
+components:
+  schemas:
+    QuestionFullModel:
+      type: object
+      properties:
+        questionName:
+          type: string
+        description:
+          type: string
+        questionAnswer:
+          type: string
+        questionAnswer2:
+          type: string
+        questionAnswer3:
+          type: string
+        correctAnswer:
+          type: integer
+        puntuation:
+          type: number
+        penalty:
+          type: number
+      required:
+        - questionName
+        - description
+        - questionAnswer
+        - questionAnswer2
+        - questionAnswer3
+        - correctAnswer
+        - puntuation
+        - penalty
+    QuestionFullIdModel:
+      type: object
+      properties:
+        id:
+          type: integer
+        questionName:
+          type: string
+        description:
+          type: string
+        questionAnswer:
+          type: string
+        questionAnswer2:
+          type: string
+        questionAnswer3:
+          type: string
+        correctAnswer:
+          type: integer
+        puntuation:
+          type: number
+        penalty:
+          type: number
+      required:
+        - id
+        - questionName
+        - description
+        - questionAnswer
+        - questionAnswer2
+        - questionAnswer3
+        - correctAnswer
+        - puntuation
+        - penalty
+    QuestionsFullListModel:
+      type: array
+      items:
+        $ref: '#/components/schemas/QuestionFullIdModel'
+
+    AnswerFullModel:
+      type: object
+      properties:
+        id:
+          type: integer
+        answer:
+          type: string
+        valoration:
+          type: number
+        username:
+          type: string
+      required:
+        - id
+        - answer
+        - valoration
+        - username
+    AnswersFullListModel:
+      type: array
+      items:
+        $ref: '#/components/schemas/AnswerFullModel'
+
+  securitySchemes:
+    user_token:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      x-bearerInfoFunc: dms2122auth.presentation.rest.security.verify_token
+    api_key:
+      type: apiKey
+      name: X-ApiKey-Auth
+      in: header
+      x-apikeyInfoFunc: dms2122auth.presentation.rest.security.verify_api_key
           
           
           

@@ -36,7 +36,7 @@ def get_student_answers(username: str, token_info: Dict) -> Tuple[Union[List[Dic
     """ 
     """
     with current_app.app_context():
-        if (not RoleServices.has_role(token_info['user_token']['user'], Role.Student, current_app.db):
+        if not RoleServices.has_role(token_info['user_token']['user'], Role.Student, current_app.db):
             return (
                 'Current user has not enough privileges to view his answers',
                 HTTPStatus.FORBIDDEN.value
@@ -56,7 +56,7 @@ def get_question_answers(id: int, token_info: Dict) -> Tuple[Union[List[Dict], s
     """ 
     """
     with current_app.app_context():
-        if (not RoleServices.has_role(token_info['user_token']['user'], Role.Teacher, current_app.db):
+        if not RoleServices.has_role(token_info['user_token']['user'], Role.Teacher, current_app.db):
             return (
                 'Current user has not enough privileges to view question answers',
                 HTTPStatus.FORBIDDEN.value
@@ -73,7 +73,3 @@ def get_question_answers(id: int, token_info: Dict) -> Tuple[Union[List[Dict], s
 
 
 
-
-    
-    
-    

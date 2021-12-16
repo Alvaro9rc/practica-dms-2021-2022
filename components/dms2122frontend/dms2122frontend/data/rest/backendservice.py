@@ -161,7 +161,7 @@ class BackendService():
             return response_data
 
 
-    def get_question_answers(self, token: Optional[str], questionId: int) -> ResponseData:
+    def get_question_answers(self, token: Optional[str], id: int) -> ResponseData:
             """ GEts all the answers of a question
             Args:
                 token (Optional[str]): The user session token.
@@ -171,7 +171,7 @@ class BackendService():
             """
             response_data: ResponseData = ResponseData()
             response: requests.Response = requests.get(
-                self.__base_url() + f'/answers/{questionId}',
+                self.__base_url() + f'/answers/{id}',
                 headers={
                     'Authorization': f'Bearer {token}',
                     self.__apikey_header: self.__apikey_secret
@@ -211,7 +211,7 @@ class BackendService():
             return response_data
 
 
-    def create_question_answer(self, token: Optional[str], questionId: int, answer: str, valoration: float, username, str) -> ResponseData:
+    def create_question_answer(self, token: Optional[str], id: int, answer: str, valoration: float, username, str) -> ResponseData:
         """ Creates an asnwer.
         Args:
             -
@@ -220,9 +220,9 @@ class BackendService():
         """
         response_data: ResponseData = ResponseData()
         response: requests.Response = requests.post(
-            self.__base_url() + f'/question/{questionId}/answer{username}',
+            self.__base_url() + f'/question/{id}/answer{username}',
             json={
-                'questionId': questionId,
+                'questionId': id,
                 'answer': answer,
                 'valoration': valoration,
                 'username': username

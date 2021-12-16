@@ -58,7 +58,7 @@ def get_question(id: int) -> Tuple[Union[Dict, str], Optional[int]]:
     """    
     with current_app.app_context():
         try:
-            question: Dict = QuestionsServices.get_question(
+            question: Dict = QuestionServices.get_question(
                 id, current_app.db
             )
         except ValueError:
