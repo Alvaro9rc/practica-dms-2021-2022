@@ -1,0 +1,118 @@
+openapi: 3.0.0
+info:
+  title: DMS authentication service REST API
+  version: '1.0'
+  description: |
+    REST API for the authentication service.
+    This is part of the mandatory exercise.
+    Diseño y Mantenimiento del Software. Grado en Ingeniería Informática, Universidad de Burgos, 2021-2022.
+  contact:
+    name: Universidad de Burgos
+tags:
+  - name: questions
+    description: Questions-related operations (e.g., list, create, search)
+  - name: answers
+    description: Answer-related operations (e.g., grant, revoke)
+  - name: server
+    description: Operations about the server itself (e.g., server status querying)
+servers:
+  - url: /api/v1
+paths:
+  '/':
+    head:
+      summary: Health test for the service
+      operationId: dms2122backend.presentation.rest.server.health_test
+      responses:
+        '204':
+          description: Success response (will not redirect)
+          content:
+            'text/plain':
+              schema:
+                type: string
+      tags:
+        - server
+  /questions:
+    get:
+      summary: Gets a listing of questions.
+      operationId: dms2122backend.presentation.rest.question.list_questions
+      responses:
+        '200':
+          description: A list of questions.
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/QuestionsFullListModel'
+      tags:
+        - questions
+      security:
+        - user_token: []
+          api_key: []
+  /question/new:
+    post:
+      summary: Creates a new question.
+      operationId: dms2122backend.presentation.rest.question.create_question
+      requestBody:
+        description: New question's data.
+        content:
+          'application/json':
+            schema:
+              $ref: '#/components/schemas/QuestionFullIdModel'
+      responses:
+        '200':
+          description: Data of the newly created question.
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/QuestionFullModel'
+        '400':
+          description: Errors in the request.
+          content:
+            'text/plain':
+              schema:
+                type: string
+        '403':
+          description: The requesting user has no permission to do this operation.
+          content:
+            'text/plain':
+              schema:
+                type: string
+        '409':
+          description: There is a conflict with some of the question's unique data.
+          content:
+            'text/plain':
+              schema:
+                type: string
+      tags:
+        - users
+      security:
+        - user_token: []
+          api_key: []
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
