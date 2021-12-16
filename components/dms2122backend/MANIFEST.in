@@ -1,1 +1,1 @@
-recursive-include dmsbackend/openapi/ *
+recursive-include dms2122backend/openapi/ *
