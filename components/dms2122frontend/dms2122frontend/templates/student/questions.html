@@ -1,52 +1,42 @@
-
 {% extends "student.html" %}
 {% from "macros/buttons.html" import button, submit_button %}
-
-{% block scripts %}
-    <!-- Librerias para el editor de texto enriquecido -->
-    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>  
-    <script>tinymce.init({selector:'textarea'});</script>
-{% endblock %}
-
 {% block contentsubheading %}Contestar preguntas{% endblock %}
 {% block maincontent %}
 
-<!-- TODO Pewndiente de poenr ruta en el form -->
-<form action="" method="post">
-    <!-- <input type="hidden" name="redirect_to" value="{{ redirect_to }}" /> -->
 
-	<form >
-		{% for question in questions %}
-		<div>{{ question.questionName }} </div>
-		  <input type="radio" id=" {{ question.id }}" name=" {{ question.id }}"value="6">
-		  <label for="P1"> {{question.questionAnswer }} </label><br>
-		  <input type="radio" id=" {{ question.id }}" name=" {{ question.id }}" value="8">
-		  <label for="P1"> {{ question.questionAnswer2 }} </label><br>
-		  <input type="radio" id=" {{ question.id }}" name=" {{ question.id }}" value="7">
-		  <label for="P1"> {{ question.questionAnswer3 }} </label>
-		  <br>
-		  <!-- <input type="button" value="Corregir" onclick="comprobarRespuestas(respuestaCorrecta)" /></td></tr> -->
-
-		  <div id="solucion"></div>
-
-        {% endfor %}
-		<!-- <div>¿Cuántos planetas tiene el sistema solar? </div>
-		  <input type="radio" id="P1" name="1" value="6">
-		  <label for="P1"> 6 </label><br>
-		  <input type="radio" id="P1" name="1" value="8">
-		  <label for="P1"> 8 </label><br>
-		  <input type="radio" id="P1" name="1" value="7">
-		  <label for="P1"> 7 </label>
--->
-	</form>
-    
-    <!-- BOTONES -->
-    <div class="ml35">
-        {{ submit_button('bluebg', 'Save changes') }}
-        {{ button('bluebg', '/student', 'Cancel') }}
-    <div>
+<!-- Tabla que contendra las preguntas que se han establecido -->
+<table style="width:100%">
+    <caption></caption>
+    <!-- Cabecera de la tabla -->
+    <tr>
+        <th scope="col">Question name</th>
+        <th scope="col">Description</th>
+        <th scope="col">Option 1</th>
+        <th scope="col">Option 2</th>
+        <th scope="col">Option 3</th>
+		<th scope="col">Puntuation</th>
+		<th scope="col">Penalty value</th>
+		<th scope="col">Give answer</th>
+    </tr>
+    {% for question in questions %}
+    <tr>
+	  <td>{{ question['questionName'] }} </td>
+      <td>{{ question['description'] }}</td>
+      <td>{{ question['questionAnswer'] }}</td>
+	  <td>{{ question['questionAnswer2'] }}</td>
+	  <td>{{ question['questionAnswer3'] }}</td>
+	  <td>{{ question['puntuation'] }}</td>
+	  <td>{{ question['penalty'] }}</td>
+      <td name="giveAnswer"><a href="/student/questions/question?id={{ question['id'] }}&redirect_to=/student/questions">Answer</td>
 
 
-</form>
+</tr>
+    {% endfor %}
+
+
+</table>
+{{ button('bluebg', '/student', 'Go back') }}
+
+
 
 {% endblock %}

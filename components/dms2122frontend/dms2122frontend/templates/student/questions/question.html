@@ -1,0 +1,26 @@
+{% extends "student.html" %}
+{% from "macros/buttons.html" import button, submit_button %}
+{% block contentsubheading %}Answer the question {{ question['questionName'] }}{% endblock %}
+{% block maincontent %}
+
+<p> {{ question['description'] }} </p>
+
+<form action="/student/questions/question" method="post">
+
+		  <input type="hidden" name="id" value="{{ question['id'] }}" />
+  		  <input type="hidden" name="redirect_to" value="{{ redirect_to }}" />
+          
+		  <input type="radio" id="Option1" name="Option" value="1">
+		  <label for="Option1"> {{ question['questionAnswer'] }} </label><br>
+		  <input type="radio" id="Option2" name="Option" value="2">
+		  <label for="Option2"> {{ question['questionAnswer2'] }} </label><br>
+		  <input type="radio" id="Option3" name="Option" value="3">
+		  <label for="Option3"> {{ question['questionAnswer3'] }} </label><br>
+          <br>
+
+<div class="ml35">
+        {{ submit_button('bluebg', 'Save') }}
+        {{ button('redbg', redirect_to, 'Cancel') }}
+<div>
+</form>
+

@@ -1,8 +1,9 @@
 {% extends "teacher.html" %} 
 {% from "macros/buttons.html" import button with context %} 
-{% block contentsubheading %}Preguntas{% endblock %} 
+{% block contentsubheading %}Questions{% endblock %} 
 {% block maincontent %}
 
+<h2> Unanswered questions that can be editable </h2>
 <!-- Tabla que contendra las preguntas que se han establecido -->
 <table style="width:100%">
     <caption></caption>
@@ -17,27 +18,58 @@
 		<th scope="col">Puntuation</th>
 		<th scope="col">Penalty value</th>
         <th scope="col">Edit</th>
-		<th scope="col">Statistics</th>
     </tr>
-    {% for question in questions %}
+    {% for unanswered_question in unanswered %}
     <tr>
-	  <td>{{ question['questionName'] }} </td>
-      <td>{{ question['description'] }}</td>
-      <td>{{ question['questionAnswer'] }}</td>
-	  <td>{{ question['questionAnswer2'] }}</td>
-	  <td>{{ question['questionAnswer3'] }}</td>
-	  <td>{{ question['correctAnswer'] }}</td>
-	  <td>{{ question['puntuation'] }}</td>
-	  <td>{{ question['penalty'] }}</td>
-      <td name="editQuestion"><a href="/teacher/questions/edit?id={{ question['id'] }}&redirect_to=/teacher/questions">Edit Question</td>
-	  <td name="questionStats"><a href="/teacher/questions/stats?id={{ question['id'] }}&redirect_to=/teacher/questions">Question stats</td>
+	  <td>{{ unanswered_question['questionName'] }} </td>
+      <td>{{ unanswered_question['description'] }}</td>
+      <td>{{ unanswered_question['questionAnswer'] }}</td>
+	  <td>{{ unanswered_question['questionAnswer2'] }}</td>
+	  <td>{{ unanswered_question['questionAnswer3'] }}</td>
+	  <td>{{ unanswered_question['correctAnswer'] }}</td>
+	  <td>{{ unanswered_question['puntuation'] }}</td>
+	  <td>{{ unanswered_question['penalty'] }}</td>
+      <td name="editQuestion"><a href="/teacher/questions/edit?id={{ unanswered_question['id'] }}&redirect_to=/teacher/questions">Edit Question</td>
+	  
+
+</tr>
+    {% endfor %}
+</table>
+
+
+<h2> Answered questions with statistics option </h2>
+<!-- Tabla que contendra las preguntas que se han establecido -->
+<table style="width:100%">
+    <caption></caption>
+    <!-- Cabecera de la tabla -->
+    <tr>
+        <th scope="col">Question name</th>
+        <th scope="col">Description</th>
+        <th scope="col">Option 1</th>
+        <th scope="col">Option 2</th>
+        <th scope="col">Option 3</th>
+        <th scope="col">Correct option number</th>
+		<th scope="col">Puntuation</th>
+		<th scope="col">Penalty value</th>
+        <th scope="col">Stats</th>
+    </tr>
+    {% for answered_question in answered %}
+    <tr>
+	  <td>{{ answered_question['questionName'] }} </td>
+      <td>{{ answered_question['description'] }}</td>
+      <td>{{ answered_question['questionAnswer'] }}</td>
+	  <td>{{ answered_question['questionAnswer2'] }}</td>
+	  <td>{{ answered_question['questionAnswer3'] }}</td>
+	  <td>{{ answered_question['correctAnswer'] }}</td>
+	  <td>{{ answered_question['puntuation'] }}</td>
+	  <td>{{ answered_question['penalty'] }}</td>
+	  <td name="questionStats"><a href="/teacher/questions/stats?id={{ answered_question['id'] }}&redirect_to=/teacher/questions">Question stats</td>
 
 </tr>
     {% endfor %}
 
-
 </table>
 {{ button('bluebg', '/teacher/questions/new', 'Create new question') }}
-{{ button('bluebg', '/teacher', 'Volver') }}
+{{ button('bluebg', '/teacher', 'Go back') }}
 
 {% endblock %}
