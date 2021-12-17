@@ -4,8 +4,8 @@
 from typing import List, Dict, Optional
 from sqlalchemy.orm.session import Session  # type: ignore
 from dms2122backend.data.db.schema import Schema
-from dms2122backend.data.db.resultsets import Questions
-from dms2122backend.data.db.results import Question
+from dms2122backend.data.db.resultsets.questions import Questions
+from dms2122backend.data.db.results.question import Question
 
 class QuestionServices():
     """ Class QuestionServices.

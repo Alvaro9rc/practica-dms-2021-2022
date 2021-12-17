@@ -5,7 +5,7 @@ from typing import List, Dict, Optional
 from sqlalchemy.orm.session import Session  # type: ignore
 from dms2122backend.data.db.schema import Schema
 from dms2122backend.data.db.resultsets.answers import Answers
-from dms2122backend.data.db.results import Answer
+from dms2122backend.data.db.results.answer import Answer
 
 class AnswersServices():
     """ Monostate class that provides high-level services to handle answer-related use cases.

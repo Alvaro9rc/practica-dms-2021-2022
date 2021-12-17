@@ -376,12 +376,12 @@ components:
       type: http
       scheme: bearer
       bearerFormat: JWT
-      x-bearerInfoFunc: dms2122auth.presentation.rest.security.verify_token
+      x-bearerInfoFunc: dms2122backend.presentation.rest.security.verify_token
     api_key:
       type: apiKey
-      name: X-ApiKey-Auth
+      name: X-ApiKey-Backend
       in: header
-      x-apikeyInfoFunc: dms2122auth.presentation.rest.security.verify_api_key
+      x-apikeyInfoFunc: dms2122backend.presentation.rest.security.verify_api_key
           
           
           

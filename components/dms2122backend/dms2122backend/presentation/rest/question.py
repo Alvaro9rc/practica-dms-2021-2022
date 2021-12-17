@@ -6,7 +6,6 @@ from http import HTTPStatus
 from flask import current_app
 from dms2122backend.data.db.results.question import Question
 from dms2122backend.service.questionservices import QuestionServices
-from dms2122auth.service import RoleServices
 from dms2122common.data.role import Role
 from dms2122backend.data.db.exc.questionexisterror import QuestionExistsError
 from dms2122backend.data.db.exc.questionnotfounderror import QuestionNotFoundError

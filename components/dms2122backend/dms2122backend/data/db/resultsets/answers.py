@@ -5,11 +5,9 @@ import hashlib
 from typing import List, Optional
 from sqlalchemy.exc import IntegrityError  # type: ignore
 from sqlalchemy.orm.session import Session  # type: ignore
-from sqlalchemy.orm.exc import NoResultFound  # type: ignore
 from dms2122backend.data.db.results import Answer
-from dms2122backend.data.db.exc.questionexisterror import QuestionExistsError
 from dms2122backend.data.db.exc.questionnotfounderror import QuestionNotFoundError
-from dms2122auth.data.db.exc.usernotfounderror import UserNotFoundError
+
 
 class Answers():
     """ Class responsible of table-level answers operations.
