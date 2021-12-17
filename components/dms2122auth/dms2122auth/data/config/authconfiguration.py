@@ -11,7 +11,6 @@ class AuthConfiguration(ServiceConfiguration):
 
     def _component_name(self) -> str:
         """ The component name, to categorize the default config path.
-
         Returns:
             - str: A string identifying the component which will categorize the configuration.
         """
@@ -35,7 +34,6 @@ class AuthConfiguration(ServiceConfiguration):
 
     def _set_values(self, values: Dict) -> None:
         """Sets/merges a collection of configuration values.
-
         Args:
             - values (Dict): A dictionary of configuration values.
         """
@@ -52,10 +50,8 @@ class AuthConfiguration(ServiceConfiguration):
 
     def set_db_connection_string(self, db_connection_string: str) -> None:
         """ Sets the db_connection_string configuration value.
-
         Args:
             - db_connection_string: A string with the configuration value.
-
         Raises:
             - ValueError: If validation is not passed.
         """
@@ -63,7 +59,6 @@ class AuthConfiguration(ServiceConfiguration):
 
     def get_db_connection_string(self) -> str:
         """ Gets the db_connection_string configuration value.
-
         Returns:
             - str: A string with the value of db_connection_string.
         """
@@ -72,10 +67,8 @@ class AuthConfiguration(ServiceConfiguration):
 
     def set_password_salt(self, salt: str) -> None:
         """ Sets the password salt configuration value.
-
         Args:
             - salt: A string with the configuration value.
-
         Raises:
             - ValueError: If validation is not passed.
         """
@@ -83,7 +76,6 @@ class AuthConfiguration(ServiceConfiguration):
 
     def get_password_salt(self) -> str:
         """ Gets the password salt configuration value.
-
         Returns:
             - str: A string with the value of salt.
         """
@@ -92,10 +84,8 @@ class AuthConfiguration(ServiceConfiguration):
 
     def set_jws_secret(self, secret: str) -> None:
         """ Sets the JWS secret key configuration value.
-
         Args:
             - secret: A string with the configuration value.
-
         Raises:
             - ValueError: If validation is not passed.
         """
@@ -103,7 +93,6 @@ class AuthConfiguration(ServiceConfiguration):
 
     def get_jws_secret(self) -> str:
         """ Gets the JWS secret key configuration value.
-
         Returns:
             - str: A string with the value of jws_secret.
         """
@@ -112,10 +101,8 @@ class AuthConfiguration(ServiceConfiguration):
 
     def set_jws_ttl(self, ttl: int) -> None:
         """ Sets the jws_ttl configuration value.
-
         Args:
             - ttl: An integer with the configuration value.
-
         Raises:
             - ValueError: If validation is not passed.
         """
@@ -123,7 +110,6 @@ class AuthConfiguration(ServiceConfiguration):
 
     def get_jws_ttl(self) -> int:
         """ Gets the jws_ttl configuration value.
-
         Returns:
             - int: An integer with the value of jws_ttl.
         """

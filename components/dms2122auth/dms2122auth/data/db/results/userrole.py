@@ -12,9 +12,7 @@ class UserRole(ResultBase):
 
     def __init__(self, username: str, role: Role):
         """ Constructor method.
-
         Initializes a user role record.
-
         Args:
             - username (str): A string with the user name.
             - role (Role): A string with the role.
@@ -25,11 +23,9 @@ class UserRole(ResultBase):
     @staticmethod
     def _table_definition(metadata: MetaData) -> Table:
         """ Gets the table definition.
-
         Args:
             - metadata (MetaData): The database schema metadata
                         (used to gather the entities' definitions and mapping)
-
         Returns:
             - Table: A `Table` object with the table definition.
         """

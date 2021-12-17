@@ -4,9 +4,7 @@ info:
   version: '1.0'
   description: |
     REST API for the authentication service.
-
     This is part of the mandatory exercise.
-
     Diseño y Mantenimiento del Software. Grado en Ingeniería Informática, Universidad de Burgos, 2021-2022.
   contact:
     name: Universidad de Burgos
@@ -19,8 +17,6 @@ tags:
     description: Role-related operations (e.g., grant, revoke)
   - name: server
     description: Operations about the server itself (e.g., server status querying)
-  # - name: questions
-  #   description: Question-related operations (e.g., list, create, search)
 servers:
   - url: /api/v1
 paths:
@@ -55,24 +51,6 @@ paths:
           api_key: []
         - user_credentials: []
           api_key: []
-  
-  # /questions:
-  #   get:
-  #     summary: Gets a listing of questions.
-  #     operationId: dms2122auth.presentation.rest.question.list_questions
-  #     responses:
-  #       '200':
-  #         description: A list of questions.
-  #         content:
-  #           'application/json':
-  #             schema:
-  #               $ref: '#/components/schemas/QuestionsFullListModel'
-  #     tags:
-  #       - questions
-  #     security:
-  #       - user_token: []
-  #         api_key: []  
-  
   /users:
     get:
       summary: Gets a listing of users.
@@ -302,31 +280,6 @@ components:
               type: string
           required:
             - password
-    # QuestionsFullListModel:
-    #   type: array
-    #   items:
-    #     $ref: '#/components/schemas/QuestionsFullModel' 
-    # QuestionsFullModel:
-    #   type: object
-    #   properties:
-    #     id:
-    #       type: integer
-    #     questionName:
-    #       type: string
-    #     descriptone:
-    #       type: string
-    #     questionAnswer:
-    #       type: string
-    #     questionAnswer2:
-    #       type: string
-    #     questionAnwer3:
-    #       type: string
-    #     puntuation:
-    #       type: integer
-    #     penality:
-    #       type: integer
-    #     userCreated:
-    #       type: string
     UsersFullListModel:
       type: array
       items:

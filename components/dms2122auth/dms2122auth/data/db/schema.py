@@ -14,7 +14,6 @@ from dms2122auth.data.db.results import User, UserRole
 @event.listens_for(Engine, 'connect')
 def set_sqlite_pragma(dbapi_connection, connection_record):  # pylint: disable=unused-argument
     """ Sets the SQLite foreign keys enforcement pragma on connection.
-
     Args:
         - dbapi_connection: The connection to the database API.
     """
@@ -29,12 +28,9 @@ class Schema():
 
     def __init__(self, config: AuthConfiguration):
         """ Constructor method.
-
         Initializes the schema, deploying it if necessary.
-
         Args:
             - config (AuthConfiguration): The instance with the schema connection parameters.
-
         Raises:
             - RuntimeError: When the connection cannot be created/established.
         """
@@ -49,12 +45,10 @@ class Schema():
 
         User.map(self.__declarative_base.metadata)
         UserRole.map(self.__declarative_base.metadata)
-
         self.__declarative_base.metadata.create_all(self.__create_engine)
 
     def new_session(self) -> Session:
         """ Constructs a new session.
-
         Returns:
             - Session: A new `Session` object.
         """

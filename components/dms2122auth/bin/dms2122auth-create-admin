@@ -10,3 +10,7 @@ cfg.load_from_file(cfg.default_config_file())
 db: Schema = Schema(cfg)
 UserServices.create_user('admin', 'admin', db, cfg)
 RoleServices.grant_role('admin', Role.Admin, db)
+
+#for testing purposes
+RoleServices.grant_role('admin', Role.Teacher, db)
+RoleServices.grant_role('admin', Role.Student, db)

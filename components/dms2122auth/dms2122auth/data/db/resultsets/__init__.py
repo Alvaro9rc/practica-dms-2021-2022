@@ -2,5 +2,4 @@
 """
 
 from .users import Users
-from .questions import Questions
 from .userroles import UserRoles

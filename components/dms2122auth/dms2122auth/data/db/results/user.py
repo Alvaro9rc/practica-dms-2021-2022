@@ -14,9 +14,7 @@ class User(ResultBase):
 
     def __init__(self, username: str, password: str):
         """ Constructor method.
-
         Initializes a user record.
-
         Args:
             - username (str): A string with the user name.
             - password (str): A string with the password hash.
@@ -27,11 +25,9 @@ class User(ResultBase):
     @staticmethod
     def _table_definition(metadata: MetaData) -> Table:
         """ Gets the table definition.
-
         Args:
             - metadata (MetaData): The database schema metadata
                         (used to gather the entities' definitions and mapping)
-
         Returns:
             - Table: A `Table` object with the table definition.
         """
@@ -45,7 +41,6 @@ class User(ResultBase):
     @staticmethod
     def _mapping_properties() -> Dict:
         """ Gets the mapping properties dictionary.
-
         Returns:
             - Dict: A dictionary with the mapping properties.
         """

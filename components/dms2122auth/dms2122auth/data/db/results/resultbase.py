@@ -14,7 +14,6 @@ class ResultBase(ABC):
     @classmethod
     def map(cls: type, metadata: MetaData) -> None:
         """ Maps the database user records to instances of this class.
-
         Args:
             - cls (type): This class.
             - metadata (MetaData): The database schema metadata
@@ -30,11 +29,9 @@ class ResultBase(ABC):
     @abstractmethod
     def _table_definition(metadata: MetaData) -> Table:
         """ Gets the table definition.
-
         Args:
             - metadata (MetaData): The database schema metadata
                         (used to gather the entities' definitions and mapping)
-
         Returns:
             - Table: A `Table` object with the table definition.
         """
@@ -42,7 +39,6 @@ class ResultBase(ABC):
     @staticmethod
     def _mapping_properties() -> Dict:
         """ Gets the mapping properties dictionary.
-
         Returns:
             - Dict: A dictionary with the mapping properties.
         """
