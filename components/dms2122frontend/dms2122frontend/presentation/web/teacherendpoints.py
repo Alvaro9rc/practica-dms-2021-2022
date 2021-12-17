@@ -94,9 +94,7 @@ class TeacherEndpoints():
             return redirect(url_for('get_login'))
         if Role.Teacher.name not in session['roles']:
             return redirect(url_for('get_home'))
-        if (request.form['questionAnswer'] == request.form['questionAnswer2']) or 
-            (request.form['questionAnswer'] == request.form['questionAnswer3']) or
-            (request.form['questionAnswer2'] == request.form['questionAnswer3']):
+        if (request.form['questionAnswer'] == request.form['questionAnswer2']) or (request.form['questionAnswer'] == request.form['questionAnswer3']) or (request.form['questionAnswer2'] == request.form['questionAnswer3']):
             flash('2 or more answer options can not be the same', 'error')
             return redirect(url_for('get_admin_users_new'))
             

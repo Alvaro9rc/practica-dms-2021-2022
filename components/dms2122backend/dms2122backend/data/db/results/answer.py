@@ -41,6 +41,6 @@ class Answer(ResultBase):
                 Column('id', Integer, ForeignKey('questions.id') , primary_key=True) ,
                 Column('answer', String(64), nullable=False),
                 Column('valoration', Integer, nullable=False),
-                Column('username', String(64),  ForeignKey('user.username'), primary_key=True) 
+                Column('username', String(64), primary_key=True) 
         )
 

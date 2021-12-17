@@ -7,7 +7,7 @@ from sqlalchemy.log import instance_logger  # type: ignore
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql.sqltypes import Integer  # type: ignore
 from dms2122backend.data.db.results.resultbase import ResultBase
-from dms2122backend.data.db.results import Answer
+from dms2122backend.data.db.results.answer import Answer
 
 class Question(ResultBase):
     """ Class Question.
