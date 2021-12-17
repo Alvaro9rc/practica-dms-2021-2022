@@ -40,6 +40,34 @@ Endpoints
             
 -Comunicación: Este endpoint se comunica con la clase `dms2122backend.presentation.rest.question` y accede al método `def create_question()`
 
+### /question/{id}:
+
+-PUT
+
+-Descripción: Edita una pregunta pasandole el ID.
+
+-Responses:
+
+            - 200: Correcto
+            - 400: Error en la petición
+            - 403: El usuario no tiene los permisos necesarios
+            - 409: Hay un conflicto con los datos de la pregunta
+            
+-Comunicación: Este endpoint se comunica con la clase `dms2122backend.presentation.rest.question` y accede al método `def edit_question()`
+
+-GET
+
+-Descripción: Obtiene una pregunta dado el ID.
+
+-Responses:
+
+            - 200: Correcto
+            - 400: Error en la petición
+
+-Comunicación: Este endpoint se comunica con la clase `dms2122backend.presentation.rest.question` y accede al método `def get_question()`
+
+
+
 ### /question/{id}/answer/{username}:
 
 -POST
@@ -68,7 +96,22 @@ Endpoints
             - 400: Fallo porque un parametro no se ha pasado
             - 403: El usuario no tiene los permisos necesarios
             
--Comunicación: Este endpoint se comunica con la clase `dms2122backend.presentation.rest.answer` y accede al método `def list_all_for_user()`
+-Comunicación: Este endpoint se comunica con la clase `dms2122backend.presentation.rest.answer` y accede al método `def get_question_answers()`
+
+
+### answers/{username}:
+
+-GET
+
+-Descripción: Devuelve todas las respuestas de la pregunta
+
+-Responses:
+
+            - 200: Correcto
+            - 400: Fallo porque un parametro no se ha pasado
+            - 403: El usuario no tiene los permisos necesarios
+            
+-Comunicación: Este endpoint se comunica con la clase `dms2122backend.presentation.rest.answer` y accede al método `def get_student_answers()`
 
 
 Tablas de la base de datos 
