@@ -87,6 +87,79 @@ paths:
       security:
         - user_token: []
           api_key: []
+  /question/{id}:
+    put:
+      summary: Edit a question given an ID.
+      operationId: dms2122backend.presentation.rest.question.edit_question
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        description: Question's data.
+        content:
+          'application/json':
+            schema:
+              $ref: '#/components/schemas/QuestionFullIdModel'
+      responses:
+        '200':
+          description: Data of the requested question.
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/QuestionFullIdModel'
+        '400':
+          description: Errors in the request.
+          content:
+            'text/plain':
+              schema:
+                type: string
+        '403':
+          description: The requesting user has no permission to do this operation.
+          content:
+            'text/plain':
+              schema:
+                type: string
+        '409':
+          description: There is a conflict with some of the question's unique data.
+          content:
+            'text/plain':
+              schema:
+                type: string
+      tags:
+        - questions
+      security:
+        - user_token: []
+          api_key: []
+    get:
+      summary: Obtains a question given an ID.
+      operationId: dms2122backend.presentation.rest.question.get_question
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Data of the question requested.
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/QuestionFullIdModel'
+        '400':
+          description: Errors in the request.
+          content:
+            'text/plain':
+              schema:
+                type: string
+      tags:
+        - questions
+      security:
+        - user_token: []
+          api_key: []
   /question/{id}/answer/{username}:
     post:
       summary: Answer created by answering a question.
@@ -142,7 +215,7 @@ paths:
   /answers/{id}:
     get:
       summary: Gets all answers to a question.
-      operationId: dms2122backend.presentation.rest.answer.list_all_for_question
+      operationId: dms2122backend.presentation.rest.answer.get_question_answers
       parameters:
         - name: id
           in: path
@@ -177,7 +250,7 @@ paths:
   /answers/{username}:
     get:
       summary: Gets all the answers to a question.
-      operationId: dms2122backend.presentation.rest.answer.list_all_for_user
+      operationId: dms2122backend.presentation.rest.answer.get_student_answers
       parameters:
         - name: username
           in: path
@@ -309,6 +382,7 @@ components:
       name: X-ApiKey-Auth
       in: header
       x-apikeyInfoFunc: dms2122auth.presentation.rest.security.verify_api_key
+          
           
           
           

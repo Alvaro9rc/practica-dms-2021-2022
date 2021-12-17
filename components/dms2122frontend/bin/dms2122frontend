@@ -84,28 +84,28 @@ def post_admin_users_edit():
 def get_student():
     return StudentEndpoints.get_student(auth_service)
 
-# lista de preguntos por contestar del alumno con la opcion de acceso a una pregunta para contestar
+# lista de preguntas por contestar del alumno con la opcion de acceso a una pregunta para contestar
 @app.route("/student/questions", methods=['GET'])
 def get_student_questions():
     return StudentEndpoints.get_student_questions(auth_service, backend_service)
 
 # pregunta seleccionada para contestar 
 @app.route("/student/questions/question", methods=['GET'])
-def get_student_list_questions():
+def get_student_questions_question():
     return StudentEndpoints.get_student_questions_question(auth_service, backend_service)
 
 @app.route("/student/questions/question", methods=['POST'])
-def get_student_list_answer():
+def post_student_questions_question():
     return StudentEndpoints.post_student_questions_question(auth_service, backend_service)
 
 # pagina de las respuestas ya dadas por el alummno
 @app.route("/student/answers", methods=['GET'])
-def get_student_questions():
+def get_student_answers():
     return StudentEndpoints.get_student_answers(auth_service, backend_service)
 
 # pagina del progreso del alumno
 @app.route("/student/progress", methods=['GET'])
-def get_student_questions():
+def get_student_progress():
     return StudentEndpoints.get_student_progress(auth_service, backend_service)
 
 # pagina del profesor, vera un voton de gestion de preguntas y otro de gestion de alumnos
@@ -138,12 +138,12 @@ def post_teacher_questions_edit():
 
 # estadisticas de esa pregunta 
 @app.route("/teacher/questions/stats", methods=['GET'])
-def post_teacher_questions_edit():
+def get_teacher_questions_stats():
     return TeacherEndpoints.get_teacher_questions_stats(auth_service, backend_service)
 
 # estadisticas de los alumnos
 @app.route("/teacher/studentsStats", methods=['GET'])
-def get_teacher_questions_edit():
+def get_teacher_studentsStats():
     return TeacherEndpoints.get_teacher_studentsStats(auth_service, backend_service)
 
 

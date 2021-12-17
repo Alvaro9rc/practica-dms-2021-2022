@@ -55,7 +55,7 @@ class StudentEndpoints():
             for answer in student_answers:
                 if question['id'] == answer['id']:
                     flag = False
-            if flag = True:
+            if flag == True:
                 questions.append(question)
             else:
                 continue
@@ -110,7 +110,7 @@ class StudentEndpoints():
         question=WebQuestion.get_question(backend_service, id)
         if option == int(question['correctAnswer']):
             value = float(question['puntuation'])
-        else 
+        else: 
             value = (- float(question['puntuation']))*( float(question['penalty']))
            
            
