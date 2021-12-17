@@ -140,3 +140,13 @@ class BackendConfiguration(ServiceConfiguration):
             - ValueError: If validation is not passed.
         """
         self._values['jws_secret'] = str(secret)
+
+    
+    def get_jws_secret(self) -> str:
+        """ Gets the jws_secret configuration value.
+
+        Returns:
+            - str: An string with the value of jws_secret.
+        """
+
+        return str(self._values['jws_secret'])
