@@ -1,7 +1,4 @@
-from typing import Dict
 from sqlalchemy import Table, MetaData, Column, String
-from sqlalchemy.log import instance_logger  # type: ignore
-from sqlalchemy.orm import relationship
 from sqlalchemy.sql.schema import ForeignKey
 from sqlalchemy.sql.sqltypes import Integer  # type: ignore
 from dms2122backend.data.db.results.resultbase import ResultBase
