@@ -1,0 +1,32 @@
+{% extends "teacher.html" %}
+{% from "macros/buttons.html" import button, submit_button %}
+{% block contentsubheading %}Question {{ question['questionName'] }} stats {% endblock %}
+{% block maincontent %}
+
+<table style="width:100%">
+    <caption></caption>
+    <!-- Cabecera de la tabla -->
+    <tr>
+        <th scope="col">Given answer</th>
+        <th scope="col">Punctuation obtained</th>
+        <th scope="col">User who answered</th>
+    </tr>
+    {% for answer in answers %}
+    <tr>
+	  <td>{{ answer['answer'] }} </td>
+      <td>{{ answer['valoration'] }}</td>
+      <td>{{ answer['username'] }}</td>
+	</tr>
+    {% endfor %}
+
+</table>
+
+<h3>Puntuation average: {{ media }}</h3>
+ <!-- BOTONES -->
+ <div class="ml35">
+    {{ button('redbg', redirect_to, 'Cancel') }}
+<div>
+
+
+</form>
+{% endblock %}

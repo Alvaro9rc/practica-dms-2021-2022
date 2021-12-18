@@ -154,10 +154,29 @@ class StudentEndpoints():
 
     @staticmethod
     def get_student_progress(auth_service: AuthService, backend_service: BackendService) -> Union[Response, Text]:
-        """ Handles the GET requests to the answers the student has made.
-        Args:
-            - auth_service (AuthService): The authentication service.
-        Returns:
-            - Union[Response,Text]: The generated response to the request.
+        """  progreso del alumno similar a lo que ve el profesor al acceder a las estadisticas de un alumno.
         """
-        #TODO PROGRESO DEL ALUMNO
+        if not WebAuth.test_token(auth_service):
+            return redirect(url_for('get_login'))
+        if Role.Teacher.name not in session['roles']:
+            return redirect(url_for('get_home'))
+
+        redirect_to: str = str(request.args.get(
+            'redirect_to', default='/student'))
+        name = session['user']
+
+        # se requiere el numero de preguntas contestadas, la nota sobre estas y la nota sobre todas las preguntas
+
+        n_questions = len(WebQuestion.list_question(backend_service))
+        answers = WebAnswer.get_student_answers(backend_service, name)
+        n_answers = 0
+        sumatorio = 0
+        for answer in answers:
+            n_answers += 1
+            sumatorio += int(answer['valoration'])
+
+        total_average = sumatorio/n_questions
+        answered_average = sumatorio/n_answers
+
+        return render_template('teacher/students/stats.html', name=name, roles=session['roles'], answered_average = answered_average, 
+                    total_average = total_average, n_questions = n_questions, n_answers = n_answers, redirect_to=redirect_to)

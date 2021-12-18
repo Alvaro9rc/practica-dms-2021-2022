@@ -8,8 +8,11 @@ from dms2122common.data import Role
 from dms2122frontend.data.rest.authservice import AuthService
 from flask import redirect, url_for, session, render_template, request, flash
 from dms2122frontend.data.rest.backendservice import BackendService
+from dms2122frontend.presentation import web
+from dms2122frontend.presentation.web import webquestion
 from dms2122frontend.presentation.web.webanswer import WebAnswer
 from dms2122frontend.presentation.web.webquestion import WebQuestion
+from dms2122frontend.presentation.web.webuser import WebUser
 from .webauth import WebAuth
 
 
@@ -178,8 +181,74 @@ class TeacherEndpoints():
     def get_teacher_questions_stats(auth_service: AuthService, backend_service: BackendService) -> Union[Response, Text]:
         """ TODO STATS DE CADA PREGUNTA
         """
+        if not WebAuth.test_token(auth_service):
+            return redirect(url_for('get_login'))
+        if Role.Teacher.name not in session['roles']:
+            return redirect(url_for('get_home'))
+        id: int = int(request.args.get('id'))
+        redirect_to: str = str(request.args.get(
+            'redirect_to', default='/teacher/questions'))
+        name = session['user']
+        question = WebQuestion.get_question(backend_service, id)
+        answers = WebAnswer.get_question_answers(backend_service, id)
+        nAnswer = 0
+        sumatorio = 0
+        for answer in answers:
+            nAnswer += 1
+            sumatorio += int(answer['valoration'])
+        
+        if nAnswer != 0:
+            media = sumatorio/nAnswer
+        else:
+            media = 0
+        return render_template('teacher/questions/stats.html', name=name, roles=session['roles'], question = question, answers = answers, media = media, redirect_to=redirect_to)
 
     @staticmethod
-    def get_teacher_studentsStats(auth_service: AuthService, backend_service: BackendService) -> Union[Response, Text]:
-        """ TODO STATS DE LOS ALUMNOS
+    def get_teacher_students(auth_service: AuthService, backend_service: BackendService) -> Union[Response, Text]:
+        """ Lista los alumnos con el rol de student y te da la opcion de entrar a ver sus estadisticas
         """
+        if not WebAuth.test_token(auth_service):
+            return redirect(url_for('get_login'))
+        if Role.Teacher.name not in session['roles']:
+            return redirect(url_for('get_home'))
+        name = session['user']
+
+        #creacion de la lista de usuarios que tengan el rol de student
+        listusers = WebUser.list_users(auth_service)
+        users = []
+        for singleuser in listusers:
+            if 'Student' in WebUser.get_roles(auth_service, singleuser['username']):
+                users.append(singleuser)
+
+        return render_template('teacher/students.html', name=name, roles=session['roles'], users = users)
+
+
+
+    @staticmethod
+    def get_teacher_students_stats(auth_service: AuthService, backend_service: BackendService) -> Union[Response, Text]:
+        """  STATS del alumno seleccionado
+        """
+        if not WebAuth.test_token(auth_service):
+            return redirect(url_for('get_login'))
+        if Role.Teacher.name not in session['roles']:
+            return redirect(url_for('get_home'))
+        username = request.args.get('username')
+        redirect_to: str = str(request.args.get(
+            'redirect_to', default='/teacher/students'))
+        name = session['user']
+
+        # se requiere el numero de preguntas contestadas, la nota sobre estas y la nota sobre todas las preguntas
+
+        n_questions = len(WebQuestion.list_question(backend_service))
+        answers = WebAnswer.get_student_answers(backend_service, username)
+        n_answers = 0
+        sumatorio = 0
+        for answer in answers:
+            n_answers += 1
+            sumatorio += int(answer['valoration'])
+
+        total_average = sumatorio/n_questions
+        answered_average = sumatorio/n_answers
+
+        return render_template('teacher/students/stats.html', name=name, roles=session['roles'], username = username,
+                     answered_average = answered_average, total_average = total_average, n_questions = n_questions, n_answers = n_answers, redirect_to=redirect_to)

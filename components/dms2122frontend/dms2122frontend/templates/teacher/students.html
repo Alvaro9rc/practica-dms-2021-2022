@@ -1,0 +1,24 @@
+{% extends "teacher.html" %} 
+{% from "macros/buttons.html" import button with context %} 
+{% block contentsubheading %}Students{% endblock %} 
+{% block maincontent %}
+
+<table class="fillwidth highlightrows">
+    <tbody>
+        <tr>
+            <th>Student name</th>
+            <th>View stats</th>
+        </tr>
+        {% for user in users %}
+        <tr class="highlightable">
+            <td>{{ user['username'] }}</td>
+            <td><a href="/teacher/students/stats?username={{ user['username'] }}&redirect_to=/teacher/students">Stats</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+{{ button('bluebg', '/teacher', 'Go back') }}
+
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "student.html" %}
+{% from "macros/buttons.html" import button, submit_button %}
+{% block contentsubheading %}My progress{% endblock %}
+{% block maincontent %}
+<table class="fillwidth highlightrows">
+    <tbody>
+        <tr>
+            <th>Total number of questions</th>
+            <th>Number of questions answered</th>
+            <th>My total puntuation</th>
+            <th>My answered questions puntuation</th>
+        </tr>
+        <tr class="highlightable">
+            <td>{{ n_questions }}</td>
+            <td>{{ n_answers }}</td>
+            <td>{{ total_average }}</td>
+            <td>{{ answered_average }}</td>
+
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{{ button('bluebg', '/student', 'Go back') }}
+{% endblock %}

@@ -118,9 +118,13 @@ def get_teacher_questions_stats():
     return TeacherEndpoints.get_teacher_questions_stats(auth_service, backend_service)
 
 # estadisticas de los alumnos
-@app.route("/teacher/studentsStats", methods=['GET'])
-def get_teacher_studentsStats():
-    return TeacherEndpoints.get_teacher_studentsStats(auth_service, backend_service)
+@app.route("/teacher/students", methods=['GET'])
+def get_teacher_students():
+    return TeacherEndpoints.get_teacher_students(auth_service, backend_service)
+
+@app.route("/teacher/students/stats", methods=['GET'])
+def get_teacher_students_stats():
+    return TeacherEndpoints.get_teacher_students_stats(auth_service, backend_service)
 
     
 @app.route("/admin", methods=['GET'])
