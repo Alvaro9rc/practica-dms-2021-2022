@@ -73,7 +73,7 @@ class TeacherEndpoints():
             return redirect(url_for('get_home'))
         name = session['user']
         redirect_to = request.args.get('redirect_to', default='/teacher/questions')
-        return render_template('admin/users/new.html', name=name, roles=session['roles'],
+        return render_template('teacher/questions/new.html', name=name, roles=session['roles'],
                                redirect_to=redirect_to
                                )
 

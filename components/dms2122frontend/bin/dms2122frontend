@@ -55,30 +55,6 @@ def get_logout():
 def get_home():
     return CommonEndpoints.get_home(auth_service)
 
-@app.route("/admin", methods=['GET'])
-def get_admin():
-    return AdminEndpoints.get_admin(auth_service)
-
-@app.route("/admin/users", methods=['GET'])
-def get_admin_users():
-    return AdminEndpoints.get_admin_users(auth_service)
-
-@app.route("/admin/users/new", methods=['GET'])
-def get_admin_users_new():
-    return AdminEndpoints.get_admin_users_new(auth_service)
-
-@app.route("/admin/users/new", methods=['POST'])
-def post_admin_users_new():
-    return AdminEndpoints.post_admin_users_new(auth_service)
-
-@app.route("/admin/users/edit", methods=['GET'])
-def get_admin_users_edit():
-    return AdminEndpoints.get_admin_users_edit(auth_service)
-
-@app.route("/admin/users/edit", methods=['POST'])
-def post_admin_users_edit():
-    return AdminEndpoints.post_admin_users_edit(auth_service)
-
 # pagina del alumno, vera un boton de acceso a las preguntas, otro para ver las respuestas ya dadas y otro para ver su progreso
 @app.route("/student", methods=['GET'])
 def get_student():
@@ -145,6 +121,31 @@ def get_teacher_questions_stats():
 @app.route("/teacher/studentsStats", methods=['GET'])
 def get_teacher_studentsStats():
     return TeacherEndpoints.get_teacher_studentsStats(auth_service, backend_service)
+
+    
+@app.route("/admin", methods=['GET'])
+def get_admin():
+    return AdminEndpoints.get_admin(auth_service)
+
+@app.route("/admin/users", methods=['GET'])
+def get_admin_users():
+    return AdminEndpoints.get_admin_users(auth_service)
+
+@app.route("/admin/users/new", methods=['GET'])
+def get_admin_users_new():
+    return AdminEndpoints.get_admin_users_new(auth_service)
+
+@app.route("/admin/users/new", methods=['POST'])
+def post_admin_users_new():
+    return AdminEndpoints.post_admin_users_new(auth_service)
+
+@app.route("/admin/users/edit", methods=['GET'])
+def get_admin_users_edit():
+    return AdminEndpoints.get_admin_users_edit(auth_service)
+
+@app.route("/admin/users/edit", methods=['POST'])
+def post_admin_users_edit():
+    return AdminEndpoints.post_admin_users_edit(auth_service)
 
 
 
