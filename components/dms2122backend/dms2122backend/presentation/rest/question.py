@@ -4,10 +4,9 @@
 from typing import Tuple, Union, Optional, List, Dict
 from http import HTTPStatus
 from flask import current_app
-from dms2122backend.data.db.results.question import Question
 from dms2122backend.service.questionservices import QuestionServices
-from dms2122common.data.role import Role
-from dms2122auth.service import RoleServices
+# from dms2122common.data.role import Role
+# from dms2122auth.service import RoleServices
 from dms2122backend.data.db.exc.questionexisterror import QuestionExistsError
 from dms2122backend.data.db.exc.questionnotfounderror import QuestionNotFoundError
 
@@ -15,11 +14,11 @@ def create_question(body: Dict, token_info: Dict) -> Tuple[Union[Dict, str], Opt
     """ creates a question if the user has the teacher role.
     """
     with current_app.app_context():
-        if not RoleServices.has_role(token_info['user_token']['user'], Role.Teacher, current_app.db):
-            return (
-                'Current user has not enough privileges to create a question',
-                HTTPStatus.FORBIDDEN.value
-            )
+        # if not RoleServices.has_role(token_info['user_token']['user'], Role.Teacher, current_app.db):
+        #     return (
+        #         'Current user has not enough privileges to create a question',
+        #         HTTPStatus.FORBIDDEN.value
+        #     )
         try:
             question: Dict = QuestionServices.create_question( body['questionName'],
              body['description'], body['questionAnswer'], body['questionAnswer2'], body['questionAnswer3'], 
@@ -36,11 +35,11 @@ def edit_question(id: int, body: Dict, token_info: Dict) -> Tuple[Union[Dict, st
     """ edit a question if the user has the teacher role.
     """
     with current_app.app_context():
-        if not RoleServices.has_role(token_info['user_token']['user'], Role.Teacher, current_app.db):
-            return (
-                'Current user has not enough privileges to edit a question',
-                HTTPStatus.FORBIDDEN.value
-            )
+        # if not RoleServices.has_role(token_info['user_token']['user'], Role.Teacher, current_app.db):
+        #     return (
+        #         'Current user has not enough privileges to edit a question',
+        #         HTTPStatus.FORBIDDEN.value
+        #     )
         try:
             edited_question: Dict = QuestionServices.edit_question(id, body['questionName'],
              body['description'], body['questionAnswer'], body['questionAnswer2'], body['questionAnswer3'], 

@@ -1,9 +1,9 @@
 openapi: 3.0.0
 info:
-  title: DMS authentication service REST API
+  title: DMS backend service REST API
   version: '1.0'
   description: |
-    REST API for the authentication service.
+    REST API for the backend service.
     This is part of the mandatory exercise.
     Diseño y Mantenimiento del Software. Grado en Ingeniería Informática, Universidad de Burgos, 2021-2022.
   contact:
@@ -45,8 +45,7 @@ paths:
       tags:
         - questions
       security:
-        - user_token: []
-          api_key: []
+        - api_key: []
   /question/new:
     post:
       summary: Creates a new question.
@@ -85,8 +84,7 @@ paths:
       tags:
         - users
       security:
-        - user_token: []
-          api_key: []
+        - api_key: []
   /question/{id}:
     put:
       summary: Edit a question given an ID.
@@ -131,8 +129,7 @@ paths:
       tags:
         - questions
       security:
-        - user_token: []
-          api_key: []
+        - api_key: []
     get:
       summary: Obtains a question given an ID.
       operationId: dms2122backend.presentation.rest.question.get_question
@@ -158,8 +155,7 @@ paths:
       tags:
         - questions
       security:
-        - user_token: []
-          api_key: []
+        - api_key: []
   /question/{id}/answer/{username}:
     post:
       summary: Answer created by answering a question.
@@ -210,8 +206,7 @@ paths:
         - questions
         - answers
       security:
-        - user_token: []
-          api_key: []
+        - api_key: []
   /answers/{id}:
     get:
       summary: Gets all answers to a question.
@@ -245,8 +240,7 @@ paths:
         - questions
         - answers
       security:
-        - user_token: []
-          api_key: []
+        - api_key: []
   /answers/{username}:
     get:
       summary: Gets all the answers to a question.
@@ -372,11 +366,11 @@ components:
         $ref: '#/components/schemas/AnswerFullModel'
 
   securitySchemes:
-    user_token:
-      type: http
-      scheme: bearer
-      bearerFormat: JWT
-      x-bearerInfoFunc: dms2122backend.presentation.rest.security.verify_token
+    # user_token:
+    #   type: http
+    #   scheme: bearer
+    #   bearerFormat: JWT
+    #   x-bearerInfoFunc: dms2122backend.presentation.rest.security.verify_token
     api_key:
       type: apiKey
       name: X-ApiKey-Backend
